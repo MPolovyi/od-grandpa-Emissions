@@ -1,0 +1,1 @@
+-ffixed-line-length-200 -ffree-line-length-200 string_recognition.f08 read_from_file.f WriteFormattedData.f08

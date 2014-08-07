@@ -1,0 +1,777 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"if",
+				"if	if"
+			],
+			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
+				"sub",
+				"subfolder"
+			],
+			[
+				"de",
+				"delta"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"rad",
+				"radians"
+			],
+			[
+				"deg",
+				"degree"
+			],
+			[
+				"f",
+				"function"
+			],
+			[
+				"S",
+				"StrNums"
+			],
+			[
+				"A",
+				"Alphabet"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/F/works/models_granddad/N2O_emission/Mod T9.f08",
+			"settings":
+			{
+				"buffer_size": 52323,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Peat-mod-3m7.f",
+			"settings":
+			{
+				"buffer_size": 118631,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Max/AppData/Roaming/Sublime Text 3/Packages/User/Fortran.sublime-build",
+			"settings":
+			{
+				"buffer_size": 271,
+				"line_ending": "Windows",
+				"name": "untitled.sublime-build"
+			}
+		}
+	],
+	"build_system": "Packages/User/Fortran.sublime-build",
+	"command_palette":
+	{
+		"height": 337.0,
+		"selected_items":
+		[
+			[
+				"ssfor",
+				"Set Syntax: MinimalFortran"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"op",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"pa",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"paca",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"ssjs",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"table",
+				"Table Editor: Show demo film in new scratch view"
+			],
+			[
+				"tab",
+				"Table Editor: Enable for current view"
+			],
+			[
+				"sshtm",
+				"Set Syntax: HTML (ASP)"
+			],
+			[
+				"ssasp",
+				"Set Syntax: HTML (ASP)"
+			],
+			[
+				"java",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"ssmu",
+				"Set Syntax: MultiMarkdown"
+			],
+			[
+				"ope",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"mar",
+				"Set Syntax: Markdown"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"brow",
+				"Preferences: Browse Packages"
+			],
+			[
+				"ssmm",
+				"Set Syntax: MultiMarkdown"
+			],
+			[
+				"ss",
+				"Set Syntax: Markdown"
+			],
+			[
+				"o",
+				"Markdown Preview: Open Markdown Cheat sheet"
+			],
+			[
+				"ssaca",
+				"Set Syntax: AcademicMarkdown"
+			],
+			[
+				"ssma",
+				"Set Syntax: Markdown"
+			],
+			[
+				"ssmar",
+				"Set Syntax: Markdown GFM"
+			],
+			[
+				"ssmul",
+				"Set Syntax: MultiMarkdown"
+			],
+			[
+				"ssmma",
+				"Set Syntax: MultiMarkdown"
+			],
+			[
+				"pain",
+				"Package Control: Install Package"
+			],
+			[
+				"ssacama",
+				"Set Syntax: AcademicMarkdown"
+			],
+			[
+				"ssmark",
+				"Set Syntax: MultiMarkdown"
+			],
+			[
+				"prewi",
+				"Markdown Preview: Python Markdown: Preview in Browser"
+			],
+			[
+				"markp",
+				"Markdown Preview: Python Markdown: Preview in Browser"
+			],
+			[
+				"sesmark",
+				"Set Syntax: Markdown"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"pai",
+				"Package Control: Install Package"
+			],
+			[
+				"pacain",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 544.0
+	},
+	"console":
+	{
+		"height": 263.0,
+		"history":
+		[
+			"sublime.packages_path()",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/F/works/models_granddad/Search_07_08/compile_settings",
+		"/F/works/models_granddad/Search_07_08/Peat-mod-main-3m7.res",
+		"/Z/Users/Maxim/AppData/Roaming/Sublime Text 2/Packages/User/Build sistems/Fortran.sublime-build",
+		"/F/works/models_granddad/Search_07_08/Peat-mod-main-3m6.res",
+		"/F/works/models_granddad/Поиск_7_08/Peat-mod-3m5.f",
+		"/F/Users/Maxim/UserData/Programming/ChromeExt/manifest.json",
+		"/F/Users/Maxim/UserData/Programming/ChromeExt/jquery-2.1.1.min.js",
+		"/F/Users/Maxim/UserData/Книги/programming stuff/Encoding Errors.txt",
+		"/F/Users/Maxim/UserData/Книги/programming stuff/1/2/3/File38.txt",
+		"/F/Users/Maxim/UserData/Книги/programming stuff/1/2/4/5/File54.epub",
+		"/F/Users/Maxim/UserData/Книги/programming stuff/1/2/4/5/File66.txt",
+		"/F/Users/Maxim/UserData/Книги/Ghost in the Wires/metadata.opf",
+		"/F/Users/Maxim/Calibre_Books/Universal Library/Kevin Mitnick/Ghost in the Wires_ My Adventures a (2746)/metadata.opf",
+		"/F/Users/Maxim/Calibre_Books/Universal Library/Elliot, Dzh/Simmietriia v fizikie (2607)/metadata.opf",
+		"/F/Users/Maxim/UserData/Programming/ChromeExt/background.js",
+		"/C/Users/Max/AppData/Local/Temp/Rar$DIa0.012/t0.tex",
+		"/F/Users/Maxim/UserData/Книги/Mastering.Regular.Expressions.3rd.Edition.Aug.2006.chm",
+		"/F/Users/Maxim/UserData/Programming/ChromeExt/ContextMenu/sample.js",
+		"/F/Users/Maxim/UserData/Programming/ChromeExt/ContextMenu/manifest.json",
+		"/F/Users/Maxim/UserData/Programming/getstarted/manifest.json",
+		"/F/Users/Maxim/UserData/Programming/ChromeExt/popup.html",
+		"/F/Users/Maxim/UserData/Programming/ChromeExt/background.html",
+		"/F/Users/Maxim/UserData/Programming/MozillaExt/install.rdf",
+		"/F/Users/Maxim/UserData/Programming/Samples/Samples ASM/MASMHello.asm",
+		"/C/Users/Max/AppData/Local/Temp/Rar$DIa0.423/Readme_EN.txt",
+		"/C/Users/Max/AppData/Local/Temp/Rar$DIa0.133/Readme_RU.txt",
+		"/F/Users/Maxim/Desktop/primesieve-5.0-win64/Unsaved Document 1",
+		"/D/Downloads/tm/Новая папка/Новая папка/Secret of Beauty Bundle/Secret of Beauty Stone Lady/readme.txt",
+		"/D/Downloads/tm/Новая папка/Новая папка/DeadTide 4/dead_tide_4_readme.txt",
+		"/D/Downloads/tm/Новая папка/Новая папка/Dead Tide 2/log.txt",
+		"/D/Downloads/tm/Новая папка/Новая папка/Dead Tide 2/DEAD_TIDE_2.sh",
+		"/D/Downloads/tm/Новая папка/Новая папка/Dead Tide 2/DEAD_TIDE_2.py",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Velocities_09.07_00.52.36.txt",
+		"/F/SimpleTempFile.txt",
+		"/F/TempFile.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Velocities_14.06_23.34.17.txt",
+		"/F/Users/Maxim/Desktop/sites.json",
+		"/F/Users/Maxim/Desktop/Velocities_4k_rad.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/MainFile.py",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Velocities_13.06_23.24.17.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Velocities_14.06_01.01.44.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Velocities_15.06_03.49.58.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Velocities_15.06_03.32.57.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Velocities_14.06_11.07.42.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Velocities_14.06_08.26.23.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Velocities_14.06_02.48.07.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Velocities_15.06_13.24.30.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Velocities_15.06_13.54.19.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Velocities_16.06_23.01.23.txt",
+		"/F/Users/Maxim/Desktop/yaaazzz.cpp",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/amp_tinymt_rng.cpp",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Rand/amp_tinymt_rng.h",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Rand/amp_rand_collection.h",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Vicsek_AMPConsole.cpp",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Vicsek2DIntegrator.h",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Vicsek2DMath.cpp",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Vicsek2DMath.h",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Vicsek2DIntegrator.cpp",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/VicsekKulinsky2DIntegrator.h",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/VicsekStoppedTop.cpp",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/VicsekStoppedTop.h",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/VicsekKulinsky2DIntegrator.cpp",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Viscek2DKulinskIntegrator.h",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/CommonStructs.h",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/DataCollection.h",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/DataCollectionGPU.cpp",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/DataCollectionGPU.h",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Integrator.h",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Viscek2DKulinskIntegrator.cpp",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Integrator2D.h",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Integrator2D.cpp",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/MathHelper.h",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/IntegratorCollection.cpp",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/IntegratorCollection.h",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/MathHelper.cpp",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/Reduction.h",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/stdafx.h",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Vicsek_AMPConsole/targetver.h",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/AveragedSplitVelocity.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/Averager.py",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Kulinsky/SplitsVelocities_13.06_23.24.17.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Kulinsky/SplitsVelocities_14.06_11.07.42.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Kulinsky/SplitsVelocities_15.06_13.24.30.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Kulinsky/SplitsVelocities_15.06_13.39.22.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Kulinsky/SplitsVelocities_16.06_01.41.21.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/32k/SplitsVelocities_14.06_08.26.23.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/32kAverage.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/32kAverageSlice.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/MainFile_New.py",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/32k/SplitsVelocities_05.06_19.43.50.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/SplitsVelocities_03.06_19.14.18.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/SplitsVelocities_03.06_17.30.22.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/32k/SplitsDensities_14.06_08.26.23.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/3k rho = 2/SplitsVelocities_04.06_14.30.53.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/3k rho = 2/SplitsVelocities_05.06_16.33.22.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/3k rho = 2/SplitsVelocities_05.06_21.28.02.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/SplitsVelocities_05.06_20.53.58.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/SplitsVelocities_05.06_21.07.48.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Something/SplitsVelocities_15.06_13.54.19.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Something/SplitsVelocities_15.06_04.00.21.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Something/SplitsVelocities_15.06_12.51.02.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Something/SplitsVelocities_15.06_13.15.17.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_14.06_11.07.42.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_13.06_23.24.17.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_14.06_23.34.17.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_15.06_04.00.21.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_15.06_12.51.02.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_15.06_13.15.17.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_15.06_13.24.30.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_15.06_13.39.22.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_15.06_13.54.19.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_16.06_01.41.21.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/3k/SplitsVelocities_05.06_21.28.02.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/3k/SplitsVelocities_05.06_16.33.22.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/3k/SplitsVelocities_04.06_14.30.53.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/1k/SplitsVelocities_04.06_14.14.55.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/1k/SplitsVelocities_06.06_00.45.13.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/1k/SplitsVelocities_13.06_22.51.23.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/1k/SplitsVelocities_15.06_03.49.58.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/1k/SplitsVelocities_16.06_23.01.23.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/1k/SplitsVelocities_16.06_23.17.18.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/1k/SplitsDensities_16.06_23.17.18.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/DataViewerPy/AveragedVelocity.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Thesis/DataFiles.sublime-project",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/SplitsVelocities_16.06_23.17.18.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/SplitsVelocities_16.06_23.01.23.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/SplitsVelocities_16.06_01.41.21.txt",
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/SplitsVelocities_15.06_13.54.19.txt"
+	],
+	"find":
+	{
+		"height": 39.0
+	},
+	"find_in_files":
+	{
+		"height": 112.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			".",
+			",",
+			"Noise",
+			"N",
+			"y = ",
+			"y = \\d\\.*\\d* ",
+			" - ",
+			"article",
+			"url",
+			"annote",
+			"journaltitle",
+			"journal",
+			"journaltitle",
+			"{\n",
+			"writeField",
+			"month",
+			"annote",
+			"month = ",
+			"month =",
+			"root",
+			"tex",
+			"e",
+			"Bookmark",
+			" n",
+			"y.*= ",
+			"y.*n",
+			".",
+			" n",
+			"y.*= ",
+			"y.*n",
+			" n",
+			"y.= ",
+			"y.*n",
+			".",
+			" n",
+			"y.*= ",
+			"y.*n",
+			".",
+			" n",
+			"y.*= ",
+			"y.*n",
+			".",
+			"y = ",
+			" n",
+			"y.*n",
+			".",
+			"y = ",
+			" n",
+			"y.*N",
+			".",
+			"y = ",
+			" n",
+			"y.*n",
+			" n",
+			" .*n",
+			".",
+			" n",
+			"c:.",
+			"c:.*n",
+			".",
+			" n",
+			"c:.",
+			"c:.*n",
+			".",
+			" n",
+			"c:.",
+			"c:.*n",
+			"Particle",
+			".",
+			" n",
+			"c: ",
+			"c:.",
+			"c:.*n",
+			".",
+			" n",
+			"c: ",
+			"c:.",
+			"c:.*n",
+			" n",
+			"c: ",
+			".",
+			"c:.*n",
+			".",
+			" n",
+			"c: ",
+			"c:.*n",
+			".",
+			" n",
+			"c: ",
+			"c.*n",
+			".",
+			" n",
+			"c: ",
+			"c:.*n",
+			".",
+			"......... ",
+			"matri",
+			"g_Camera.",
+			"Camera",
+			" noize.*",
+			"Veloc: ",
+			" n",
+			"c:.",
+			"c:.*n",
+			".n",
+			"c:.",
+			"c:.*n",
+			" n",
+			".*n",
+			".",
+			"e: ",
+			"e:.*",
+			" n",
+			": ",
+			":.*n",
+			".",
+			"/",
+			"179.5",
+			"179ю5",
+			".",
+			"e: ",
+			"e:.",
+			"e:.*",
+			".",
+			"c: ",
+			".n",
+			"c:.*n",
+			"."
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			",",
+			",\n",
+			"",
+			" --- ",
+			"journal",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			",",
+			"",
+			"\\\\",
+			";\n",
+			"",
+			"{",
+			" ",
+			", "
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/F/works/models_granddad/N2O_emission/Mod T9.f08",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 52323,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10936,
+								10936
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/MinimalFortran/MinimalFortran.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6166.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Peat-mod-3m7.f",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 118631,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5604,
+								5604
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/MinimalFortran/MinimalFortran.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1980.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/Users/Max/AppData/Roaming/Sublime Text 3/Packages/User/Fortran.sublime-build",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 271,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								213,
+								213
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 261.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.markdown":
+	{
+		"height": 128.0
+	},
+	"project": "Search_proj.sublime-project",
+	"replace":
+	{
+		"height": 74.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"sess",
+				"Pages\\Helpers\\SessionHelper.cs"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"F:\\Users\\Maxim\\UserData\\University\\4 course\\Vicsek\\Thesis\\Thesis.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 237.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
