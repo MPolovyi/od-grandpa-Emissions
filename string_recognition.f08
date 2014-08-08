@@ -79,7 +79,6 @@ subroutine RealArrayOneDimRead(InString,OutArray)
 
 	NumOfItems=GetNumOfElements(InString)
 	allocate(OutArray(NumOfItems))
-
 	Read(InString,*),(OutArray(j),j=1,Size(OutArray,1))
 end subroutine
 
