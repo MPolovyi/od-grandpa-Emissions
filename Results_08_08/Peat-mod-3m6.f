@@ -134,9 +134,10 @@ c==========================================================================
 
 
 
-                if(i.ne.1)inf(8)=BalanC
-                       if(i.ne.1)inf(1)=SumDPM
+      if(i.ne.1) inf(8)=BalanC
+      if(i.ne.1) inf(1)=SumDPM
 
+      print *, inf(8), i.ne.1, i
  4118 format(4x,76('*'))
  4117 format(10x,'MODEL  DINAMIKI  ORGANICHNOI  RECHOVINI') 
  4120 format(10x,'V  ORGANICHNIX  GRUNTAX(TORFOVISCHAX)  TA') 

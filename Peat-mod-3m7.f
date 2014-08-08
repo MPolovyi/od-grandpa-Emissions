@@ -94,7 +94,7 @@ c==========================================================================
       integer, dimension(:), allocatable :: dv
       real, dimension(:), allocatable :: ts, os, dww, usl2, usl3, usl4, inf, rnitr, hgr
 
-      BalanC=0
+      
 
 c      open (unit=InputFileUnit, file='Peat-mod-3.dat',status='old',form='formatted')
       Open (UNIT=OutputFileUnit,FILE='Peat-mod-main-3m7.res')
@@ -136,9 +136,13 @@ c      read(InputFileUnit, "(12f7.1)")  (hgr(j),j=1,n)
      >      RealArrOne1=ts, RealArrOne2=os, RealArrOne3=dww, RealArrOne4=usl2, RealArrOne5=usl3,
      >      RealArrOne6=usl4, RealArrOne7=inf, RealArrOne8=rnitr, RealArrOne9=hgr)
 
-      if(i.ne.1)inf(8)=BalanC
-      if(i.ne.1)inf(1)=SumDPM
+      
+      BalanC=0
 
+      i = 1
+      if(i.ne.1) inf(8)=BalanC
+      if(i.ne.1) inf(1)=SumDPM
+      
  4118 format(4x,76('*'))
  4117 format(10x,'MODEL  DINAMIKI  ORGANICHNOI  RECHOVINI') 
  4120 format(10x,'V  ORGANICHNIX  GRUNTAX(TORFOVISCHAX)  TA') 
@@ -453,41 +457,28 @@ c dww - otnositelnaj vlagnost vozduxa
 
 c   TSMD - accomulated Topsoil Moisture Deficit
          TSMD(j)=Os(j)-0.75*TIsp(j)
-
-         if(os(j) > TIsp(j)) then
-            TSMD(j) = 0
-         end if
-
-         if(TSMD(j) < rd51(j)) then
-            TSMD(j) = rd51(j)
-         end if
-         
+        if(os(j).gt.TIsp(j)) TSMD(j)=0
+        if(TSMD(j).lt.rd51(j))TSMD(j)=rd51(j)
          rd41=rd41+tsmd(j)
 c  rd41 - AccTSMD
-         if(os(j) > TIsp(j)) then
-            rd41 = 0
-         end if
-
-         if(rd41 < rd51(j)) then
-            rd41 = rd51(j)+0.01
-         end if
+       if(os(j).gt.TIsp(j)) rd41=0
+        if(rd41.lt.rd51(j))rd41=rd51(j)+0.01
 c=============================================================
 c===============================================+++++++++++
          Whgr(j) = -1.5643*(-1*hgr(j))+452.32
      
-         if((Whgr(j)-inf(15)) < (inf(16)-inf(15))/2) then
-            rmW(j)= 0.2+(0.8*2/(inf(16)-Inf(15)))*(Whgr(j)-inf(15))
-         end if
+        if((Whgr(j)-inf(15)).lt.(inf(16)-inf(15))/2) rmW(j)= 0.2+
+     6 (0.8*2/(inf(16)-Inf(15)))*(Whgr(j)-inf(15))
 
+
+       if((Whgr(j)-inf(15)).gt.(inf(16)-inf(15))/2.and.(Whgr(j)-
+     6  inf(15)).lt.(inf(16)-inf(15)))rmW(j)=1.0
      
-         if((Whgr(j)-inf(15)) > (inf(16)-inf(15))/2 .and. (Whgr(j)-inf(15)) < (inf(16)-inf(15))) then
-            rmW(j)=1.0
-         end if
 
 
-         if((Whgr(j)-inf(15)) > (inf(16)-inf(15))) then
-            rmW(j)= 1-(0.8/((inf(17)-inf(15))-(inf(16)-inf(15))))*((Whgr(j)-inf(15))-(inf(16)-inf(15)))
-         end if
+        if((Whgr(j)-inf(15)).gt.(inf(16)-inf(15))) rmW(j)= 1-
+     6 (0.8/((inf(17)-inf(15))-(inf(16)-inf(15))))*((Whgr(j)-
+     6  inf(15))-(inf(16)-inf(15)))
      
 c        if(Whgr(j).gt.inf(16)) rmW(j)= 0.8-(0.8/(inf(17)-inf(16)))*
 c     6   (Whgr(j)-(inf(16)))
@@ -496,33 +487,25 @@ ccccccccccccccc	rchW1(j)=(Whgr(j)-inf(15))/(inf(16)-inf(15))
 
          rchW1(j)=Whgr(j)/inf(16)
 
-C       if(Whgr(j).gt.(inf(16))) rmW1(j)=381.2*rchW1(j)**4-
-C    6 1643.3*rchW1(j)**3+2658.9*rchW1(j)**2-1913*rchW1(j)+
-C    6 516.21
-
 
         if(Whgr(j).lt.(inf(16))) rmW1(j)=0
-        if((Whgr(j).gt.(inf(16))) .and. (Whgr(j).lt.(inf(17))))
-     >   rmW1(j)=1-(381.2*rchW1(j)**4-1643.3*rchW1(j)**3+
-     >   2658.9*rchW1(j)**2-1913*rchW1(j)+516.21)
+        if(Whgr(j).gt.(inf(16)))rmW1(j)=381.2*rchW1(j)**4-
+     6 1643.3*rchW1(j)**3+2658.9*rchW1(j)**2-1913*rchW1(j)+
+     6 516.21
         if(Whgr(j).gt.(inf(17))) rmW1(j)=1
 ccc       if(rmW1(j).gt.1) rmW1(j)=1
 cc     6   -inf(15))))/(inf(17)-(inf(16)-inf(15)))
 
 
          rmpH(j)=0.2+(1-0.2)*((inf(18)-2)/(5-2))
-
-         if(Whgr(j) > inf(16)) then
-            rmpH(j)=((1.0**(1/(-50))+exp((-1)*inf(18))))**(-50) 
-         end if
+        if(Whgr(j).gt.inf(16))rmpH(j)=((1.0**(1/(-50))+exp((-1)
+     6 *inf(18))))**(-50) 
 c==================================================
 ccccccccc       rmT1(j)=47.9/(1+exp(106/(Tpoch(j)+18.3)))
-c       rmW3(j)=0.5
+c       rmW1(j)=0.5
          rmpH1(j)=((1.0**(1/(-50))+exp((-1)*inf(18))))**(-50)
 
-         rmW3(j) = -0.0012*(hgr(j)**2) + 0.002*hgr(j) + 1.006
-
-C         Whgr(5) = -1.5643*(-1*20)+452.32
+      rmW3(j) = -0.0012*hgr(j)**2 + 0.002*hgr(j) + 1.006
 
 
 c============================================================
@@ -551,7 +534,6 @@ c==================================================================
 c         raC(j)=47.9/(1+exp(106/(Tpoch(j)+18.3)))
          raC(j)=47.9/(1+exp(125/(Tpoch(j)+18.3)))
          rmt1(j)=47.9/(1+exp(125/(Tpoch(j)+18.3)))
-
          if(Tpoch(j).lt.0) raC(j)=0
          if(Tpoch(j).lt.0) rmt1(j)=0  
 c  raC - koeffizient "a" v osnovnom uravnenii
@@ -1223,7 +1205,7 @@ c=============================================================
 c	SDBIO(j)=SDPM0(j)*(0.85)*(0.85/(1+(1/ratX(j))))*0.46
 c        SDHUM(j)=SDPM0(j)*(0.85/(1+(1/ratX(j))))*0.54
 
-	      SDBIO(j)=SDPM0(j)*(1/(1+ratX(j)))*0.46
+	      SDBIO(j)=DPM0(j)*(1/(1+ratX(j)))*0.46
          SDHUM(j)=SDPM0(j)*(1/(1+ratX(j)))*0.54
 
 
@@ -1762,9 +1744,10 @@ ccccccccccccc        if(Tpoch(j).lt.0.or.Tpoch(j).eq.0) VNnitr(j)=0
          RNupt(j)=0.75*(CUrost(j)/rnitr(3))*1000*rnitr(11)
 
 
-         VNnitr(j)=(rMNsoi(j)+(SMNrst(j)+SMNsoi(j)+SMNfum(j)-RNupt(j))*0.8)*exp(-0.6*rmt2(j)*rmW2(j)*rmpH2(j))+rnitr(7)*rnitr(8)
-
-         if(Tpoch(j) <= 0) VNnitr(j)=0
+       VNnitr(j)=(rMNsoi(j)+(SMNrst(j)+SMNsoi(j)+SMNfum(j)-
+     4 RNupt(j))*0.8)*exp(-0.6
+     4   *rmt2(j)*rmW2(j)*rmpH2(j))+rnitr(7)*rnitr(8)
+        if(Tpoch(j).lt.0.or.Tpoch(j).eq.0) VNnitr(j)=0
 
 
 
