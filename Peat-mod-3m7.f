@@ -462,6 +462,9 @@ ccccccccccccccc	rchW1(j)=(Whgr(j)-inf(15))/(inf(16)-inf(15))
 ccc       if(rmW1(j).gt.1) rmW1(j)=1
 cc     6   -inf(15))))/(inf(17)-(inf(16)-inf(15)))
 
+      if (rmW1(j) > 1) then
+         rmW1(j) = 1
+      end if
 
         rmpH(j)=0.2+(1-0.2)*((inf(18)-2)/(5-2))
         if(Whgr(j).gt.inf(16))rmpH(j)=((1.0**(1/(-50))+exp((-1)
