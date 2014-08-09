@@ -455,7 +455,7 @@ ccccccccccccccc	rchW1(j)=(Whgr(j)-inf(15))/(inf(16)-inf(15))
 
 
         if(Whgr(j).lt.(inf(16))) rmW1(j)=0
-        if(Whgr(j).gt.(inf(16)))rmW1(j)=381.2*rchW1(j)**4-
+        if(Whgr(j).gt.(inf(16))) rmW1(j)=381.2*rchW1(j)**4-
      6 1643.3*rchW1(j)**3+2658.9*rchW1(j)**2-1913*rchW1(j)+
      6 516.21
         if(Whgr(j).gt.(inf(17))) rmW1(j)=1
@@ -463,13 +463,13 @@ ccc       if(rmW1(j).gt.1) rmW1(j)=1
 cc     6   -inf(15))))/(inf(17)-(inf(16)-inf(15)))
 
 
-         rmpH(j)=0.2+(1-0.2)*((inf(18)-2)/(5-2))
+        rmpH(j)=0.2+(1-0.2)*((inf(18)-2)/(5-2))
         if(Whgr(j).gt.inf(16))rmpH(j)=((1.0**(1/(-50))+exp((-1)
      6 *inf(18))))**(-50) 
 c==================================================
 ccccccccc       rmT1(j)=47.9/(1+exp(106/(Tpoch(j)+18.3)))
 c       rmW1(j)=0.5
-         rmpH1(j)=((1.0**(1/(-50))+exp((-1)*inf(18))))**(-50)
+        rmpH1(j)=((1.0**(1/(-50))+exp((-1)*inf(18))))**(-50)
 
       rmW3(j) = -0.0012*hgr(j)**2 + 0.002*hgr(j) + 1.006
 
