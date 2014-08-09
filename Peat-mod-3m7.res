@@ -11,7 +11,7 @@
           RASCHET ZA GOD RAZLOGJENIJ ORGANIKI POCHVI,;
              VSEX KOMPONENTOV, t/ga ;
     ----------------------------------------------------------------------------
- SoilBIO =8.43500 SoilHUM =0.00420 SoilCO2 =**********
+ SoilBIO =8.43501 SoilHUM =0.00420 SoilCO2 =**********
     ----------------------------------------------------------------------------
           RASCHET ZA GOD RAZLOGJENIJ ORGANIKI UDOBRENIY,;
              VSEX KOMPONENTOV, t/ga ;
@@ -28,7 +28,7 @@
  VIDILENIE CO2  , t C /ga =  -6.37300
     ----------------------------------------------------------------------------
           PRIBAVKA UGLERODA za schet Razlogenij za god, t/ga;
- PRIBAVKA UGLEROD za schet Razlogenij, t/ga =   8.60729
+ PRIBAVKA UGLEROD za schet Razlogenij, t/ga =   8.60730
     ----------------------------------------------------------------------------
           VINOS  UGLEROGA S  MASSOY  UROGJAJ za god, t/ga;
   VINOS  UGLEROGA S  MASSOY  UROGJAJ , t/ga =   0.00050

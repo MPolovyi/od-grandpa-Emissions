@@ -71,7 +71,7 @@ c==========================================================================
      > rmW3(36)
 
 
-      real*8 sumOs,SmDBIO,SmBIO1,SmBIO2,SmBIO3,SmDHUM,SmHUM1,SmHUM2,
+      real*4 sumOs,SmDBIO,SmBIO1,SmBIO2,SmBIO3,SmDHUM,SmHUM1,SmHUM2,
      4 SmHUM3,SmDCO,SmR1CO,SmR2CO,SmR3CO,SsDBIO,SsBIO1,SsBIO2,SsBIO3,
      4 SsDHUM,SsHUM1,SsHUM2,SsHUM3,SsDCO,SsR1CO,SsR2CO,SsR3CO,
      5 SFDBIO, SFBIO1,SFBIO3,SFDHUM,SFHUM1,SFHUM3,SFDCO,SFR1CO,
@@ -85,7 +85,7 @@ c==========================================================================
       
       integer j
 
-      integer gi,g2,gim,rd41,b1,b2,b3
+      integer gi,g2,rd41,b1,b2,b3,gim
 
       integer, parameter :: OutputFileUnit = 106
 
@@ -93,13 +93,13 @@ c==========================================================================
       real :: fi
       integer, dimension(:), allocatable :: dv
       real, dimension(:), allocatable :: ts, os, dww, usl2, usl3, usl4, inf, rnitr, hgr
-
+      real, dimension(36) :: tmpArray, dekadesReal, gimReal
       
 
-c      open (unit=InputFileUnit, file='Peat-mod-3.dat',status='old',form='formatted')
-      Open (UNIT=OutputFileUnit,FILE='Peat-mod-main-3m7.res')
-      Open (UNIT=7,FILE='Peat-mod-3m7.res')
-      Open (UNIT=8,FILE='Peat-mod-omm7.res')
+c      open (unit=InputFileUnit, file="Peat-mod-3.dat",status="old",form="formatted")
+      Open (UNIT=OutputFileUnit,FILE="Peat-mod-main-3m7.res")
+      Open (UNIT=7,FILE="Peat-mod-3m7.res")
+      Open (UNIT=8,FILE="Peat-mod-omm7.res")
 
 
 
@@ -131,7 +131,7 @@ c      read(InputFileUnit, "(9f8.3)")   (rnitr(j),j=1,15)
 c      read(InputFileUnit, "(4a20)")
 c      read(InputFileUnit, "(12f7.1)")  (hgr(j),j=1,n)
 
-      call ReadDataFromFile('Peat-mod-3.dat', Int1=n, Int2=t0, Int3=n1, Int4=n2, 
+      call ReadDataFromFile("Peat-mod-3.dat", Int1=n, Int2=t0, Int3=n1, Int4=n2, 
      >      Real1=fi, IntArrOne1=dv, 
      >      RealArrOne1=ts, RealArrOne2=os, RealArrOne3=dww, RealArrOne4=usl2, RealArrOne5=usl3,
      >      RealArrOne6=usl4, RealArrOne7=inf, RealArrOne8=rnitr, RealArrOne9=hgr)
@@ -143,26 +143,26 @@ c      read(InputFileUnit, "(12f7.1)")  (hgr(j),j=1,n)
       if(i.ne.1) inf(8)=BalanC
       if(i.ne.1) inf(1)=SumDPM
       
- 4118 format(4x,76('*'))
- 4117 format(10x,'MODEL  DINAMIKI  ORGANICHNOI  RECHOVINI') 
- 4120 format(10x,'V  ORGANICHNIX  GRUNTAX(TORFOVISCHAX)  TA') 
- 4813 format(10x,'VIKIDIV  VUGLEZU, METANU  i  ZAKISU  AZOTU') 
- 4119 format(10x,'        Z  ZIX   GRUNTIV  (Peat-GHG-Model)  ')    
+ 4118 format(4x,76("*"))
+ 4117 format(10x,"MODEL  DINAMIKI  ORGANICHNOI  RECHOVINI") 
+ 4120 format(10x,"V  ORGANICHNIX  GRUNTAX(TORFOVISCHAX)  TA") 
+ 4813 format(10x,"VIKIDIV  VUGLEZU, METANU  i  ZAKISU  AZOTU") 
+ 4119 format(10x,"        Z  ZIX   GRUNTIV  (Peat-GHG-Model)  ")    
 
 
 
 
-c 4117 format(10x,'M O D E L  N A K O P L E N I J  U G L E R O D A')
-c 4120 format(10x,'       V  P O C H V E   ')
-c 4813 format(10x,' MODIFIZIROVANNIY VARIANT ROTHC-26.3  modeli     ') 
-c 4119 format(4x,76('*'))
- 4193 format(4x,76('*'))
-  117 format(10x,'      W X O D N A J   I N F O R M A Z I J ')
-  118 format(1x,76('-'))
-  119 format(1x,76('*'))
-  120 format(4x,76('-'))
-  121 format(' ')
-  129 format(1x,76('-'))
+c 4117 format(10x,"M O D E L  N A K O P L E N I J  U G L E R O D A")
+c 4120 format(10x,"       V  P O C H V E   ")
+c 4813 format(10x," MODIFIZIROVANNIY VARIANT ROTHC-26.3  modeli     ") 
+c 4119 format(4x,76("*"))
+ 4193 format(4x,76("*"))
+  117 format(10x,"      W X O D N A J   I N F O R M A Z I J ")
+  118 format(1x,76("-"))
+  119 format(1x,76("*"))
+  120 format(4x,76("-"))
+  121 format(" ")
+  129 format(1x,76("-"))
       write(OutputFileUnit,4118)
       write(OutputFileUnit,4117)
       write(OutputFileUnit,4120)
@@ -175,29 +175,29 @@ c 4119 format(4x,76('*'))
       write(OutputFileUnit,116) a55
       write(OutputFileUnit,116) a1,a2,a3,a4
       write(OutputFileUnit,100) n,t0,n1,n2,fi
-      write(OutputFileUnit, *)' Srednjj za mesjz tempsratura vozduxa (grad. C):'
+      write(OutputFileUnit, *)" Srednjj za mesjz tempsratura vozduxa (grad. C):"
       write(OutputFileUnit,102) (ts(j),j=1,n)
-      write(OutputFileUnit, *) '      Summa osadkov za mesjz (mm):'
+      write(OutputFileUnit, *) "      Summa osadkov za mesjz (mm):"
       write(OutputFileUnit,102) (os(j),j=1,n)
-      write(OutputFileUnit, *) ' Srednjj za mesjz otnositelnaj vlagnost vozduxa (%):'
+      write(OutputFileUnit, *) " Srednjj za mesjz otnositelnaj vlagnost vozduxa (%):"
       write(OutputFileUnit,102) (dww(j),j=1,n)
-      write(OutputFileUnit, *) ' Uslovnaj velichina 2 (nomer mesjza goda):'
+      write(OutputFileUnit, *) " Uslovnaj velichina 2 (nomer mesjza goda):"
       write(OutputFileUnit,102) (usl2(j),j=1,n)
-      write(OutputFileUnit, *) 'Chislo dekad v mesjze, kogda uroven gruntovix vod)'
-      write(OutputFileUnit, *) ' raven i menee 20 sm)'
+      write(OutputFileUnit, *) "Chislo dekad v mesjze, kogda uroven gruntovix vod)"
+      write(OutputFileUnit, *) " raven i menee 20 sm)"
 
       write(OutputFileUnit,102) (usl3(j),j=1,n)
 
-      write(OutputFileUnit, *) ' Uslovnaj velichina(mesjzi vegetazii kulturi):'
+      write(OutputFileUnit, *) " Uslovnaj velichina(mesjzi vegetazii kulturi):"
       write(OutputFileUnit,102) (usl4(j),j=1,n)
-      write(OutputFileUnit, *) '     Chislo dney v raschetnom mesjze :'
+      write(OutputFileUnit, *) "     Chislo dney v raschetnom mesjze :"
       write(OutputFileUnit,115) (dv(j),j=1,n)
       write(OutputFileUnit,118)
-      write(OutputFileUnit, *) '  M A S S I V  " I N F " - parametri modeli   :'
+      write(OutputFileUnit, *) "  M A S S I V  ' I N F ' - parametri modeli   :"
       write(OutputFileUnit,101)(inf(j),j=1,21)
-      write(OutputFileUnit, *) '  M A S S I V  " Rnitr " - parametri modeli   :'
+      write(OutputFileUnit, *) "  M A S S I V  ' Rnitr ' - parametri modeli   :"
       write(OutputFileUnit,101)(rnitr(j),j=1,15)
-      write(OutputFileUnit, *) ' Sredniy za mesjz uroven gruntovix vod (sm):'
+      write(OutputFileUnit, *) " Sredniy za mesjz uroven gruntovix vod (sm):"
       write(OutputFileUnit,"(12f7.1)") (hgr(j),j=1,n)
 
 
@@ -233,7 +233,7 @@ c   inf(6) - urogay osnovnoy produkzii, tonn/ gektar (t/ga)
 c    inf(7) - nomer 1-go mesjza vegetazii kulturi
 c inf(8) - visota (tolscina) sloj pochvi, m
 c inf(9) - Organicheskie  udobrenij,  t/ga
-c       write(OutputFileUnit, *) 'inf(10) - kod prirodnoy rastitelnosti:
+c       write(OutputFileUnit, *) "inf(10) - kod prirodnoy rastitelnosti:
 c         1- vologi luki z dominuvannjm  Deschampsia caespitosa ,
 c         2- vologi luki z dominuvannjm  Molinia caerulea ,
 c         3 ugrupuvannj gjorstkix bezlistix zlakovidnix  rasteniy tipa  Cyperaceae та Juncaceae,
@@ -245,33 +245,33 @@ c         8 verba v vozraste 8-10 let
 c         9 verba v vozraste  10-12 let
 c        10 verba v vozraste bolee 12 let     
 
-c     write(OutputFileUnit, *) 'inf(11) - massa nadzemnoy chasti prirodnoy rastitelnosti,  t/ga'
-c       write(OutputFileUnit, *) 'inf(12) - dolj otmershey nadzemnoy chasti (trav ili listev dereva),  otn. ed.'
-c       write(OutputFileUnit, *) 'inf(13) - otnoshenie nadzemnoy k podzemnoy chasti rasteniy ,  otn.ed.'
-c       write(OutputFileUnit, *) 'inf(14) - dolj otmershix korney,  otn.ed.'
-c       write(OutputFileUnit, *) 'inf(15) - wlgjnost zavjdanij,  mm'
-c        write(OutputFileUnit, *) 'inf(16) - naimenshaj wlagoemkost,  mm'
-c        write(OutputFileUnit, *) 'inf(17) - wlagoemkost nasishenij,  mm'
-c        write(OutputFileUnit, *) 'inf(18) - pH pochvi,  otn.ed.'
-c        write(OutputFileUnit, *) 'inf(19) - objemnaj massa pochvi,  g/cm3.'
-c        write(OutputFileUnit, *) 'inf(20) - organicheskoe veschestvo pochvi (C), %
-c        write(OutputFileUnit, *) 'inf(21) - kolichestvo kustov verboloza ili kolichestvo derevev (verbi) na 1 ga, shtuk /ga
+c     write(OutputFileUnit, *) "inf(11) - massa nadzemnoy chasti prirodnoy rastitelnosti,  t/ga"
+c       write(OutputFileUnit, *) "inf(12) - dolj otmershey nadzemnoy chasti (trav ili listev dereva),  otn. ed."
+c       write(OutputFileUnit, *) "inf(13) - otnoshenie nadzemnoy k podzemnoy chasti rasteniy ,  otn.ed."
+c       write(OutputFileUnit, *) "inf(14) - dolj otmershix korney,  otn.ed."
+c       write(OutputFileUnit, *) "inf(15) - wlgjnost zavjdanij,  mm"
+c        write(OutputFileUnit, *) "inf(16) - naimenshaj wlagoemkost,  mm"
+c        write(OutputFileUnit, *) "inf(17) - wlagoemkost nasishenij,  mm"
+c        write(OutputFileUnit, *) "inf(18) - pH pochvi,  otn.ed."
+c        write(OutputFileUnit, *) "inf(19) - objemnaj massa pochvi,  g/cm3."
+c        write(OutputFileUnit, *) "inf(20) - organicheskoe veschestvo pochvi (C), %
+c        write(OutputFileUnit, *) "inf(21) - kolichestvo kustov verboloza ili kolichestvo derevev (verbi) na 1 ga, shtuk /ga
 c==========================================================================
 c             O P I S A N I E    M A S S I V A     " Rnitr "  
 c==========================================================================
 
-c        write(OutputFileUnit, *) 'rnitr(1) - soderganie ammonij NH4 v pochvi, mg N / 100 g pochvi 
-c        write(OutputFileUnit, *) 'rnitr(2) - soderganie nitratov NO3 v pochvi, mg N / 100 g pochvi
-c        write(OutputFileUnit, *) 'rnitr(3) - otnoshenie C/N dlj rastitelnix ostatkov, otn.ed. 
-c        write(OutputFileUnit, *) 'rnitr(4) - otnoshenie C/N dlj pochvi, otn.ed.
-c        write(OutputFileUnit, *) 'rnitr(5) - otnoshenie C/N dlj udobreniy, otn.ed. 
-c        write(OutputFileUnit, *) 'rnitr(6) - otnoshenie C/N  summarnoe - obobschennoe, otn.ed.
-c       write(OutputFileUnit, *) 'rnitr(7) - kolichestvo vnesennogo azotnogo udobrenij,kg N / ga
-c        write(OutputFileUnit, *) 'rnitr(8) - dolj N v azotnom udobrenii, otn. od.
-c        write(OutputFileUnit, *) 'rnitr(9) - kriticheskoe kolichestvo osadkov, pri kotorom 
+c        write(OutputFileUnit, *) "rnitr(1) - soderganie ammonij NH4 v pochvi, mg N / 100 g pochvi 
+c        write(OutputFileUnit, *) "rnitr(2) - soderganie nitratov NO3 v pochvi, mg N / 100 g pochvi
+c        write(OutputFileUnit, *) "rnitr(3) - otnoshenie C/N dlj rastitelnix ostatkov, otn.ed. 
+c        write(OutputFileUnit, *) "rnitr(4) - otnoshenie C/N dlj pochvi, otn.ed.
+c        write(OutputFileUnit, *) "rnitr(5) - otnoshenie C/N dlj udobreniy, otn.ed. 
+c        write(OutputFileUnit, *) "rnitr(6) - otnoshenie C/N  summarnoe - obobschennoe, otn.ed.
+c       write(OutputFileUnit, *) "rnitr(7) - kolichestvo vnesennogo azotnogo udobrenij,kg N / ga
+c        write(OutputFileUnit, *) "rnitr(8) - dolj N v azotnom udobrenii, otn. od.
+c        write(OutputFileUnit, *) "rnitr(9) - kriticheskoe kolichestvo osadkov, pri kotorom 
 c                             nachinaetsj vivetrivanie ammonij
-c       write(OutputFileUnit, *) 'rnitr(10) - dolj ammoniju v pogloschennom rasteniem  azote
-c       write(OutputFileUnit, *) 'rnitr(11) - dolj nitraotv  v pogloschennom rasteniem  azote
+c       write(OutputFileUnit, *) "rnitr(10) - dolj ammoniju v pogloschennom rasteniem  azote
+c       write(OutputFileUnit, *) "rnitr(11) - dolj nitraotv  v pogloschennom rasteniem  azote
 c===========================================================================
 c  NACHALNIe DANNIe KOMPONENTOV ORGANICHNOGO MATERIALA   POCHVI
 c================================================================
@@ -280,15 +280,15 @@ c        SRPM(j)=0.1324*inf(8)
 c        SBIO(j)=0.0197*inf(8)
 c        SHUM(j)=0.7636*inf(8)
 
-c       write(OutputFileUnit, *) 'rnitr(12) -OMSDPM(j) 
-c       write(OutputFileUnit, *) 'rnitr(13) -OMSRPM(j) 
-c       write(OutputFileUnit, *) 'rnitr(14) -OMSBIO(j) 
-c       write(OutputFileUnit, *) 'rnitr(15) -OMSHUM(j) 
+c       write(OutputFileUnit, *) "rnitr(12) -OMSDPM(j) 
+c       write(OutputFileUnit, *) "rnitr(13) -OMSRPM(j) 
+c       write(OutputFileUnit, *) "rnitr(14) -OMSBIO(j) 
+c       write(OutputFileUnit, *) "rnitr(15) -OMSHUM(j) 
 c==========================================================================
       write(OutputFileUnit,129)
       write(OutputFileUnit,119)
       write(OutputFileUnit,122)
-  122 format(10x,'     R E S U L T A T     R A S C H E T O V       ')
+  122 format(10x,"     R E S U L T A T     R A S C H E T O V       ")
       write(OutputFileUnit,119)
 
   100 format(4i3,f6.2)
@@ -418,7 +418,7 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+      
       do j=1,n
          s1=0
          s2=0
@@ -684,7 +684,7 @@ c  .
 c==================================================================
 c      RASCHET RASPREDELENIJ RASTITELNIX OSTATKOV PO MESJZAM VEGETAZII
 c===================================================================
-c          'inf(7) - nomer pervogo mesjza vegetazii kulturi'
+c          "inf(7) - nomer pervogo mesjza vegetazii kulturi"
 
          CUrost(j)=((2.3026*(2./3)*10.**(2.-(2./3)*(j-inf(7)+1)))/(1.+10.**(2.-(2./3)*(j-inf(7)+1)))**2)*SumRst
 
@@ -869,21 +869,11 @@ c     6 *(HUM3(j)*(exp(-raC(j)*rmW(j)*rmpH(j)
 c     6 *0.6*0.02*0.08333)))
          if(hgr(j) < -20)CHHUM3(j)=0
 
-c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
          CHBIO3(j)=BIO3(j)*rmW3(j)*(exp(-raC(j)*rmpH(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
          if(hgr(j) < -20)CHBIO3(j)=0
 
          CHHUM3(j)=HUM3(j)*rmW3(j)*(exp(-raC(j)*rmpH(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
          if(hgr(j) < -20)CHHUM3(j)=0
-
-c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 c================================================================
 c      RASCHET  PERVICHNOGO RAZLOGENIJ NERAZLOGIVSCHIXSJ RASTITELNIX OSTATKOV
@@ -1147,10 +1137,10 @@ c	rNmicr(j)=VNnitr(j)/(inf(19)*0.2*10)
          SRPM(j)=rnitr(13)*rMCsoi(j)
          SBIO(j)=rnitr(14)*rMCsoi(j)
          SHUM(j)=rnitr(15)*rMCsoi(j)
-c       write(OutputFileUnit, *) 'rnitr(12) -OMSDPM(j) 
-c       write(OutputFileUnit, *) 'rnitr(13) -OMSRPM(j) 
-c       write(OutputFileUnit, *) 'rnitr(14) -OMSBIO(j) 
-c       write(OutputFileUnit, *) 'rnitr(15) -OMSHUM(j) 
+c       write(OutputFileUnit, *) "rnitr(12) -OMSDPM(j) 
+c       write(OutputFileUnit, *) "rnitr(13) -OMSRPM(j) 
+c       write(OutputFileUnit, *) "rnitr(14) -OMSBIO(j) 
+c       write(OutputFileUnit, *) "rnitr(15) -OMSHUM(j) 
 
 
 c=============================================================
@@ -1869,7 +1859,7 @@ c       if(inf(4).eq.1)SumRst=(0.48*Ur+2.0)
 c==================================================================
 c      RASCHET RASPREDELENIJ RASTITELNIX OSTATKOV PO MESJZAM VEGETAZII
 c===================================================================
-c          'inf(7) - nomer pervogo mesjza vegetazii kulturi'
+c          "inf(7) - nomer pervogo mesjza vegetazii kulturi"
 
 c       CUrost(j)=((2.3026*(2./3)*10.**(2.-(2./3)*
 c     6 (j-inf(7)+1)))/(1.+10.**(2.-(2./3)*(j-inf(7)+1)))**2)*SumRst
@@ -2003,12 +1993,12 @@ c===============================================================
          if(inf(4).eq.7)RKwin=0.005
          if(inf(4).eq.0)RKwin=0.0
 	
-c       write(OutputFileUnit, *) 'inf(10) - otnositelniy vinos azota s urogjaem '
-c       write(OutputFileUnit, *) 'inf(4) = :1- ozim pscheniza (0.035),2 - jachmen(0.030) '
-c       write(OutputFileUnit, *) ' 3 - gorox (0.016)4 - kukuruza na zerno (0.030)
-c      5  5 - kukuruza na silos (0.003)'
-c       write(OutputFileUnit, *) '6 - podsolnechnic(0.037)  7 - ljuzerna (0.005)
-c      5 , 0 -  par'
+c       write(OutputFileUnit, *) "inf(10) - otnositelniy vinos azota s urogjaem "
+c       write(OutputFileUnit, *) "inf(4) = :1- ozim pscheniza (0.035),2 - jachmen(0.030) "
+c       write(OutputFileUnit, *) " 3 - gorox (0.016)4 - kukuruza na zerno (0.030)
+c      5  5 - kukuruza na silos (0.003)"
+c       write(OutputFileUnit, *) "6 - podsolnechnic(0.037)  7 - ljuzerna (0.005)
+c      5 , 0 -  par"
 
          if(inf(4).eq.1)RKwin=0.035
          if(inf(4).eq.2)RKwin=0.030
@@ -2026,8 +2016,8 @@ ccc       if(inf(10).eq.3)PKpoch=1.6
 ccc       if(inf(10).eq.4)PKpoch=1.4
 ccc       if(inf(10).eq.5)PKpoch=1.6
 
-c       write(OutputFileUnit, *) 'inf(10)= 1-tjgjeliy suglinok; 2- sredniy suglinok:
-c      3 3 legkiy suglinok; 4- supeschanaj pochva; 5 peschanaj pochva'
+c       write(OutputFileUnit, *) "inf(10)= 1-tjgjeliy suglinok; 2- sredniy suglinok:
+c      3 3 legkiy suglinok; 4- supeschanaj pochva; 5 peschanaj pochva"
 
          if(inf(4).eq.1)PKcult=1.35
          if(inf(4).eq.2)PKcult=1.23
@@ -2171,1261 +2161,392 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+      
+      
       j1=j-1
-        write(OutputFileUnit,121)
 
-          write(OutputFileUnit,9371)
-9371  format(4x,76('='))
-       write(OutputFileUnit, *) '                       T A B L I Z A  R.1     '
-       write(OutputFileUnit, *) '                       T A B L I Z A  R.1     '
-       write(OutputFileUnit,970)
-         write(OutputFileUnit,9321)
-           write(OutputFileUnit,9311)
-9321  format(4x,76('='))
- 970  format(10x,' RASCHET  DEFIZITA  WLAGI ')
-9311  format(4x,76('-'))
-        write(OutputFileUnit,143)
- 143   format(1x,'i','dek','i','cyt','i',1x,'Tisp  ',4x,'i',
-     4 3x,'ratX',2x,'i',2x,'pBIO',1x,'i',3x,'pHUM',4x,'i',
-     5 3x,' pCO2',4x,'i',2x,   'rE  i')
+      do iter = 1,n
+         dekadesReal(iter) = iter
+         gimReal(iter) = gim(iter)
+      end do
 
-       write(OutputFileUnit,120)
+      call WriteTable(OutputFileUnit,"RASCHET  DEFIZITA  WLAGI",
+     >   "dek", dekadesReal,"cyt",gimReal,"Tisp",Tisp,"ratX",ratX,"pBIO",pBIO,"pHUM",pHUM," pCO2",pCO2,"rE",rE)
 c=================
-      do 154 j=1,n
-      write(OutputFileUnit,151)j,gim(j),Tisp(j),ratX(j),pBIO(j),pHUM(j),
-     3 pCO2(j),rE(j)
-
-  154 continue
- 151   format(1x,'i',i3,' i',i4,' i',6(f7.3,1x,' i'))
-      write(OutputFileUnit,121)
-       write(OutputFileUnit, *) '                       T A B L I Z A  R.2'
-       write(OutputFileUnit, *) '                       T A B L I Z A  R.2     '     
-c====================================================
-      write(OutputFileUnit,147)
- 147   format(1x,'i','dek','i','cyt','i',1x,'hgr  ',4x,'i',
-     4 3x,'Whgr',2x,'i',2x,'rmpH  ',1x,'i',3x,'rmpH1  ',1x,'i',
-     5 3x,'rmW   ','i',2x,   'rmW3     i')
-
-      write(OutputFileUnit,120)
-c=================
-      do 157 j=1,n
-      write(OutputFileUnit,155)j,gim(j),hgr(j),Whgr(j),rmpH(j),rmpH1(j),
-     3 rmW(j),rmW3(j)
-
-  157 continue
- 155   format(1x,'i',i3,'i',i3,'i',6(f7.3,2x,' i'))
-      write(OutputFileUnit,121)
+      call WriteTable(OutputFileUnit,"RASCHET  DEFIZITA  WLAGI",
+     >   "dek", dekadesReal,"cyt",gimReal,"hgr", hgr, "Whgr", Whgr, "rmpH", rmpH,"rmpH1", rmpH1, "rmW", rmW, "rmW1", rmW1, "rmW2", rmW2, "rmW3", rmW3)
 
 
 
 c====================================================== 
-       write(OutputFileUnit, *) '                       T A B L I Z A  R.2a     '     
-c====================================================
-      write(OutputFileUnit,447)
- 447   format(1x,'i','dek','i','cyt','i',1x,'hgr  ',4x,'i',
-     4 3x,'rchW2',2x,'i',2x,'mt1',1x,'i',3x,'mt2   ',1x,'i',
-     5 3x,'mW2 1 ','i',2x,   'mpH2     i')
-
-      write(OutputFileUnit,120)
-c=================
-      do 857 j=1,n
-      write(OutputFileUnit,451)j,gim(j),hgr(j),rchW2(j),rmt1(j),rmt2(j),
-     3 rmW2(j),rmpH2(j)
-
-  857 continue
- 451   format(1x,'i',i3,'i',i3,'i',6(f7.3,2x,' i'))
-      write(OutputFileUnit,121)
-
-
-
-c====================================================== 
-
-
-
-
-      write(OutputFileUnit,9361)
-9361  format(4x,76('='))
-      write(OutputFileUnit,120)
-       write(OutputFileUnit, *) '                               T A B L I Z A  R.3     '
-      write(OutputFileUnit,1250)
-      write(OutputFileUnit,4123)
-      write(OutputFileUnit,4239)
-4102  format(4x,76('='))
-1250  format(10x, 'RASCHET  PARAMETROV OSNOVNOGO URAVNENIJ I   ')
-4123  format(10x,'  RASTITELNIX OSTATKOV  i DPM i  RPM, t/ga     ')
-4239  format(4x,76('='))
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,5000)
-5000   format(1x,'i','dek','i','cyt','i',1x,'raC ',5x,'i',
-     4 3x,'rbC',4x,'i',3x,'ratX',3x,'i',3x,'CUrost',3x,'i',6x,'DPM0 i',
-     5 2x,'RPM0 i')
-
-      write(OutputFileUnit,120)
-      do 45 j=1,n
-      write(OutputFileUnit,459)j,gim(j),raC(j),rbC(j),ratX(j),CUrost(j),DPM0(j),
-     4 RPM0(j)
-459    format(1x,'i',i3,'i',i3,'i',f7.3,3x,'i',5(f7.4,3x,'i'))
-
- 45   continue
-c++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        write(OutputFileUnit,120)
-        write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .4  '
-        write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '              RASCHET  RAZLOGJENIJ   DPM(j)    '
-        write(OutputFileUnit, *) '                  RASTITELNIX OSTATKOV, t/ga    '
-        write(OutputFileUnit,120)
-       write(OutputFileUnit,223)
- 223   format(1x,'i','dek','i','cyt','i',3x,'DBIO',11x,'i',
-     4 7x,'DHUM',4x,'i',7x,'DCO2',4x,'i',10x,'DPM',2x,'i')
-       write(OutputFileUnit,120)
-       do 46 j=1,n
-       write(OutputFileUnit,224)j,gim(j),DBIO(j),DHUM(j),DCO2(j),DPM(j)
- 224  format(1x,'i',i3,'i',i3,'i',2x,f10.9,7x,'i',3(2x,f10.9,2x,'i'))
-  46   continue
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,3361)
-3361   format(10x,'                                T A B L I Z A  R.5.')
-      write(OutputFileUnit,1142)
-       write(OutputFileUnit,120)
-1142  format(10x,'             RASCHET  RAZLOGENUJ  RPM(j)')
-        write(OutputFileUnit, *) '                RASTITELNIX OSTATKOV, t/ga    '
-       write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,225)
-
-
- 225  format(1x,'i','dek','i','cyt','i',3x,'BIO1',11x,'i',
-     4 7x,'HUM1',2x,'i',7x,'R1CO2',5x,'i',10x,'RPM',2x,'i')
-      write(OutputFileUnit,120)
-       do 88 j=1,n
-      write(OutputFileUnit,222)j,gim(j),BIO1(j),HUM1(j),R1CO2(j),RPM(j)
- 222  format(1x,'i',i3,'i',i3,'i',2x,f10.9,7x,'i',3(2x,f10.9,2x,'i'))
-  88  continue
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .6  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '            RASCHET  RAZLOGJENIJ   BIO1(j)  '
-        write(OutputFileUnit, *) '                RASTITELNIX OSTATKOV, t/ga    '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,227)
- 227  format(1x,'i','dek','i','cyt','i',1x,'BIO2',9x,'i',3x,'HUM2',7x,
-     4'i',3x,'R2CO2',4x,'i',2x,'rdh1+rdh2' )
-
-      write(OutputFileUnit,120)
-       do 89 j=1,n
-      write(OutputFileUnit,229)j,gim(j),BIO2(j),HUM2(j),R2CO2(j),(rdh1(j)+rdh2(j))
- 229  format(1x,'i',i3,'i',i3,'i',4(f10.9,3x,' i'))
-  89  continue
-      write(OutputFileUnit,120)
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .7  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '            RASCHET  videlenij METANA  '
-        write(OutputFileUnit, *) '  IZ   BIO   RASTITELNIX OSTATKOV, t/ga    '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,430)
- 430  format(1x,'i','dek','i','cyt','i',1x,'CHBIO',9x,'i',3x,'CHBIO1',7x,
-     4'i',3x,'CHBIO2',4x,'i',2x,'CHBIO3' )
-
-      write(OutputFileUnit,120)
-       do 431 j=1,n
-      write(OutputFileUnit,432)j,gim(j),CHBIO(j),CHBIO1(j),CHBIO2(j),CHBIO3(j)
- 432  format(1x,'i',i3,'i',i3,'i',4(f10.8,3x,' i'))
- 431  continue
-      write(OutputFileUnit,120)
-c===============================================================
-
-      write(OutputFileUnit,120)
-
-       write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                      T A B L I Z A   R.8       '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '       RASCHET  RAZLOGJENIJ   HUM1(j)    '
-        write(OutputFileUnit, *) '             RASTITELNIX OSTATKOV, t/ga    '
-
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit,120)
-
-      write(OutputFileUnit,9324)
-      write(OutputFileUnit,9316)
-9324  format(4x,76('='))
-
-9316  format(4x,76('-'))
-      write(OutputFileUnit,343)
- 343   format(1x,'i','dek','i','cyt','i',1x,'BIO3  ',7x,'i',
-     4 3x,'HUM3',5x,'i',2x,'R3CO2',7x,'i',3x,'rdh3+rdh4',1x,'i')
-       write(OutputFileUnit,120)
-          do 174 j=1,n
-      write(OutputFileUnit,630)j,gim(j),BIO3(j),HUM3(j),R3CO(j),(rdh3(j)+rdh4(j))
-
-  174 continue
- 630   format(1x,'i',i3,'i',i3,'i',4(f10.9,2x,' i'))
-      write(OutputFileUnit,120)
-
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .9  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '            RASCHET  videlenij METANA  '
-        write(OutputFileUnit, *) '  IZ   HUM   RASTITELNIX OSTATKOV, t/ga    '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,435)
- 435  format(1x,'i','dek','i','cyt','i',1x,'CHHUM',9x,'i',3x,'CHHUM1',7x,
-     4'i',3x,'CHHUM2',4x,'i',2x,'CHHUM3' )
-
-      write(OutputFileUnit,120)
-       do 433 j=1,n
-      write(OutputFileUnit,434)j,gim(j),CHHUM(j),CHHUM(j),CHHUM2(j),CHHUM3(j)
- 434  format(1x,'i',i3,'i',i3,'i',4(f10.8,3x,' i'))
- 433  continue
-      write(OutputFileUnit,120)
-c===============================================================
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .9a  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '            RASCHET  videlenij CO2  '
-        write(OutputFileUnit, *) '  IZ      RASTITELNIX OSTATKOV, t/ga    '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,405)
- 405  format(1x,'i','dek','i','cyt','i',1x,'DCO2 ',9x,'i',3x,'R1CO2 ',7x,
-     4'i',3x,'R2CO2',4x,'i',2x,'R3CO' )
-
-      write(OutputFileUnit,120)
-       do 403 j=1,n
-      write(OutputFileUnit,404)j,gim(j),DCO2(j),R1CO2(j),R2CO2(j),R3CO(j)
- 404  format(1x,'i',i3,'i',i3,'i',4(f10.8,3x,' i'))
- 403  continue
-      write(OutputFileUnit,120)
-c===============================================================
-
+      call WriteTable(OutputFileUnit, "T A B L I Z A  R.2a",
+     >   "dek", dekadesReal,"cyt",gimReal,"hgr", hgr, "rchW2", rchW2,"rmt1",rmt1,"rmt2",rmt2, "rmW2",rmW2,"rmpH2",rmpH2)
+       
+c======================================================        
+      call WriteTable(OutputFileUnit, "RASCHET  PARAMETROV OSNOVNOGO URAVNENIJ I \n RASTITELNIX OSTATKOV  i DPM i  RPM, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal, "raC",raC,"rbC",rbC,"ratX",ratX,"CUrost",CUrost,"DPM0",DPM0,"RPM0",RPM0)
 
 c++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        write(OutputFileUnit,120)
-        write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .10  '
-        write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '              RASCHET  RAZLOGJENIJ   PrDPM(j)    '
-        write(OutputFileUnit, *) '   RASTITELNIX OSTATKOV  proschlogo goda, t/ga   '
-        write(OutputFileUnit,120)
-       write(OutputFileUnit,323)
- 323   format(1x,'i','dek','i','cyt','i',2x,'PrDBIO',4x,'i',
-     4 2x,'PrDHUM',4x,'i',2x,'PrDCO2',4x,'i',2x,'PrDPM',2x,'i')
-       write(OutputFileUnit,120)
-       do 346 j=1,n
-       write(OutputFileUnit,324)j,gim(j),PrDBIO(j),PrDHUM(j),PrDCO2(j),PrDPM(j)
- 324  format(1x,'i',i3,'i',i3,'i',2x,f8.7,2x,'i',3(2x,f8.7,2x,'i'))
- 346   continue
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,3366)
-3366   format(10x,'                      T A B L I Z A  R.11.')
-      write(OutputFileUnit,1182)
-       write(OutputFileUnit,120)
-1182  format(10x,'             RASCHET  RAZLOGENUJ  PrRPM(j)')
-        write(OutputFileUnit, *) '   ASTITELNIX OSTATKOV   proschlogo goda , t/ga  '
-       write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,325)
+      call WriteTable(OutputFileUnit, "RASCHET  RAZLOGJENIJ   DPM(j) \n RASTITELNIX OSTATKOV, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal, "DBIO",DBIO,"DHUM",DHUM,"DCO2",DCO2,"DPM",DPM)
 
- 325  format(1x,'i','dek','i','cyt','i',2x,'PrBIO1',4x,'i',
-     4 2x,'PrHUM1',4x,'i',2x,'PrR1CO2',4x,'i',2x,'PrRPM',2x,'i')
-      write(OutputFileUnit,120)
-       do 388 j=1,n
-      write(OutputFileUnit,322)j,gim(j),BIO1(j),HUM1(j),R1CO2(j),RPM(j)
- 322  format(1x,'i',i3,'i',i3,'i',2x,f8.7,2x,'i',3(2x,f8.7,2x,'i'))
- 388  continue
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .12  '
-       write(OutputFileUnit,120)
+      call WriteTable(OutputFileUnit, "RASCHET  RAZLOGJENIJ   RPM(j) \n RASTITELNIX OSTATKOV, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal, "BIO1",BIO1,"HUM1",HUM1,"R1CO2",R1CO2,"RPM",RPM)
 
-        write(OutputFileUnit, *) '            RASCHET  RAZLOGJENIJ   PrBIO1(j)  '
-        write(OutputFileUnit, *) '    RASTITELNIX OSTATKOV    proschlogo goda, t/ga  '
-       write(OutputFileUnit,120)
+      do iter = 1, n
+         tmpArray(iter) = rdh1(iter) + rdh2(iter)
+      end do
 
-      write(OutputFileUnit,327)
- 327  format(1x,'i','dek','i','cyt','i',2x,'PrBIO2',2x,'i',2x,'PrHUM2'
-     6 ,2x,
-     4'i',2x,'PrR2CO2',2x,'i',2x,'Prrdh1+Prrdh2' )
-
-      write(OutputFileUnit,120)
-       do 389 j=1,n
-      write(OutputFileUnit,329)j,gim(j),PrBIO2(j),PrHUM2(j),PrR2CO(j),
-     6 (Prrdh1(j)+Prrdh2(j))
- 329  format(1x,'i',i3,'i',i3,'i',4(f8.7,2x,' i'))
- 389  continue
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-
-       write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                      T A B L I Z A   R.13       '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '       RASCHET  RAZLOGJENIJ   PrHUM1(j)    '
-        write(OutputFileUnit, *) '     RASTITELNIX OSTATKOV    proschlogo goda, t/ga  '
-
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit,120)
-
-      write(OutputFileUnit,9114)
-      write(OutputFileUnit,9216)
-9114  format(4x,76('='))
-
-9216  format(4x,76('-'))
-      write(OutputFileUnit,443)
- 443   format(1x,'i','dek','i','cyt','i',2x,'PrBIO3  ',2x,'i',
-     4 2x,'PrHUM3',2x,'i',2x,'PrR3CO2',2x,'i',2x,'Prrdh3+Prrdh4',1x,'i')
-       write(OutputFileUnit,120)
-          do 374 j=1,n
-      write(OutputFileUnit,333)j,gim(j),PrBIO3(j),PrHUM3(j),PrR3CO(j),
-     6 (Prrdh3(j)+Prrdh4(j))
-  374 continue
- 333   format(1x,'i',i3,'i',i3,'i',4(f8.7,2x,' i'))
-      write(OutputFileUnit,120)
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .14  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '            RASCHET  videlenij METANA  '
-      write(OutputFileUnit, *) 'IZ  PrBIO  RASTITELNIX OSTATKOV  proschlogo goda, t/ga '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,436)
- 436  format(1x,'i','dek','i','cyt','i',1x,'PCHBIO',9x,'i',3x,'PCHB1',7x
-     4,'i',3x,'PCHB2',4x,'i',2x,'PCHB3' )
-
-      write(OutputFileUnit,120)
-       do 437 j=1,n
-      write(OutputFileUnit,438)j,gim(j),PCHBIO(j),PCHB1(j),PCHB2(j),PCHB3(j)
- 438  format(1x,'i',i3,'i',i3,'i',4(f10.8,3x,' i'))
- 437  continue
-      write(OutputFileUnit,120)
-
-
-
+      call WriteTable(OutputFileUnit, "RASCHET  RAZLOGJENIJ   BIO1(j) \n RASTITELNIX OSTATKOV, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal, "BIO2",BIO2,"HUM2",HUM2,"R2CO2",R2CO2,"rdh1+rdh2", tmpArray)
 
 c===============================================================
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .15  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '            RASCHET  videlenij METANA  '
-      write(OutputFileUnit, *) 'IZ  PrHUM  RASTITELNIX OSTATKOV  proschlogo goda, t/ga '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,439)
- 439  format(1x,'i','dek','i','cyt','i',1x,'PCHHUM',9x,'i',3x,'PCHH1',7x
-     4,'i',3x,'PCHH2',4x,'i',2x,'PCHH3' )
-
-      write(OutputFileUnit,120)
-       do 440 j=1,n
-      write(OutputFileUnit,441)j,gim(j),PCHHUM(j),PCHH1(j),PCHH2(j),PCHH3(j)
- 441  format(1x,'i',i3,'i',i3,'i',4(f10.8,3x,' i'))
- 440  continue
-      write(OutputFileUnit,120)
-
-
-
+      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA \n IZ   BIO   RASTITELNIX OSTATKOV, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal, "CHBIO",CHBIO,"CHBIO1",CHBIO1,"CHBIO2",CHBIO2,"CHBIO3", CHBIO3)
 
 c===============================================================
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .16  '
-       write(OutputFileUnit,120)
+      do iter = 1, n
+         tmpArray(iter) = rdh3(iter) + rdh4(iter)
+      end do
 
-        write(OutputFileUnit, *) '  RASCHET  videlenij METANA IZ  RASTITELNIX OSTATKOV '
-      write(OutputFileUnit, *) 'IZ  tekuschego i proschlogo goda, t/ga '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,442)
- 442  format(1x,'i','dek','i','cyt','i',1x,'CHBIrs',9x,'i',3x,'CHHUrs'
-     4,7x
-     4,'i',3x,'CHrst  ',4x,'i',2x,'SMCHrs' )
-
+      call WriteTable(OutputFileUnit, "RASCHET  RAZLOGJENIJ   HUM1(j) \n RASTITELNIX OSTATKOV, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal, "BIO3",BIO3,"HUM3",HUM3,"R3CO2",R3CO,"rdh3+rdh4",tmpArray)
       write(OutputFileUnit,120)
-       do 445 j=1,n
-      write(OutputFileUnit,444)j,gim(j),CHBIrs(j),CHHUrs(j),CHrst(j),rdCHrs(j)
- 444  format(1x,'i',i3,'i',i3,'i',4(f10.8,3x,' i'))
- 445  continue
-      write(OutputFileUnit,120)
+C!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+C!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+C!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 c===============================================================
+      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA \n IZ   HUM   RASTITELNIX OSTATKOV, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal, "CHHUM",CHHUM,"CHHUM1",CHHUM,"CHHUM2",CHHUM2,"CHHUM3", CHHUM3)
+C!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+C!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+C!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASCHET  videlenij CO2 \n IZ  RASTITELNIX OSTATKOV, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal, "DCO2",DCO2,"R1CO2 ",R1CO2,"R2CO2",R2CO2,"R3CO", R3CO)
 
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASCHET  videlenij CO2 \n IZ  RASTITELNIX OSTATKOV, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal, "PrDBIO",PrDBIO,"PrDHUM",PrDHUM,"PrDCO2",PrDCO2,"PrDPM",PrDPM)
 
+      call WriteTable(OutputFileUnit, "RASCHET  RAZLOGENUJ  PrRPM(j) \n IZ  RASTITELNIX OSTATKOV, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal, "PrBIO1",BIO1,"PrHUM1",HUM1,"PrR1CO2",R1CO2,"PrRPM",RPM)
 
-c===================================================
-       write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                      T A B L I Z A   R.17       '
-       write(OutputFileUnit,120)
+      do iter = 1, n
+         tmpArray(iter) = Prrdh1(iter) + Prrdh2(iter)
+      end do
+      call WriteTable(OutputFileUnit, "RASCHET  RAZLOGJENIJ   PrBIO1(j) \n IZ  RASTITELNIX OSTATKOV, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal, "PrBIO2",PrBIO2,"PrHUM2",PrHUM2,"PrR2CO2",PrR2CO,"Prrdh1+Prrdh2", tmpArray)
 
-        write(OutputFileUnit, *) ' SUMMARNOE   RAZLOGJENIE  PO VSEM KOMPONENTAM'
-        write(OutputFileUnit, *) '     RASTITELNIX OSTATKOV, t/ga      '
-       write(OutputFileUnit,120)
-        write(OutputFileUnit,120)
-      write(OutputFileUnit,9224)
-      write(OutputFileUnit,9266)
-9224  format(4x,76('='))
+      do iter = 1, n
+         tmpArray(iter) = Prrdh3(iter) + Prrdh4(iter)
+      end do      
+      call WriteTable(OutputFileUnit, "RASCHET  RAZLOGJENIJ   PrHUM1(j) \n IZ  RASTITELNIX OSTATKOV, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal, "PrBIO3", PrBIO3, "PrHUM3",PrHUM3,"PrR3CO2",PrR3CO,"Prrdh3+Prrdh4",tmpArray)
+        
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA \n IZ  PrBIO  RASTITELNIX OSTATKOV, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal, "PCHBIO",PCHBIO,"PCHB1",PCHB1,"PCHB2",PCHB2,"PCHB3", PCHB3)
 
-9266  format(4x,76('-'))
-      write(OutputFileUnit,463)
- 463   format(1x,'i','dek','i','cyt','i',1x,'BIOrst  ',3x,'i',
-     4 3x,'HUMrst',3x,'i',2x,'CO2rst',1x,'i',2x,'CHBIrs',1x,'i',2x,
-     4 'CHHUrs',1x,'i',2x,'CHrst',1x,'i')
-       write(OutputFileUnit,120)
-          do 376 j=1,n
-      write(OutputFileUnit,937)j,gim(j),BIOrst(j),HUMrst(j),CO2rst(j),CHBIrs(j),
-     4 CHHUrs(j),CHrst(j)
-  376 continue
- 937   format(1x,'i',i3,'i',i3,'i',6(f8.4,2x,' i'))
-      write(OutputFileUnit,120)
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA \n IZ  PrHUM  RASTITELNIX OSTATKOV, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal, "PCHHUM", PCHHUM,"PCHH1",PCHH1,"PCHH2",PCHH2,"PCHH3", PCHH3)
+
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA \n IZ  IZ  tekuschego i proschlogo goda, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal, "CHBIrs",CHBIrs,"CHHUrs",CHHUrs,"CHrst",CHrst,"SMCHrs", rdCHrs)
+
+c===============================================================
+      call WriteTable(OutputFileUnit, "SUMMARNOE   RAZLOGJENIE  PO VSEM KOMPONENTAM \n RASTITELNIX OSTATKOV, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal, "BIOrst",BIOrst,"HUMrst",HUMrst,"CO2rst",CO2rst,"CHBIrs",CHBIrs,"CHHUrs",CHHUrs,"CHrst",CHrst)
 
 c=========================================
+      call WriteTable(OutputFileUnit, "VIBROSI CO2  PROSCHLOGO  GODA \n RASTITELNIX OSTATKOV, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal, "prDCO2",prDCO2,"prR1CO",prR1CO,"prR2CO",prR2CO,"prR3CO",prR3CO)
 
-c===================================================
-       write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                      T A B L I Z A   R.17a       '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) ' VIBROSI CO2  PROSCHLOGO  GODA'
-        write(OutputFileUnit, *) '     RASTITELNIX OSTATKOV, t/ga      '
-       write(OutputFileUnit,120)
-        write(OutputFileUnit,120)
-      write(OutputFileUnit,9274)
-      write(OutputFileUnit,9276)
-9274  format(4x,76('='))
-
-9276  format(4x,76('-'))
-      write(OutputFileUnit,763)
- 763   format(1x,'i','dek','i','cyt','i',1x,'prDCO2',3x,'i',
-     4 3x,'prR1CO',3x,'i',2x,'prR2CO',1x,'i',2x,'prR3CO',1x,'i')
-c,2x,
-c     4 'CHHUrs',1x,'i',2x,'CHrst',1x,'i')
-       write(OutputFileUnit,120)
-          do 776 j=1,n
-      write(OutputFileUnit,917)j,gim(j),prDCO2(j),prR1CO(j),prR2CO(j),prR3CO(j)
-c     4 CHHUrs(j),CHrst(j)
-  776 continue
- 917   format(1x,'i',i3,'i',i3,'i',4(f10.8,2x,' i'))
-      write(OutputFileUnit,120)
+      
 
 c=========================================
-
-
-
-
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .18  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) 'RASCHET  NACHALNIX ZNACHENIY ORGANIKI   '
-        write(OutputFileUnit, *) '           POCHVI, t/ga   '
-       write(OutputFileUnit,120)
-
-
-      write(OutputFileUnit,843)
- 843   format(1x,'i','dek','i','cyt','i',1x,'SDPM  ',4x,'i',
-     4 3x,'SRPM',2x,'i',2x,'SBIO',4x,'i',3x,'SHUM',3x,'i',
-     5 3x,' IOM ',2x,'i',2x,   '  SOM  i')
-       write(OutputFileUnit,120)
-          do 874 j=1,n
-      write(OutputFileUnit,851)j,gim(j),SDPM(j),SRPM(j),SBIO(j),SHUM(j),
-     3 RIOM(j),inf(8)
-
-  874 continue
-
- 851   format(1x,'i',i3,'i',i3,'i',6(f7.4,2x,' i'))
-      write(OutputFileUnit,120)
+      do iter = 1, n
+         tmpArray(iter) = inf(8)
+      end do 
+      call WriteTable(OutputFileUnit, "RASCHET  NACHALNIX ZNACHENIY ORGANIKI \n POCHVI, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal,"SDPM  ",SDPM,"SRPM",SRPM,"SBIO",SBIO,"SHUM",SHUM,"IOM",RIOM,"SOM", tmpArray)
 
 c============================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .19  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) 'RASCHET  ROZLOGJENIJ  ORGANIKI   '
-        write(OutputFileUnit, *) '           POCHVI, t/ga   '
-       write(OutputFileUnit,120)
-
-
-      write(OutputFileUnit,831)
- 831   format(1x,'i','dek','i','cyt','i',1x,'SDPM0  ',4x,'i',
-     4 3x,'SRPM0',2x,'i',2x,'SBIO0',1x,'i',3x,'SHUM0',1x,'i')
-       write(OutputFileUnit,120)
-          do 674 j=1,n
-      write(OutputFileUnit,651)j,gim(j),SDPM0(j),SRPM0(j),SBIO0(j),SHUM0(j)
-
-  674 continue
-
- 651   format(1x,'i',i3,'i',i3,'i',4(f8.6,2x,' i'))
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
+      call WriteTable(OutputFileUnit, "RASCHET  ROZLOGJENIJ  ORGANIKI \n POCHVI, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal,"SDPM0",SDPM0,"SRPM0",SRPM0,"SBIO0",SBIO0,"SHUM0",SHUM0)
+      
+c============================
+      call WriteTable(OutputFileUnit, "RASCHET  ROZLOGJENIJ  SDPM0 \n POCHVI, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal,"SDBIO  ",SDBIO,"SDHUM",SDHUM,"SDCO2",SDCO)
 
 c============================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .20  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '         RASCHET  ROZLOGJENIJ  SDPM0(j)   '
-        write(OutputFileUnit, *) '                POCHVI, t/ga   '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,43)
-  43   format(1x,'i','dek','i','cyt','i',1x,'SDBIO  ',4x,'i',
-     4 3x,'SDHUM',2x,'i',2x,'SDCO2',1x,'i')
-       write(OutputFileUnit,120)
-          do  74 j=1,n
-      write(OutputFileUnit,51)j,gim(j),SDBIO(j),SDHUM(j),SDCO(j)
-
-   74 continue
-  51   format(1x,'i',i3,'i',i3,'i',3(f10.6,2x,' i'))
-      write(OutputFileUnit,120)
+      call WriteTable(OutputFileUnit, "RASCHET  ROZLOGJENIJ  SRPM0 \n POCHVI, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal,"SBIO1  ",SBIO1,"SHUM1",SHUM1,"SR1CO2",SR1CO)
 
 c============================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .21 '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '        RASCHET  ROZLOGJENIJ  SRPM0(j)   '
-        write(OutputFileUnit, *) '                POCHVI, t/ga   '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,42)
-  42   format(1x,'i','dek','i','cyt','i',1x,'SBIO1  ',4x,'i',
-     4 3x,'SHUM1',2x,'i',2x,'SR1CO2',1x,'i')
-       write(OutputFileUnit,120)
-          do  73 j=1,n
-      write(OutputFileUnit,50)j,gim(j),SBIO1(j),SHUM1(j),SR1CO(j)
-
-   73 continue
-  50   format(1x,'i',i3,'i',i3,'i',3(f12.10,2x,' i'))
-      write(OutputFileUnit,120)
+      call WriteTable(OutputFileUnit, "RASCHET  ROZLOGJENIJ  SBIO0(j) \n POCHVI, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal,"SBIO2  ",SBIO2,"SHUM2",SHUM2,"SR2CO2",SR2CO)
 
 c============================
-
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .22 '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '        RASCHET  ROZLOGJENIJ  SBIO0(j)   '
-        write(OutputFileUnit, *) '                POCHVI, t/ga   '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,41)
-  41   format(1x,'i','dek','i','cyt','i',1x,'SBIO2  ',4x,'i',
-     4 3x,'SHUM2',2x,'i',2x,'SR2CO2',1x,'i')
-       write(OutputFileUnit,120)
-          do  72 j=1,n
-      write(OutputFileUnit,49)j,gim(j),SBIO2(j),SHUM2(j),SR2CO(j)
-
-   72 continue
-  49   format(1x,'i',i3,'i',i3,'i',3(f10.8,2x,' i'))
-      write(OutputFileUnit,120)
-
-c============================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .23 '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '        RASCHET  ROZLOGJENIJ  SHUM0(j)   '
-        write(OutputFileUnit, *) '                POCHVI, t/ga   '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,44)
-  44   format(1x,'i','dek','i','cyt','i',1x,'SBIO3  ',4x,'i',
-     4 3x,'SHUM3',2x,'i',2x,'SR3CO2',1x,'i')
-       write(OutputFileUnit,120)
-          do  25 j=1,n
-      write(OutputFileUnit,418)j,gim(j),SBIO3(j),SHUM3(j),SR3CO(j)
-
-   25 continue
- 418   format(1x,'i',i3,'i',i3,'i',3(f10.8,2x,' i'))
-      write(OutputFileUnit,120)
-c===================================================
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .24  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '            RASCHET  videlenij METANA  '
-        write(OutputFileUnit, *) '  IZ   BIO   POCHVI , t/ga    '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,450)
- 450  format(1x,'i','dek','i','cyt','i',1x,'HSBIO0',9x,'i',3x,'HSBIO',7x,
-     4'i',3x,'HSBIO1',4x,'i',2x,'HSBIO2','i',2x,'HSBIO3' )
-
-      write(OutputFileUnit,120)
-       do 913 j=1,n
-      write(OutputFileUnit,452)j,gim(j),HSBIO0(j),HSBIO(j),HSBIO1(j),HSBIO2(j),
-     4 HSBIO3(j)
- 452  format(1x,'i',i3,'i',i3,'i',5(f8.7,3x,' i'))
- 913  continue
-      write(OutputFileUnit,120)
-c===============================================================
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .25  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '            RASCHET  videlenij METANA  '
-        write(OutputFileUnit, *) '  IZ   HUM   POCHVI , t/ga    '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,453)
- 453  format(1x,'i','dek','i','cyt','i',1x,'HHUM00',9x,'i',3x,
-     4 'HHUM0',7x,
-     4'i',3x,'HHUM1',4x,'i',2x,'HHUM2' ,'i',2x,'HHUM3' )
-
-      write(OutputFileUnit,120)
-       do 454 j=1,n
-      write(OutputFileUnit,455)j,gim(j),HHUM00(j),HHUM0(j),HHUM1(j),HHUM2(j),
-     4 HHUM3(j)
- 455  format(1x,'i',i3,'i',i3,'i',5(f8.7,3x,' i'))
- 454  continue
-      write(OutputFileUnit,120)
-c===============================================================
-
-
-       write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                      T A B L I Z A   R.26       '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) ' SUMMARNOE   RAZLOGJENIE  PO VSEM KOMPONENTAM'
-        write(OutputFileUnit, *) '     ORGANIKI  POCHVI, t/ga      '
-       write(OutputFileUnit,120)
-        write(OutputFileUnit,120)
-      write(OutputFileUnit,9204)
-      write(OutputFileUnit,9206)
-9204  format(4x,76('='))
-
-9206  format(4x,76('-'))
-      write(OutputFileUnit,473)
- 473   format(1x,'i','dek','i','cyt','i',1x,'BIOsoil  ',7x,'i',
-     4 3x,'HUMsoil',5x,'i',2x,'CO2soil',1x,'i')
-       write(OutputFileUnit,120)
-          do 379 j=1,n
-      write(OutputFileUnit,939)j,gim(j),BIOsoi(j),HUMsoi(j),CO2soi(j)
-  379 continue
- 939   format(1x,'i',i3,'i',i3,'i',3(f10.9,2x,' i'))
-      write(OutputFileUnit,120)
-
-
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .27  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '            RASCHET  videlenij METANA  '
-        write(OutputFileUnit, *) ' SUMMARNO   IZ VSEX BIO i  HUM   POCHVI , t/ga'
-        write(OutputFileUnit, *) ' I SUMMARNO   IZ VSEY   POCHVI , t/ga'
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,456)
- 456  format(1x,'i','dek','i','cyt','i',1x,'CHBIso',9x,'i',3x,
-     4 'CHHUso',7x,
-     4'i',3x,'CHsoil',4x,'i',2x,'SMCHso'  )
-
-      write(OutputFileUnit,120)
-       do 457 j=1,n
-      write(OutputFileUnit,458)j,gim(j),CHBIso(j),CHHUso(j),CHsoil(j),rdCHso(j)
-c     4 HHUM3(j)
- 458  format(1x,'i',i3,'i',i3,'i',4(f9.8,3x,' i'))
- 457  continue
-      write(OutputFileUnit,120)
-c===============================================================
-
-
-c======================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .28 '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) ' RASCHET  PERVICHNOGO   ROZLOGJENIJ     '
-        write(OutputFileUnit, *) '     ORGANICHESKIX  UDOBRENIY, t/ga   '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,40)
-  40   format(1x,'i','dek','i','cyt','i',1x,'FDPM  ',4x,'i',
-     4 3x,'FRPM ',2x,'i',2x,'FHUM  ',1x,'i')
-       write(OutputFileUnit,120)
-          do  71 j=1,n
-      write(OutputFileUnit,48)j,gim(j),FDPM(j),FRPM(j),FHUM(j)
-
-   71 continue
-  48   format(1x,'i',i3,'i',i3,'i',3(f10.8,2x,' i'))
-      write(OutputFileUnit,120)
-
-c======================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .29 '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) ' RASCHET     ROZLOGJENIJ       FDPM(j)     '
-        write(OutputFileUnit, *) '     ORGANICHESKIX  UDOBRENIY, t/ga   '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,420)
- 420   format(1x,'i','dek','i','cyt','i',1x,'FDBIO  ',4x,'i',
-     4 3x,'FDHUM',2x,'i',2x,'FDCO',1x,'i')
-       write(OutputFileUnit,120)
-          do  712 j=1,n
-      write(OutputFileUnit,482)j,gim(j),FDBIO(j),FDHUM(j),FDCO(j)
-
- 712   continue
- 482   format(1x,'i',i3,'i',i3,'i',3(f10.8,2x,' i'))
-      write(OutputFileUnit,120)
-
-c======================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .30 '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) ' RASCHET     ROZLOGJENIJ       FRPM(j)     '
-        write(OutputFileUnit, *) '     ORGANICHESKIX  UDOBRENIY, t/ga   '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,422)
- 422   format(1x,'i','dek','i','cyt','i',1x,'FBIO1  ',4x,'i',
-     4 3x,'FHUM1',2x,'i',2x,'FR1CO',1x,'i')
-       write(OutputFileUnit,120)
-          do  714 j=1,n
-      write(OutputFileUnit,484)j,gim(j),FBIO1(j),FHUM1(j),FR1CO(j)
-
- 714   continue
- 484   format(1x,'i',i3,'i',i3,'i',3(f10.8,2x,' i'))
-      write(OutputFileUnit,120)
-
-c======================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .31 '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) ' RASCHET     ROZLOGJENIJ       FHUM(j)     '
-        write(OutputFileUnit, *) '     ORGANICHESKIX  UDOBRENIY, t/ga   '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,428)
- 428   format(1x,'i','dek','i','cyt','i',1x,'FBIO3  ',4x,'i',
-     4 3x,'FHUM3',2x,'i',2x,'FR3CO',1x,'i')
-       write(OutputFileUnit,120)
-          do  718 j=1,n
-      write(OutputFileUnit,488)j,gim(j),FBIO3(j),FHUM3(j),FR3CO(j)
-
- 718   continue
- 488   format(1x,'i',i3,'i',i3,'i',3(f10.8,2x,' i'))
-      write(OutputFileUnit,120)
-c===================================================
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .32  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '            RASCHET  videlenij METANA  '
-        write(OutputFileUnit, *) '  IZ   BIO I  HUM   UDOBRENIY , t/ga    '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,460)
- 460  format(1x,'i','dek','i','cyt','i',1x,'CHFBI0',9x,'i',3x,
-     4 'CHFBI1',7x,
-     4'i',3x,'CHFBI3',4x,'i',2x,'CHFHU0','i',2x,'CHFHU1',
-     4'i',2x,'CHFHU3' )
-
-      write(OutputFileUnit,120)
-       do 461 j=1,n
-      write(OutputFileUnit,462)j,gim(j),CHFBI0(j),CHFBI1(j),CHFBI3(j),CHFHU0(j),
-     4 CHFHU1(j),CHFHU3(j)
- 462  format(1x,'i',i3,'i',i3,'i',6(f8.7,3x,' i'))
- 461  continue
-      write(OutputFileUnit,120)
-c===============================================================
-c===============================================================
-
-       write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                      T A B L I Z A   R.33       '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) ' SUMMARNOE   RAZLOGJENIE  PO VSEM KOMPONENTAM'
-        write(OutputFileUnit, *) '     ORGANICHESKIX  UDOBRENIY, t/ga      '
-       write(OutputFileUnit,120)
-        write(OutputFileUnit,120)
-      write(OutputFileUnit,9704)
-      write(OutputFileUnit,9706)
-9704  format(4x,76('='))
-
-9706  format(4x,76('-'))
-      write(OutputFileUnit,773)
- 773   format(1x,'i','dek','i','cyt','i',1x,'BIOfum  ',7x,'i',
-     4 3x,'HUMfum',5x,'i',2x,'CO2fum',1x,'i')
-       write(OutputFileUnit,120)
-          do 779 j=1,n
-      write(OutputFileUnit,839)j,gim(j),BIOfum(j),HUMfum(j),CO2fum(j)
-  779 continue
- 839   format(1x,'i',i3,'i',i3,'i',3(f10.9,2x,' i'))
-      write(OutputFileUnit,120)
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .34  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '            RASCHET  videlenij METANA  '
-        write(OutputFileUnit, *) '  SUMMARNOGO  IZ    UDOBRENIY , t/ga    '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,288)
- 288  format(1x,'i','dek','i','cyt','i',1x,'CHBIOfm',9x,'i',3x,
-     4 'CHHUMfm',7x,
-     4'i',3x,'CHfum',4x,'i',2x,'SMCHfum')
-
-      write(OutputFileUnit,120)
-       do 465 j=1,n
-      write(OutputFileUnit,464)j,gim(j),CHBIfm(j),CHHUfm(j),CHfum(j),rdCHfm(j)
-c     4 CHFHU1(j),CHFHU3(j)
- 464  format(1x,'i',i3,'i',i3,'i',4(f9.8,3x,' i'))
- 465  continue
-      write(OutputFileUnit,120)
-c===============================================================
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .35  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) ' RASCHET  KOEFFIZIENTOV URAVNENIY  '
-        write(OutputFileUnit, *) '  RASCHETA NITRIFIKAZII  I DENITRIFIKAZII '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,470)
- 470  format(1x,'i','dek','i','cyt','i',4x,'denNO3',3x,'i',3x,
-     4 'denW',3x,'i',3x,'denCO2',4x,'i',2x,'denpW',4x,'i',2x,
-     4 'dnpNO3')
-ccc     4'i',2x,'CHFHU3' )
-
-      write(OutputFileUnit,120)
-       do 471 j=1,n
-      write(OutputFileUnit,472)j,gim(j),denNO3(j),denW(j),denCO2(j),denpW(j),
-     4 dnpNO3(j)
- 472  format(1x,'i',i3,'i',i3,'i',5(f8.6,3x,' i'))
- 471  continue
-      write(OutputFileUnit,120)
-c===============================================================
-
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .36  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) ' RASCHET  SKOROSII OBRAZOVANIJ UGLERODA  '
-cccccccccccccccc        write(OutputFileUnit, *) '  RASCHETA NITRIFIKAZII  I DENITRIFIKAZII '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,412)
- 412  format(1x,'i','dek','i','cyt','i',1x,'SMCrst',1x,'i',3x,
-     4 'SdN2O',7x,'i',3x,'SnN2O',4x,'i',2x,'denpW','i',2x,
-     4 'dnpNO3')
-ccc     4'i',2x,'CHFHU3' )
-
-      write(OutputFileUnit,120)
-       do 413 j=1,n
-      write(OutputFileUnit,414)j,gim(j),SMCrst(j),gn2(j),gn1(j),denpW(j),
-     4 dnpNO3(j)
- 414  format(1x,'i',i3,'i',i3,'i',5(f8.6,3x,' i'))
- 413  continue
-      write(OutputFileUnit,120)
-c===============================================================
-
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .37  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '     RASCHET    '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,133)
- 133  format(1x,'i','dek','i','cyt','i',1x,'rNmicr',9x,'i',3x,
-     4 'FdNO3',7x,'i',3x,'FdWFPS',4x,'i',2x,'rchW2')
-      write(OutputFileUnit,120)
-       do 112 j=1,n
-      write(OutputFileUnit,113)j,gim(j),rNmicr(j),FdNO3(j),FdWFPS(j),rchW2(j)
-ccccccccccc      write(OutputFileUnit,113)j,gim(j),CNrst(j),CNsoil(j),CNfum(j),CNfum(j)
- 113  format(1x,'i',i3,'i',i3,'i',4(f8.3,3x,' i'))
- 112  continue
-      write(OutputFileUnit,120)
-c===============================================================
-
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .38  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) '  RASCHET  SKOROSTI MINERALIZAZII - OBRAZOVANIJ  '
-        write(OutputFileUnit, *) '        AMMONIJ                 '
-       write(OutputFileUnit,120)
-
-      write(OutputFileUnit,476)
- 476  format(1x,'i','dek','i','cyt','i',1x,'SMNrst',9x,'i',3x,
-     4 'SMNsoi',7x,'i',3x,'SMNfum',4x,'i',2x,'SMNsum')
-c,'i',2x,
-c     4 'dnpNO3')
-ccc     4'i',2x,'CHFHU3' )
-
-      write(OutputFileUnit,120)
-       do 477 j=1,n
-      write(OutputFileUnit,478)j,gim(j),SMNrst(j),SMNsoi(j),SMNfum(j),SMNfum(j)
-c     4 dnpNO3(j)
- 478  format(1x,'i',i3,'i',i3,'i',4(f10.5,3x,' i'))
- 477  continue
-      write(OutputFileUnit,120)
-c===============================================================
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .39  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) ' RASCHET  NITRIFIKAZII  I EMISSII AZOTA V PROZESSE'
-        write(OutputFileUnit, *) '    NITRIFIKAZII - VNnitr(j),VNN2O(j),VNNO(j)'   
-             
-       write(OutputFileUnit,120)
-      write(OutputFileUnit,976)
- 976  format(1x,'i','dek','i','cyt','i',1x,'VNnitr',8x,'i',3x,
-     4 'VNN2O',7x,'i',3x,'VNNO')
-c,4x,'i',2x,'VNdeni','i',3x,'VNdN2',
-c     4 4x,'i',2x,'VNdN2O')
-      write(OutputFileUnit,120)
-       do 377 j=1,n
-      write(OutputFileUnit,978)j,gim(j),VNnitr(j),VNN2O(j),VNNO(j)
-c,VNdeni(j),
-c     4 VNdN2(j),VNdN2O(j)
- 978  format(1x,'i',i3,'i',i3,'i',3(f10.6,3x,' i'))
- 377  continue
-      write(OutputFileUnit,120)
-c===============================================================
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .40  '
-       write(OutputFileUnit,120)           
-        write(OutputFileUnit, *) 'RASCHET  DENITRIFIKAZII  I EMISSII AZOTA V PROZESSE'
-        write(OutputFileUnit, *) '    DENITRIFIKAZII - VNdeni(j),VNdN2(j),VNdN2O(j) '
-       write(OutputFileUnit,120)
-      write(OutputFileUnit,961)
- 961  format(1x,'i','dek','i','cyt','i',1x,'VNdeni',8x,'i',3x,'VNdN2+
-     4N2O',
-     4 7x,'i',3x,'VNdN2O')
-      write(OutputFileUnit,120)
-       do 907 j=1,n
-      write(OutputFileUnit,908)j,gim(j),VNdeni(j),VNdN2(j),VNdN2O(j)
- 908  format(1x,'i',i3,'i',i3,'i',3(f10.6,3x,' i'))
- 907  continue
-      write(OutputFileUnit,120)
-c===============================================================
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .41  '
-       write(OutputFileUnit,120)           
-        write(OutputFileUnit, *) 'RASCHET  POGLOSHENIJ AZOTA RASTENIJMI,'
-        write(OutputFileUnit, *) 'INFILTRAZII I VIVETRIVANIJ AZOTA '
-        write(OutputFileUnit, *) 'RNupt(j),RNinfl(j),Unvfum(j),Unvfrt(j) '
-       write(OutputFileUnit,120)
-      write(OutputFileUnit,933)
- 933  format(1x,'i','dek','i','cyt','i',1x,'RNupt ',8x,'i',3x,'RNinfl',
-     4 7x,'i',3x,'Vnvfum',7x,'i',3x,'Vnvfrt')
-      write(OutputFileUnit,120)
-       do 977 j=1,n
-      write(OutputFileUnit,111)j,gim(j),RNupt(j),RNinfl(j),Vnvfum(j),Vnvfrt(j)
- 111  format(1x,'i',i3,'i',i3,'i',4(f10.6,3x,' i'))
- 977  continue
-      write(OutputFileUnit,120)
-c===============================================================
-
-
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .42  '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) ' VIBROSI N2O pri nitrifikazii SumnitrN2O '      
-        write(OutputFileUnit, *) ' VIBROSI N2O pri denitrifikazii SumdenN2O'
-        write(OutputFileUnit, *) ' (kg N / ga za god) '
-       write(OutputFileUnit,120)
-      write(OutputFileUnit,161)
- 161  format(1x,'i','dek','i','cyt','i',1x,'SumnitrN2O',11x,'i',3x,
-     4 'sumdenN2o',
-     4 8x,'i',4x,'rMCsoi')
-      write(OutputFileUnit,120)
-       do 107 j=1,n
-      write(OutputFileUnit,108)j,gim(j),VNN2O(j),VNdN2(j),rMCsoi(j)
- 108  format(1x,'i',i3,'i',i3,'i',3(f12.6,3x,' i'))
- 107  continue
-      write(OutputFileUnit,120)
-c===============================================================
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .42a  '
-       write(OutputFileUnit,120)           
-        write(OutputFileUnit, *) 'RASTENIJMI,'
-        write(OutputFileUnit, *) 'A '
-ccccccccc        write(OutputFileUnit, *) 'SMCOrs,RNinfl(j),Unvfum(j),Unvfrt(j) '
-       write(OutputFileUnit,120)
-      write(OutputFileUnit,633)
- 633  format(1x,'i','dek','i','cyt','i',1x,'SMCOrs ',8x,'i',3x,'SMCOso',
-     4 7x,'i',3x,'SMCOfm',7x,'i',3x,'SPolCO')
-      write(OutputFileUnit,120)
-       do 919 j=1,n
-      write(OutputFileUnit,818)j,gim(j),gn4(j),gn5(j),gn6(j),gn7(j)
- 818  format(1x,'i',i3,'i',i3,'i',4(f10.6,3x,' i'))
- 919  continue
-      write(OutputFileUnit,120)
-c===============================================================
-
-c===============================================================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .42ab  '
-       write(OutputFileUnit,120)           
-        write(OutputFileUnit, *) 'RASTENIJMI,'
-        write(OutputFileUnit, *) 'A '
-       write(OutputFileUnit,120)
-      write(OutputFileUnit,639)
- 639  format(1x,'i','dek','i','cyt','i',1x,'CUrost ',8x,'i',3x,'RNupt',
-     4 7x,'i',3x,'SMCOfm',7x,'i',3x,'SPolCO')
-      write(OutputFileUnit,120)
-       do 999 j=1,n
-      write(OutputFileUnit,888)j,gim(j),CUrost(j),RNupt(j),gn6(j),gn7(j)
- 888  format(1x,'i',i3,'i',i3,'i',4(f10.6,3x,' i'))
- 999  continue
-      write(OutputFileUnit,120)
-c===============================================================
-
-
-
-c===========================
-      write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                   T A B L I Z A   R .42a '
-       write(OutputFileUnit,120)
-
-        write(OutputFileUnit, *) ' VIBROSI CO2 '      
-        write(OutputFileUnit, *) ' VIBROSI CO2'
-c        write(OutputFileUnit, *) ' NNH4,NNO3,TMNN20 '
-       write(OutputFileUnit,120)
-      write(OutputFileUnit,363)
- 363  format(1x,'i','dek','i','cyt','i',1x,' CO2',3x,'i',3x,
-     4 'Tpoch',
-     4 8x,'i',4x,'rMCsoi')
-      write(OutputFileUnit,120)
-       do 137 j=1,n
-      write(OutputFileUnit,838)j,gim(j),rdg12(j),Tpoch(j),rMCsoi(j)
- 838  format(1x,'i',i3,'i',i3,'i',3(f12.6,3x,' i'))
- 137  continue
-      write(OutputFileUnit,120)
-c===============================================================
-
+      call WriteTable(OutputFileUnit, "RASCHET  ROZLOGJENIJ  SHUM0(j) \n POCHVI, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal,"SBIO3  ",SBIO3,"SHUM3",SHUM3,"SR3CO2",SR3CO)
 
 c===================================================
-       write(OutputFileUnit,120)
-        write(OutputFileUnit, *) '                      T A B L I Z A   R.43       '
-       write(OutputFileUnit,120)
+      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA \n IZ BIO POCHVI, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal,"HSBIO0",HSBIO0,"HSBIO",HSBIO,"HSBIO1",HSBIO1,"HSBIO2",HSBIO2,"HSBIO3" ,HSBIO3)
+      
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA \n IZ HUM POCHVI, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal,"HHUM00",HHUM00,"HHUM0",HHUM0,"HHUM1",HHUM1,"HHUM2" ,HHUM2,"HHUM3" ,HHUM3)
+c===============================================================
+      call WriteTable(OutputFileUnit, "SUMMARNOE   RAZLOGJENIE  PO VSEM KOMPONENTAM \n ORGANIKI  POCHVI, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal, "BIOsoil  ",BIOsoi,"HUMsoil",HUMsoi,"CO2soil",CO2soi)
+
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA SUMMARNO IZ VSEX BIO i HUM POCHVI , t/ga \n I SUMMARNO   IZ VSEY   POCHVI , t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal,"CHBIso",CHBIso, "CHHUso",CHHUso,"CHsoil",CHsoil,"SMCHso", rdCHso)
+
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASCHET  PERVICHNOGO   ROZLOGJENIJ \n ORGANICHESKIX  UDOBRENIY, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal,"FDPM",FDPM,"FRPM",FRPM,"FHUM",FHUM)
+
+c======================
+      call WriteTable(OutputFileUnit, "RASCHET     ROZLOGJENIJ       FDPM(j) \n ORGANICHESKIX  UDOBRENIY, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal,"FDBIO  ",FDBIO,"FDHUM",FDHUM,"FDCO",FDCO)
+
+c======================
+      call WriteTable(OutputFileUnit, "RASCHET     ROZLOGJENIJ       FRPM(j) \n ORGANICHESKIX  UDOBRENIY, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal,"FBIO1  ",FBIO1,"FHUM1",FHUM1,"FR1CO",FR1CO)
+
+c======================
+      call WriteTable(OutputFileUnit, "RASCHET     ROZLOGJENIJ       FHUM(j) \n ORGANICHESKIX  UDOBRENIY, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal,"FBIO3  ",FBIO3,"FHUM3",FHUM3,"FR3CO",FR3CO)
+      
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA \n IZ   BIO I  HUM   UDOBRENIY , t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal,"CHFBI0",CHFBI0,"CHFBI1",CHFBI1,"CHFBI3",CHFBI3,"CHFHU0",CHFHU0,"CHFHU1",CHFHU1,"CHFHU3", CHFHU3)
+
+c===============================================================
+      call WriteTable(OutputFileUnit, "SUMMARNOE   RAZLOGJENIE  PO VSEM KOMPONENTAM \n ORGANICHESKIX  UDOBRENIY, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal,"BIOfum  ",BIOfum,"HUMfum",HUMfum,"CO2fum",CO2fum)
+
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA \n SUMMARNOGO  IZ    UDOBRENIY, t/ga",
+     >   "dek", dekadesReal, "cyt", gimReal,"CHBIOfm",CHBIfm, "CHHUMfm",CHHUfm,"CHfum",CHfum,"SMCHfum",rdCHfm)
+
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASCHET  KOEFFIZIENTOV URAVNENIY \n RASCHETA NITRIFIKAZII  I DENITRIFIKAZII",
+     >   "dek", dekadesReal, "cyt", gimReal,"denNO3",denNO3, "denW",denW,"denCO2",denCO2,"denpW",denpW, "dnpNO3", dnpNO3)
+
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASCHET  SKOROSII OBRAZOVANIJ UGLERODA",
+     >   "dek", dekadesReal, "cyt", gimReal,"SMCrst",SMCrst, "SdN2O",gn2,"SnN2O",gn1,"denpW",denpW,"dnpNO3", dnpNO3)
+      
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASCHET",
+     >   "dek", dekadesReal, "cyt", gimReal,"rNmicr",rNmicr,"FdNO3",FdNO3,"FdWFPS",FdWFPS,"rchW2",rchW2)
+
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASCHET  SKOROSTI MINERALIZAZII - OBRAZOVANIJ AMMONIJ",
+     >   "dek", dekadesReal, "cyt", gimReal,"SMNrst",SMNrst, "SMNsoi",SMNsoi,"SMNfum",SMNfum,"SMNsum" ,SMNfum)
+
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASCHET  NITRIFIKAZII  I EMISSII AZOTA V PROZESSE \n NITRIFIKAZII - VNnitr(j),VNN2O(j),VNNO(j)",
+     >   "dek", dekadesReal, "cyt", gimReal,"VNnitr",VNnitr, "VNN2O",VNN2O,"VNNO" ,VNNO)
+
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASCHET  NITRIFIKAZII  I EMISSII AZOTA V PROZESSE \n DENITRIFIKAZII - VNdeni(j),VNdN2(j),VNdN2O(j)", 
+     >   "dek", dekadesReal, "cyt", gimReal,"VNdeni",VNdeni,"VNdN2+4N2O",VNdN2,"VNdN2O", VNdN2O)
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASCHET  POGLOSHENIJ AZOTA RASTENIJMI \n INFILTRAZII I VIVETRIVANIJ AZOTA, RNupt(j),RNinfl(j),Unvfum(j),Unvfrt(j)", 
+     >   "dek", dekadesReal, "cyt", gimReal,"RNupt ",RNupt,"RNinfl",RNinfl,"Vnvfum",Vnvfum,"Vnvfrt", Vnvfrt)
+
+c===============================================================
+      call WriteTable(OutputFileUnit, "VIBROSI N2O pri nitrifikazii SumnitrN2O \n VIBROSI N2O pri denitrifikazii SumdenN2O  (kg N / ga za god)", 
+     >   "dek", dekadesReal, "cyt", gimReal,"SumnitrN2O",VNN2O,"sumdenN2o",VNdN2,"rMCsoi", rMCsoi)
+
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASTENIJMI \n A", 
+     >   "dek", dekadesReal, "cyt", gimReal,"SMCOrs ",gn4,"SMCOso",gn5,"SMCOfm",gn6,"SPolCO",gn7)
+
+c===============================================================
+      call WriteTable(OutputFileUnit, "RASTENIJMI \n A", 
+     >   "dek", dekadesReal, "cyt", gimReal,"CUrost ",CUrost,"RNupt",RNupt,"SMCOfm",gn6,"SPolCO", gn7)
+
+c===============================================================
+      call WriteTable(OutputFileUnit, "VIBROSI CO2 \n VIBROSI CO2", 
+     >   "dek", dekadesReal, "cyt", gimReal," CO2",rdg12, "Tpoch",Tpoch,"rMCsoi", rMCsoi)
+
 c============================================================
 c  Nnakoplenie ugleroda na pole i vibrosi CO2: PolcC(j) i  PolCO2(j)
-
-        write(OutputFileUnit, *) ' SUMMARNOE   NAKOLENIE  UGLERODA NA POLE(PoleC(j)'
-        write(OutputFileUnit, *) 'I  VIBROSI  CO2 (PolCO2(j), t/ga      '
-c       write(OutputFileUnit,120)
-c        write(OutputFileUnit,120)
-c      write(OutputFileUnit,9304)
-      write(OutputFileUnit,9306)
-c9304  format(4x,76('='))
-
-9306  format(4x,76('-'))
-      write(OutputFileUnit,783)
- 783   format(1x,'i','dek','i','cyt','i',1x,'PoleC  ',7x,'i',
-     4 3x,'PoleCO2',5x,'i')
-       write(OutputFileUnit,120)
-          do 789 j=1,n
-      write(OutputFileUnit,889)j,gim(j),PoleC(j),gn7(j)
-  789 continue
- 889   format(1x,'i',i3,'i',i3,'i',2(f10.9,2x,' i'))
-      write(OutputFileUnit,120)
-
+      call WriteTable(OutputFileUnit, "SUMMARNOE   NAKOLENIE  UGLERODA NA POLE(PoleC(j) \n I  VIBROSI  CO2 (PolCO2(j), t/ga", 
+     >   "dek", dekadesReal, "cyt", gimReal,"PoleC  ",PoleC,"PoleCO2",gn7)
 
 c++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      
 
+      write(OutputFileUnit, *) "RASCHET ZA GOD RAZLOGJENIJ RASTITELNIX OSTATKOV, t/ga;"
 
+      call WriteItems(OutputFileUnit, "SmDBIO",rd1(n),"SmBIO1",rd2(n)," SmBIO2",rd3(n),
+     >   "SmBIO3",rd4(n),"SmDHUM",rd5(n),"SMHUM1",rd6(n),"SMHUM2",rd7(n),"SMHUM3",rd8(n),
+     >   "SmDCO",rd9(n))
+
+      call WriteItems(OutputFileUnit,"SMR1CO",rd10(n),"SMR2CO",rd11(n),"SMR3CO",rd12(n))
 
       write(OutputFileUnit,120)
-       write(OutputFileUnit, *) 'RASCHET ZA GOD RAZLOGJENIJ RASTITELNIX OSTATKOV, t/ga;'
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,848)rd1(n),rd2(n),rd3(n),rd4(n),rd5(n),rd6(n),rd7(n),
-     4 rd8(n),rd9(n),rd10(n),rd11(n),rd12(n)
-
- 848   format(1x,'SmDBIO=',f7.3,1x,'SmBIO1=',f7.3,1x,'SmBIO2=',f7.3,1x,
-     4 'SmBIO3=',f7.3,1x,'SmDHUM=',f7.3,1x,'SMHUM1=',f7.3,1x,
-     4 'SMHUM2=',f7.3,1x,'SMHUM3=',f7.3,1x,'SmDCO=',f7.3,1x,'SMR1CO='
-     4 ,f7.3,5x,'SMR2CO=',f7.3,1x,'SMR3CO=',f7.3)
-      write(OutputFileUnit,120)
-       write(OutputFileUnit, *) 'RASCHET ZA GOD RAZLOGJENIJ ORGANIKI POCHVI, t/ga ;'
+       write(OutputFileUnit, *) "RASCHET ZA GOD RAZLOGJENIJ ORGANIKI POCHVI, t/ga ;"
       write(OutputFileUnit,120)
       write(OutputFileUnit,878)rds1(n),rds2(n),rds3(n),rds4(n),rds5(n),rds6(n),
      4 rds7(n),rds8(n),rds9(n),rds10(n),rds11(n),rds12(n)
-c 827 4 format(1x,'SmDBIO=',f10.5)
-878   format(1x,'SsDBIO=',f7.5,1x,'SsBIO1=',f7.5,1x,'SsBIO2=',f7.5,1x,
-     4 'SsBIO3=',f7.5,1x,'SsDHUM=',f7.5,1x,'SsHUM1=',f7.5,1x,
-     4 'SsHUM2=',f7.5,1x,'SsHUM3=',f7.5,1x,'SsDCO=',f7.5,1x,'SsR1CO='
+c 827 4 format(1x,"SmDBIO=",f10.5)
+878   format(1x,"SsDBIO=",f7.5,1x,"SsBIO1=",f7.5,1x,"SsBIO2=",f7.5,1x,
+     4 "SsBIO3=",f7.5,1x,"SsDHUM=",f7.5,1x,"SsHUM1=",f7.5,1x,
+     4 "SsHUM2=",f7.5,1x,"SsHUM3=",f7.5,1x,"SsDCO=",f7.5,1x,"SsR1CO="
      4 ,f7.5,5x,
-     4 'SsR2CO=',f7.5,1x,'SsR3CO=',f7.5)
+     4 "SsR2CO=",f7.5,1x,"SsR3CO=",f7.5)
       write(OutputFileUnit,120)
       write(OutputFileUnit,120)
-       write(OutputFileUnit, *) 'RASCHET ZA GOD RAZLOGJENIJ ORGANIKI UDOBRENIY, t/ga;'
+       write(OutputFileUnit, *) "RASCHET ZA GOD RAZLOGJENIJ ORGANIKI UDOBRENIY, t/ga;"
       write(OutputFileUnit,120)
       write(OutputFileUnit,879)rdf1(n),rdf2(n),rdf3(n),rdf4(n),rdf5(n),rdf6(n),
      4 rdf7(n),rdf8(n),rdf9(n)
-c 827 4 format(1x,'SmDBIO=',f10.5)
- 879   format(1x,'SFDBIO=',f7.5,1x,'SFBIO1=',f7.5,1x,
-     4 'SFBIO3=',f7.5,1x,'SFDHUM=',f7.5,1x,'SFHUM1=',f7.5,1x,
-     4 'SFHUM3=',f7.5,1x,'SFDCO=',f7.5,1x,'SFR1CO='
-     4 ,f7.5,5x,'SFR3CO=',f7.5)
+c 827 4 format(1x,"SmDBIO=",f10.5)
+ 879   format(1x,"SFDBIO=",f7.5,1x,"SFBIO1=",f7.5,1x,
+     4 "SFBIO3=",f7.5,1x,"SFDHUM=",f7.5,1x,"SFHUM1=",f7.5,1x,
+     4 "SFHUM3=",f7.5,1x,"SFDCO=",f7.5,1x,"SFR1CO="
+     4 ,f7.5,5x,"SFR3CO=",f7.5)
       write(OutputFileUnit,120)
 
       write(OutputFileUnit,120)
       write(OutputFileUnit,120)
-       write(OutputFileUnit, *) 'RASCHET ZA GOD RAZLOGJENIJ RASTITELNIX OSTATKOV,;'
-       write(OutputFileUnit, *) '   VSEX KOMPONENTOV, t/ga ;'
+       write(OutputFileUnit, *) "RASCHET ZA GOD RAZLOGJENIJ RASTITELNIX OSTATKOV,;"
+       write(OutputFileUnit, *) "   VSEX KOMPONENTOV, t/ga ;"
       write(OutputFileUnit,120)
       write(OutputFileUnit,900)rdg1(n),rdg2(n),rdg3(n)
 
- 900   format(1x,'RastBIO =',f7.6,1x,'RastHUM =',f7.6,1x,
-     4 'RastCO2 =',f10.8,1x)
+ 900   format(1x,"RastBIO =",f7.6,1x,"RastHUM =",f7.6,1x,
+     4 "RastCO2 =",f10.8,1x)
       write(OutputFileUnit,120)
       write(OutputFileUnit,120)
 
 
       write(OutputFileUnit,120)
       write(OutputFileUnit,120)
-       write(OutputFileUnit, *) 'RASCHET ZA GOD NERAZLOGIVSHIXSJ RASTIT OSTATKOV, t/ga;'
-       write(OutputFileUnit, *) '  ;'
+       write(OutputFileUnit, *) "RASCHET ZA GOD NERAZLOGIVSHIXSJ RASTIT OSTATKOV, t/ga;"
+       write(OutputFileUnit, *) "  ;"
       write(OutputFileUnit,120)
       write(OutputFileUnit,876)rmgw4(n),drww1(j)
 
- 876   format(1x,'SumDPM =',f12.10,1x,'prSMCO =',f12.10,1x)
+ 876   format(1x,"SumDPM =",f12.10,1x,"prSMCO =",f12.10,1x)
       write(OutputFileUnit,120)
       write(OutputFileUnit,120)
 
 
-       write(OutputFileUnit, *) 'RASCHET ZA GOD RAZLOGJENIJ ORGANIKI POCHVI,;'
-       write(OutputFileUnit, *) '   VSEX KOMPONENTOV, t/ga ;'
+       write(OutputFileUnit, *) "RASCHET ZA GOD RAZLOGJENIJ ORGANIKI POCHVI,;"
+       write(OutputFileUnit, *) "   VSEX KOMPONENTOV, t/ga ;"
       write(OutputFileUnit,120)
       write(OutputFileUnit,901)rdg4(n),rdg5(n),rdg6(n)
 
- 901   format(1x,'SoilBIO =',f7.5,1x,'SoilHUM =',f7.5,1x,
-     4 'SoilCO2 =',f10.8)
+ 901   format(1x,"SoilBIO =",f7.5,1x,"SoilHUM =",f7.5,1x,
+     4 "SoilCO2 =",f10.8)
       write(OutputFileUnit,120)
       write(OutputFileUnit,120)
-       write(OutputFileUnit, *) 'RASCHET ZA GOD RAZLOGJENIJ ORGANIKI UDOBRENIY,;'
-       write(OutputFileUnit, *) '   VSEX KOMPONENTOV, t/ga ;'
+       write(OutputFileUnit, *) "RASCHET ZA GOD RAZLOGJENIJ ORGANIKI UDOBRENIY,;"
+       write(OutputFileUnit, *) "   VSEX KOMPONENTOV, t/ga ;"
       write(OutputFileUnit,120)
       write(OutputFileUnit,922)rdg7(n),rdg8(n),rdg9(n)
 
 
- 922   format(1x,'FumBIO =',f7.5,1x,'FumHUM =',f7.5,1x,
-     4 'FUMCO2 =',f10.8)
+ 922   format(1x,"FumBIO =",f7.5,1x,"FumHUM =",f7.5,1x,
+     4 "FUMCO2 =",f10.8)
       write(OutputFileUnit,120)
       write(OutputFileUnit,120)
-       write(OutputFileUnit, *) 'RASCHET ZA GOD RAZLOGJENIJ Rastitenix ostatkov,;'
-       write(OutputFileUnit, *) 'organiki pochvi i organicheskogo veschestva ;'
-       write(OutputFileUnit, *) 'organicheskix udobreniy na pole proekta, t/ga ;'
+       write(OutputFileUnit, *) "RASCHET ZA GOD RAZLOGJENIJ Rastitenix ostatkov,;"
+       write(OutputFileUnit, *) "organiki pochvi i organicheskogo veschestva ;"
+       write(OutputFileUnit, *) "organicheskix udobreniy na pole proekta, t/ga ;"
       write(OutputFileUnit,120)
 c      write(OutputFileUnit,922)rdg10(n),rdg11(n),rdg12(n)
       write(OutputFileUnit,902)rdg10(n),rdg11(n),rmg1(n)
 
 
- 902   format(1x,'SumBIO pole =',f7.5,1x,'SumHUM pole =',f7.5,1x,
-     4 'SSSHum =',f7.5)
+ 902   format(1x,"SumBIO pole =",f7.5,1x,"SumHUM pole =",f7.5,1x,
+     4 "SSSHum =",f7.5)
       write(OutputFileUnit,120)
 
       write(OutputFileUnit,120)
-       write(OutputFileUnit, *) 'RASCHET ZA GOD VIDELENIJ METANA IZ Rastitenix 
-     4 ostatkov,;'
-       write(OutputFileUnit, *) 'organiki pochvi i organicheskogo veschestva ;'
-       write(OutputFileUnit, *) 'organicheskix udobreniy na pole proekta, t/ga ;'
+       write(OutputFileUnit, *) "RASCHET ZA GOD VIDELENIJ METANA IZ Rastitenix 
+     4 ostatkov,;"
+       write(OutputFileUnit, *) "organiki pochvi i organicheskogo veschestva ;"
+       write(OutputFileUnit, *) "organicheskix udobreniy na pole proekta, t/ga ;"
       write(OutputFileUnit,120)
       write(OutputFileUnit,932)rdrsCH(n),rdsoCH(n),rdfmCH(n)
 
 
- 932   format(1x,'rastCH pole =',f7.5,1x,'soilCH pole =',f7.5,1x,
-     4 'fumCH pole =',f7.5)
+ 932   format(1x,"rastCH pole =",f7.5,1x,"soilCH pole =",f7.5,1x,
+     4 "fumCH pole =",f7.5)
       write(OutputFileUnit,120)
 
 
 c      write(OutputFileUnit,120)
       write(OutputFileUnit,120)
-       write(OutputFileUnit, *) 'VIDILENIE METANA iz  POLE  PROEKTA za god;'
+       write(OutputFileUnit, *) "VIDILENIE METANA iz  POLE  PROEKTA za god;"
        write(OutputFileUnit,837)rdplCH(n)*1000
- 837  format(1x,'VIDILENIE  METANA  , kg CH4/ ga =',f10.5)
+ 837  format(1x,"VIDILENIE  METANA  , kg CH4/ ga =",f10.5)
       write(OutputFileUnit,120)
 
 c      write(OutputFileUnit,120)
       write(OutputFileUnit,120)
-       write(OutputFileUnit, *) 'VIDILENIE CO2 iz  POLE  PROEKTA za god;'
+       write(OutputFileUnit, *) "VIDILENIE CO2 iz  POLE  PROEKTA za god;"
        write(OutputFileUnit,828)gn7(n)
- 828  format(1x,'VIDILENIE CO2  , t C /ga =',f10.5)
+ 828  format(1x,"VIDILENIE CO2  , t C /ga =",f10.5)
       write(OutputFileUnit,120)
 c      write(OutputFileUnit,120)
 
 c      write(OutputFileUnit,120)
       write(OutputFileUnit,120)
-       write(OutputFileUnit, *) 'VIDILENIE DIOKSIDA UGLERODA - CO2 iz  POLE 
-     4  PROEKTA za god;'
+       write(OutputFileUnit, *) "VIDILENIE DIOKSIDA UGLERODA - CO2 iz  POLE 
+     4  PROEKTA za god;"
        write(OutputFileUnit,228)(gn7(n)*3.67)
- 228  format(1x,'VIDILENIE DIOKSIDA UGLERODA - CO2  , t/ga =',f10.5)
+ 228  format(1x,"VIDILENIE DIOKSIDA UGLERODA - CO2  , t/ga =",f10.5)
       write(OutputFileUnit,120)
 c      write(OutputFileUnit,120)
 
 c      write(OutputFileUnit,120)
       write(OutputFileUnit,120)
-       write(OutputFileUnit, *) 'VIDILENIE N2O iz  POLE  PROEKTA za god;'
+       write(OutputFileUnit, *) "VIDILENIE N2O iz  POLE  PROEKTA za god;"
        write(OutputFileUnit,238)gn3(n)
- 238  format(1x,'VIDILENIE N2O  , kg N /ga =',f10.5)
+ 238  format(1x,"VIDILENIE N2O  , kg N /ga =",f10.5)
       write(OutputFileUnit,120)
 c      write(OutputFileUnit,120)
 
 
 
-       write(OutputFileUnit, *) 'PRIBAVKA UGLERODA za schet Razlogenij za god;'
+       write(OutputFileUnit, *) "PRIBAVKA UGLERODA za schet Razlogenij za god;"
        write(OutputFileUnit,841)(rdg10(n)+rdg11(n)+rmg1(n))
 
- 841  format(1x,'PRIBAVKA UGLEROD za schet Razlogenij, t/ga =',f10.5)
+ 841  format(1x,"PRIBAVKA UGLEROD za schet Razlogenij, t/ga =",f10.5)
       write(OutputFileUnit,120)
 
-       write(OutputFileUnit, *) 'VINOS  UGLEROGA S  MASSOY  UROGJAJ za god;'
+       write(OutputFileUnit, *) "VINOS  UGLEROGA S  MASSOY  UROGJAJ za god;"
        write(OutputFileUnit,845)rmgw1(n)
- 845  format(1x,' VINOS  UGLEROGA S  MASSOY  UROGJAJ , t/ga =',f10.5)
+ 845  format(1x," VINOS  UGLEROGA S  MASSOY  UROGJAJ , t/ga =",f10.5)
       write(OutputFileUnit,120)
 
-       write(OutputFileUnit, *) 'SUMMARNOE PRIRASCHENIE  UGLEROGA za god;'
-       write(OutputFileUnit, *) ' s uchetom vibrosov CO2 pochvi i vinosa massoy urogaj
-     4  za god;'
+       write(OutputFileUnit, *) "SUMMARNOE PRIRASCHENIE  UGLEROGA za god;"
+       write(OutputFileUnit, *) " s uchetom vibrosov CO2 pochvi i vinosa massoy urogaj
+     4  za god;"
        write(OutputFileUnit,846)(rdg10(n)+rdg11(n)+rmg1(n)-rdg6(n)-rmgw1(n))
 
- 846  format(1x,'SUMMARNOE PRIRASCHENIE UGLEROGA na pole,t/ga =',f10.5)
+ 846  format(1x,"SUMMARNOE PRIRASCHENIE UGLEROGA na pole,t/ga =",f10.5)
       write(OutputFileUnit,120)
 
-       write(OutputFileUnit, *) 'BALANS  UGLERODA NA POLE  PROEKTA;'
+       write(OutputFileUnit, *) "BALANS  UGLERODA NA POLE  PROEKTA;"
        write(OutputFileUnit,827)rdg13(n)
- 827  format(1x,'BALANS UGLERODA , t/ga =',f10.5)
+ 827  format(1x,"BALANS UGLERODA , t/ga =",f10.5)
       write(OutputFileUnit,120)
       write(OutputFileUnit,120)
 
@@ -3433,70 +2554,70 @@ c      zapis  v maliy fail
 c      malo
       write(7,120)
       write(7,9117)
- 9117 format(10x,'RASCHET ZA GOD RAZLOGJENIJ RASTITELNIX OSTATKOV,;')
+ 9117 format(10x,"RASCHET ZA GOD RAZLOGJENIJ RASTITELNIX OSTATKOV,;")
       write(7,9118)
- 9118 format(10x,'   VSEX KOMPONENTOV, t/ga ;')
+ 9118 format(10x,"   VSEX KOMPONENTOV, t/ga ;")
       write(7,120)
       write(7,900)rdg1(n),rdg2(n),rdg3(n)
 c      malo
 c      malo
       write(7,120)
       write(7,9119)
- 9119 format(10x,'RASCHET ZA GOD NERAZLOGIVSHIXS RASTIT OSTATKOV,t/ga;')
+ 9119 format(10x,"RASCHET ZA GOD NERAZLOGIVSHIXS RASTIT OSTATKOV,t/ga;")
       write(7,120)
       write(7,876)rmgw4(n)
 c      malo
 c      malo
       write(7,120)
       write(7,9120)
- 9120 format(10x,'RASCHET ZA GOD RAZLOGJENIJ ORGANIKI POCHVI,;')
+ 9120 format(10x,"RASCHET ZA GOD RAZLOGJENIJ ORGANIKI POCHVI,;")
       write(7,9121)
- 9121 format(10x,'   VSEX KOMPONENTOV, t/ga ;')
+ 9121 format(10x,"   VSEX KOMPONENTOV, t/ga ;")
       write(7,120)
       write(7,901)rdg4(n),rdg5(n),rdg6(n)
       write(7,120)
 c      malo
 c      malo
       write(7,9122)
- 9122 format(10x,'RASCHET ZA GOD RAZLOGJENIJ ORGANIKI UDOBRENIY,;')
+ 9122 format(10x,"RASCHET ZA GOD RAZLOGJENIJ ORGANIKI UDOBRENIY,;")
       write(7,9123)
- 9123 format(10x,'   VSEX KOMPONENTOV, t/ga ;')
+ 9123 format(10x,"   VSEX KOMPONENTOV, t/ga ;")
       write(7,120)
       write(7,922)rdg7(n),rdg8(n),rdg9(n)
       write(7,120)
 c      malo
 c      malo
       write(7,9124)
- 9124 format(10x,'RASCHET ZA GOD RAZLOGJENIJ Rastitenix ostatkov,;')
+ 9124 format(10x,"RASCHET ZA GOD RAZLOGJENIJ Rastitenix ostatkov,;")
       write(7,9125)
- 9125 format(10x,'organiki pochvi i organicheskogo veschestva ;')
+ 9125 format(10x,"organiki pochvi i organicheskogo veschestva ;")
       write(7,9126)
- 9126 format(10x,'organicheskix udobreniy na pole proekta, t/ga ;')
+ 9126 format(10x,"organicheskix udobreniy na pole proekta, t/ga ;")
       write(7,120)
       write(7,902)rdg10(n),rdg11(n),rmg1(n)
       write(7,120)
 c      malo
 c      malo
       write(7,9127)
- 9127 format(10x,'VIDILENIE CO2 iz  POLE  PROEKTA za god, t/ga;')
+ 9127 format(10x,"VIDILENIE CO2 iz  POLE  PROEKTA za god, t/ga;")
        write(7,828)rdg12(n)
       write(7,120)
 c      malo
 c      malo
       write(7,9128)
- 9128 format(10x,'PRIBAVKA UGLERODA za schet Razlogenij za god, t/ga;')
+ 9128 format(10x,"PRIBAVKA UGLERODA za schet Razlogenij za god, t/ga;")
        write(7,841)(rdg10(n)+rdg11(n)+rmg1(n))
       write(7,120)
 c      malo
 c      malo
       write(7,9129)
- 9129 format(10x,'VINOS  UGLEROGA S  MASSOY  UROGJAJ za god, t/ga;')
+ 9129 format(10x,"VINOS  UGLEROGA S  MASSOY  UROGJAJ za god, t/ga;")
        write(7,845)rmgw1(n)
       write(7,120)
 c      malo
 c      malo
       write(7,9130)
- 9130 format(10x,'SUMMARNOE PRIRASCHENIE  UGLEROGA za god, t/ga;')
+ 9130 format(10x,"SUMMARNOE PRIRASCHENIE  UGLEROGA za god, t/ga;")
 cccccccccc       write(7,846)(rdg10(n)+rdg11(n)+rmg1(n)-rdg6(n)-rmgw1(n))
        write(7,846)(rdg10(n)+rdg11(n)+rmg1(n)-gn7(n)-rmgw1(n))
 
@@ -3504,7 +2625,7 @@ cccccccccc       write(7,846)(rdg10(n)+rdg11(n)+rmg1(n)-rdg6(n)-rmgw1(n))
 c      malo
 c      malo
       write(7,9131)
- 9131 format(10x,'BALANS  UGLERODA NA POLE  PROEKTA, t/ga;')
+ 9131 format(10x,"BALANS  UGLERODA NA POLE  PROEKTA, t/ga;")
        write(7,827)rdg13(n)
       write(7,120)
 c      malo
@@ -3512,19 +2633,19 @@ c      malo
 c      zapis  v ochen maliy fail
 c      ochen malo
       write(8,9132)
- 9132 format(10x,'SUMMARNOE PRIRASCHENIE  UGLEROGA za god, t/ga;')
+ 9132 format(10x,"SUMMARNOE PRIRASCHENIE  UGLEROGA za god, t/ga;")
        write(8,846)(rdg10(n)+rdg11(n)+rmg1(n)-rdg6(n)-rmgw1(n))
       write(8,120)
 c      ochen malo
 c      ochen malo
       write(8,9133)
- 9133 format(10x,'BALANS  UGLERODA NA POLE  PROEKTA, t/ga;')
+ 9133 format(10x,"BALANS  UGLERODA NA POLE  PROEKTA, t/ga;")
        write(8,827)rdg13(n)
       write(8,120)
 
 
 c      write(8,9373)
-c 9373 format(10x,'BALANS  UGLERODA NA POLE  PROEKTA, t/ga;')
+c 9373 format(10x,"BALANS  UGLERODA NA POLE  PROEKTA, t/ga;")
 c       write(8,827)SMNrst(1)
 c      write(8,120)
 

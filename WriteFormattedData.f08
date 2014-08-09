@@ -147,10 +147,11 @@ contains
 			end if
 		end do
 
-		TmpString1 = ' '
+		TmpString1 = '| '
 		do i=1, NumOfItems
+			print *, TmpString1
 			write(TmpString2, ItemFmt(i)), DataSet(i)
-			TmpString1 ="| " // trim(TmpString1) //trim(ItemNames(i)) // " = " // trim(TmpString2) //" |'"
+			TmpString1 = trim(TmpString1) // " " //trim(ItemNames(i)) // " =" // trim(TmpString2) //" |'| "
 		end do
 
 		write(FileUnit,"(40a)"), TmpString1
