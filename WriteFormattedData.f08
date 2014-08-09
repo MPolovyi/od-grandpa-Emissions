@@ -360,7 +360,7 @@ contains
 			end if
 		end do
 
-		write(FileUnit, "(15x100a)"),adjustl(trim(TmpString1))
+		write(FileUnit, "(15x100a)"), adjustl(trim(TmpString1))
 		write(FileUnit, "(15x100a)"), adjustl(trim(TmpString2))
 
 		call WriteHorisontalLine("_", TableWidth, FileUnit)
