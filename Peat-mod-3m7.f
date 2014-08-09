@@ -455,10 +455,10 @@ ccccccccccccccc	rchW1(j)=(Whgr(j)-inf(15))/(inf(16)-inf(15))
 
 
         if(Whgr(j).lt.(inf(16))) rmW1(j)=0
-        if(Whgr(j).gt.(inf(16))) rmW1(j)=381.2*rchW1(j)**4-
+        if((Whgr(j).gt.(inf(16))) .and. (Whgr(j).gt.(inf(17)))) rmW1(j)=381.2*rchW1(j)**4-
      6 1643.3*rchW1(j)**3+2658.9*rchW1(j)**2-1913*rchW1(j)+
      6 516.21
-        if(Whgr(j).gt.(inf(17))) rmW1(j)=1
+        if(Whgr(j).gt.(1.2*inf(17))) rmW1(j)=1
 ccc       if(rmW1(j).gt.1) rmW1(j)=1
 cc     6   -inf(15))))/(inf(17)-(inf(16)-inf(15)))
 
@@ -2143,7 +2143,7 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       end do
 
       call WriteTable(6, "Summarnie wibrosy metana w rasnie mejaza", 
-     > "dek", dekadesReal,"cyt",gimReal,"hgr", hgr, "Metan" , summMetanMonths)
+     > "dek", dekadesReal,"cyt",gimReal,"hgr", hgr, "Metan" , summMetanMonths, "rmW1", rmW1)
 
       print *, "Summarnie za god wibrosy", SummarnoeWidilenieMetana * 1000
 
