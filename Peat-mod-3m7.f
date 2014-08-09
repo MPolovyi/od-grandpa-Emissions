@@ -9,83 +9,49 @@ c                              Z   Z I X    G R U N T I V   (Peat-GHG-Model)
 
              
 c==========================================================================
-      
-      dimension a9(9)
-      dimension llm(21),qm(21),ts1m(21),ts2m(21)
-      dimension j1m(21),gim(21),tss(360),ts11(21),epot(21),filt(21)
-      dimension ossrnz(21),srdww(21),osnz(21),rstek(21),dw41(21),
-     4 dw51(21),CperW1(21),CperW2(21),
-     5 RPM(36),DPM(36),BIO1(36),HUM1(36),IOM(36),CUrOst(36),
-     6 raC(36),TSMD(36),MTSMD(36),rbC(36),rcC(36),Tpoch(36),TIsp(36),
-     7 rd51(36),rd42(36),HUM2(36),BIO2(36),DBIO(36),DHUM(36),DCO2(36),
-     8  R1CO2(36),R2CO2(36),ratX(36),rE(36),rMCsoi(36),rMNsoi(36),
-     9 BIO3(36),HUM3(36),R3CO(36),DPM0(36),RPM0(36),SDPM(36),SRPM(36),
-     5 SBIO(36),SHUM(36),SDPM0(36),SRPM0(36),SBIO0(36),SHUM0(36),
-     5 RIOM(36),SDBIO(36),SDHUM(36),SDCO(36),SBIO1(36),SHUM1(36),
-     5 SR1CO(36),SBIO2(36),SHUM2(36),SR2CO(36),SBIO3(36),SHUM3(36),
-     5 SR3CO(36),FDPM(36),FRPM(36),FHUM(36),SHUM00(36),
-     5 FDBIO(36),FDHUM(36),FDCO(36),FBIO1(36),FHUM1(36),
-     5 FR1CO(36),FBIO3(36),FHUM3(36),FR3CO(36),
-     5 rd1(36),rd2(36),rd3(36),rd4(36),rd5(36),rd6(36),rd7(36),rd8(36),
-     5 rd9(36),rd10(36),rd11(36),rd12(36),
-     5 rds1(36),rds2(36),rds3(36),rds4(36),rds5(36),rds6(36),rds7(36),
-     5 rds8(36),rds9(36),rds10(36),rds11(36),rds12(36),
-     5 rdf1(36),rdf2(36),rdf3(36),rdf4(36),rdf5(36),rdf6(36),rdf7(36),
-     5 rdf8(36),rdf9(36),rdg1(36),rdg2(36),
-     5 rdg3(36),rdg4(36),rdg5(36),rdg6(36),rdg7(36),rdg8(36),
-     5 rdg9(36),rdg10(36),rdg11(36),rdg12(36),rdg13(36),rdg14(36),
-     5 rdh1(36),rdh2(36),rdh3(36),rdh4(36),rmg1(36),rmg2(36),
-     5 rmgw1(36),RDPM(36),RRPM(36),rmgw2(36),rmgw3(36),rmgw4(36),
-     5 rmgw5(36),rchW2(36),pBIO(36),pHUM(36),pCO2(36)
-	    Dimension PrRPM(36),PrDPM(36),PrBIO1(36),PrHUM1(36),
-     5 PrHUM2(36),PrBIO2(36),PrDBIO(36),PrDHUM(36),PrDCO2(36),
-     8  PrR1CO(36),PrR2CO(36),Prrdh1(36),Prrdh2(36),Prrdh3(36),
-     8 Prrdh4(36),
-     9 PrBIO3(36),PrHUM3(36),PrR3CO(36),PrDPM0(36),PrRPM0(36),
-     9 BIOrst(36),BIOsoi(36),BIOfum(36),HUMrst(36),HUMsoi(36),
-     9 HUMfum(36),CO2rst(36),CO2soi(36),CO2fum(36),PoleC(36),
-     9 PolCO2(36),rgdmn1(36)
+      integer, dimension(12) :: gim
+      real, dimension(9) :: a9
+      real, dimension(12) :: j1m,ts11,epot,filt, ossrnz,srdww,osnz,rstek,dw41,
+     > dw51,CperW1,CperW2,
+     > RPM,DPM,BIO1,HUM1,IOM,CUrOst, raC,TSMD,MTSMD,rbC,rcC,Tpoch,TIsp, rd51,rd42,HUM2,BIO2,DBIO,DHUM,DCO2,
+     >  R1CO2,R2CO2,ratX,rE,rMCsoi, rMNsoi, BIO3,HUM3,R3CO,DPM0,RPM0,SDPM,SRPM, SBIO,SHUM,SDPM0,SRPM0,SBIO0,SHUM0,
+     > RIOM,SDBIO,SDHUM,SDCO,SBIO1,SHUM1, SR1CO,SBIO2,SHUM2,SR2CO,SBIO3,SHUM3, SR3CO,FDPM,FRPM,FHUM,SHUM00,
+     > FDBIO,FDHUM,FDCO,FBIO1,FHUM1, FR1CO,FBIO3,FHUM3,FR3CO, rd1,rd2,rd3,rd4,rd5,rd6,rd7,rd8,
+     > rd9,rd10,rd11,rd12, rds1,rds2,rds3,rds4,rds5,rds6,rds7, rds8,rds9,rds10,rds11,rds12, rdf1,rdf2,rdf3,rdf4,rdf5,rdf6,rdf7,
+     > rdf8,rdf9,rdg1,rdg2, rdg3,rdg4,rdg5,rdg6,rdg7,rdg8, rdg9,rdg10,rdg11,rdg12,rdg13,rdg14,
+     > rdh1,rdh2,rdh3,rdh4,rmg1,rmg2, rmgw1,RDPM,RRPM,rmgw2,rmgw3,rmgw4, rmgw5,rchW2,pBIO,pHUM,pCO2, PrRPM,PrDPM,PrBIO1,PrHUM1,
+     > PrHUM2,PrBIO2,PrDBIO,PrDHUM,PrDCO2,  PrR1CO,PrR2CO,Prrdh1,Prrdh2,Prrdh3, Prrdh4,
+     > PrBIO3,PrHUM3,PrR3CO,PrDPM0,PrRPM0, BIOrst,BIOsoi,BIOfum,HUMrst,HUMsoi,
+     > HUMfum,CO2rst,CO2soi,CO2fum,PoleC, PolCO2,rgdmn1, Whgr,rmW,rmpH, rmT1,rmW1,rmpH1,
+     > rxrd1,rxrd2,CHBIO1,CHHUM1,CHBIO2,CHHUM2, CHBIO3,CHHUM3,HSBIO,HHUM,HSBIO1,HHUM1,
+     > HSBIO2,HHUM2,HSBIO3,HHUM3,CHBIO,CHHUM, HSBIO0,HHUM0,rch1,rch2,HHUM00,rch3,
+     > rch4,rch5,rch6,rchW1, PCHBIO,PCHHUM,PCHB1,PCHH1,PCHB2,PCHH2,
+     > PCHB3,PCHH3,CHBIso,CHHUso,CHsoil,CHrst, CHBIrs,CHHUrs,FDPM0,FRPM0,FHUM0,CHFBI0,
+     > CHFHU0,CHFBI1,CHFHU1,CHFBI3,CHFHU3, CHBIfm,CHHUfm,CHfum,drww1,prCOrs, rmt2,rmW2,rmpH2,SMCrst,rCrst,
+     > SMCsoi,SMCfum,rCsoil,rCfum,SMNrst,rNrst, SMNsoi,SMNfum,rNsoil,rNfum,CNrst,CNsoil,
+     > CNfum,CNsum,VNnitr,VNN2O,VNNO,denNO3, denW,denCO2,denpW,dnpNO3,VNdeni,VNdN2,
+     > VNdN2O,VNvfum,VNvfrt,Winfil,RNinfl, Nimmob,rdCHrs,rdCHso,rdCHfm,rdRsCH,
+     > RNupt,OtnUrs,rdSoCH,rdFmCH,rdPLCH, rOCNrs,rdNH4,rdNO3,rdNN20,BNNH4,BNNO3,
+     > rNmicr,FdWFPS,FdNO3,FdCO2,FdSCO2, gn1,gn2,gn3,gn4,gn5,gn6,gn7,
+     > rmW3, ts2m
 
-       dimension Whgr(21),rmW(21),rmpH(21), rmT1(21),rmW1(21),rmpH1(21),
-     5 rxrd1(21),rxrd2(21),CHBIO1(21),CHHUM1(21),CHBIO2(21),CHHUM2(21),
-     5 CHBIO3(21),CHHUM3(21),HSBIO(21),HHUM(21),HSBIO1(21),HHUM1(21),
-     5 HSBIO2(21),HHUM2(21),HSBIO3(21),HHUM3(21),CHBIO(21),CHHUM(21),
-     5 HSBIO0(21),HHUM0(21),rch1(21),rch2(21),HHUM00(21),rch3(21),
-     6 rch4(21),rch5(21),rch6(21),rchW1(21),
-     6 PCHBIO(36),PCHHUM(36),PCHB1(36),PCHH1(36),PCHB2(36),PCHH2(36),
-     5 PCHB3(36),PCHH3(36),CHBIso(36),CHHUso(36),CHsoil(36),CHrst(36),
-     5 CHBIrs(36),CHHUrs(36),FDPM0(36),FRPM0(36),FHUM0(36),CHFBI0(36),
-     5 CHFHU0(36),CHFBI1(36),CHFHU1(36),CHFBI3(36),CHFHU3(36),
-     5 CHBIfm(36),CHHUfm(36),CHfum(36),drww1(36),prCOrs(36)
-        dimension rmt2(36),rmW2(36),rmpH2(36),SMCrst(36),rCrst(36),
-     4 SMCsoi(36),SMCfum(36),rCsoil(36),rCfum(36),SMNrst(36),rNrst(36),
-     4 SMNsoi(36),SMNfum(36),rNsoil(36),rNfum(36),CNrst(36),CNsoil(36),
-     4 CNfum(36),CNsum(36),VNnitr(36),VNN2O(36),VNNO(36),denNO3(36),
-     4 denW(36),denCO2(36),denpW(36),dnpNO3(36),VNdeni(36),VNdN2(36),
-     4 VNdN2O(36),VNvfum(36),VNvfrt(36),Winfil(36),RNinfl(36),
-     4 Nimmob(36),rdCHrs(36),rdCHso(36),rdCHfm(36),rdRsCH(36),
-     4 RNupt(36),OtnUrs(36),rdSoCH(36),rdFmCH(36),rdPLCH(36),
-     4 rOCNrs(36),rdNH4(36),rdNO3(36),rdNN20(36),BNNH4(36),BNNO3(36),
-     5 rNmicr(36),FdWFPS(36),FdNO3(36),FdCO2(36),FdSCO2(36),
-     4 gn1(36),gn2(36),gn3(36),gn4(36),gn5(36),gn6(36),gn7(36),
-     > rmW3(36)
+      real, dimension(366) :: tss
 
-
-      real*4 sumOs,SmDBIO,SmBIO1,SmBIO2,SmBIO3,SmDHUM,SmHUM1,SmHUM2,
-     4 SmHUM3,SmDCO,SmR1CO,SmR2CO,SmR3CO,SsDBIO,SsBIO1,SsBIO2,SsBIO3,
-     4 SsDHUM,SsHUM1,SsHUM2,SsHUM3,SsDCO,SsR1CO,SsR2CO,SsR3CO,
-     5 SFDBIO, SFBIO1,SFBIO3,SFDHUM,SFHUM1,SFHUM3,SFDCO,SFR1CO,
-     5 SFR3CO,RtBIO,RtHUM,RtCO,RslBIO,RslHUM,RslCO,RFBIO,RFHUM,
-     5 RFCO, SumBIO,SumHUM,SumCO,BalanC,RIOM,SSSHUM,
-     4 PerzW1,PerzW2,NorW1,NorW2,RRSHUM,UR,SumRst,prSMCO,
-     5 RKWin,PKpoch,PKcult,RWin,SumDPM,SumRPM,RazDPM,RazRPM,
-     3 TSMCrs,TSMCso,TSMCfm,RNNH4,RNNO3,TSMNrs,TSMNso,TSMNfm,TMNN2O,
-     4 SMCHrs,SMCHso,SMCHfm,rastCH,soilCH,fumCH,SMCHPL,OCNrst,
-     4 SnN2O,SdN2O,SN2O,SMCOrs,SMCOso,SMCOfm,SPolCO
+      real :: sumOs,SmDBIO,SmBIO1,SmBIO2,SmBIO3,SmDHUM,SmHUM1,SmHUM2,
+     > SmHUM3,SmDCO,SmR1CO,SmR2CO,SmR3CO,SsDBIO,SsBIO1,SsBIO2,SsBIO3,
+     > SsDHUM,SsHUM1,SsHUM2,SsHUM3,SsDCO,SsR1CO,SsR2CO,SsR3CO,
+     > SFDBIO, SFBIO1,SFBIO3,SFDHUM,SFHUM1,SFHUM3,SFDCO,SFR1CO,
+     > SFR3CO,RtBIO,RtHUM,RtCO,RslBIO,RslHUM,RslCO,RFBIO,RFHUM,
+     > RFCO, SumBIO,SumHUM,SumCO,BalanC,SSSHUM,
+     > PerzW1,PerzW2,NorW1,NorW2,RRSHUM,UR,SumRst,prSMCO,
+     > RKWin,PKpoch,PKcult,RWin,SumDPM,SumRPM,RazDPM,RazRPM,
+     > TSMCrs,TSMCso,TSMCfm,RNNH4,RNNO3,TSMNrs,TSMNso,TSMNfm,TMNN2O,
+     > SMCHrs,SMCHso,SMCHfm,rastCH,soilCH,fumCH,SMCHPL,OCNrst,
+     > SnN2O,SdN2O,SN2O,SMCOrs,SMCOso,SMCOfm,SPolCO
       
       integer j
 
-      integer gi,g2,rd41,b1,b2,b3,gim
+      integer gi,g2,rd41,b1,b2,b3
 
       integer, parameter :: OutputFileUnit = 106
 
@@ -93,7 +59,7 @@ c==========================================================================
       real :: fi
       integer, dimension(:), allocatable :: dv
       real, dimension(:), allocatable :: ts, os, dww, usl2, usl3, usl4, inf, rnitr, hgr
-      real, dimension(36) :: tmpArray, dekadesReal, gimReal
+      real, dimension(12) :: tmpArray, dekadesReal, gimReal
       
 
 c      open (unit=InputFileUnit, file="Peat-mod-3.dat",status="old",form="formatted")
@@ -738,11 +704,11 @@ c     6 *(DHUM(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)
 c     6 *0.6*0.02*0.00278)))
          if(hgr(j) < -20)CHHUM(j)=0
 
-         CHBIO(j)=DBIO(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
+         CHBIO(j)=DBIO(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
          if(hgr(j) < -20)CHBIO(j)=0
 
 
-         CHHUM(j)=DHUM(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
+         CHHUM(j)=DHUM(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
          if(hgr(j) < -20)CHHUM(j)=0
 
 
@@ -763,10 +729,10 @@ c       HUM1(j)=RPM(j)*(0.85/(1+(1/ratX(j))))*0.54
 c       R1CO2(j)=RPM(j)*(1-((1/ratX(j))))
 
 
-         CHBIO1(j)=BIO1(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
+         CHBIO1(j)=BIO1(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
          if(hgr(j) < -20)CHBIO1(j)=0
 
-         CHHUM1(j)=HUM1(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
+         CHHUM1(j)=HUM1(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
          if(hgr(j) < -20)CHHUM1(j)=0
 
 c      CHBIO1(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
@@ -787,19 +753,19 @@ c     6 *0.6*0.02*0.08333)))
 c================================================================
 c      Razlogenie BIO1 na  BIO2,  HUM2, R2CO22
 c===============================================================
-c       rdh1(j)=(DPM(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278)
+c       rdh1(j)=(DPM(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.66*0.00278)
 c     6  )
-c     6+DBIO(j))*(1-exp(-rmt1(j)*rmW3(j)*rmpH1(j)*0.6*0.66*0.00278))
+c     6+DBIO(j))*(1-exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.66*0.00278))
 
          rdh1(j)=BIO1(j)*(1-exp(-rmt1(j)*rmW(j)*rmpH(j)*0.6*0.66*0.00278))
 
          BIO2(j)=rdh1(j)*(1/(1+ratX(j)))*0.46
 
-c       rdh2(j)=(DPM(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.02*0.08333)
+c       rdh2(j)=(DPM(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.02*0.08333)
 c     6  )
-c     6+DHUM(j))*(1-exp(-rmt1(j)*rmW3(j)*rmpH1(j)*0.6*0.02*0.08333))
+c     6+DHUM(j))*(1-exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.02*0.08333))
 
-cc       rdh2(j)=DHUM(j))*(1-exp(-rmt1(j)*rmW3(j)*rmpH1(j)*0.6*0.02*0.08333))
+cc       rdh2(j)=DHUM(j))*(1-exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.02*0.08333))
 
          rdh2(j)=BIO1(j)*(1-exp(-rmt1(j)*rmW(j)*rmpH(j)*0.6*0.02*0.00278))
 
@@ -812,17 +778,17 @@ cc       rdh2(j)=DHUM(j))*(1-exp(-rmt1(j)*rmW3(j)*rmpH1(j)*0.6*0.02*0.08333))
 
 c      CHBIO2(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
 c     5+(1/ratX(j)))))
-c     6 *(BIO2(j)*rmW3(j)*(exp(-rmt1(j)
+c     6 *(BIO2(j)*(exp(-rmt1(j)*rmW1(j)
 c     6 *rmpH1(j)*0.6*0.66*0.08333)))
          if(hgr(j) < -20)CHBIO2(j)=0
 
 c      CHHUM2(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
 c     5+(1/ratX(j)))))
-c     6 *(HUM2(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)
+c     6 *(HUM2(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)
 c     6 *0.6*0.02*0.08333)))
          if(hgr(j) < -20)CHHUM2(j)=0
 
-         CHBIO2(j)=BIO2(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
+         CHBIO2(j)=BIO2(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
          if(hgr(j) < -20)CHBIO2(j)=0
 
          CHHUM2(j)=HUM2(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
@@ -851,7 +817,7 @@ c     6   )
 c     6+DHUM(j)+HUM2(j))*(1-exp(-raC(j)*rmW(j)*rmpH(j)*0.6*0.02*0.08333)*
 c     6 usl4(j))
 
-	      rdh4(j)=HUM1(j)*(1-exp(-rmt1(j)*rmW(j)*rmpH(j)*0.6*0.02*0.00278))
+	rdh4(j)=HUM1(j)*(1-exp(-rmt1(j)*rmW(j)*rmpH(j)*0.6*0.02*0.00278))
 
         HUM3(j)=rdh4(j)*(1/(1+ratX(j)))*0.54		
 
@@ -868,11 +834,15 @@ c     5+(1/ratX(j)))))
 c     6 *(HUM3(j)*(exp(-raC(j)*rmW(j)*rmpH(j)
 c     6 *0.6*0.02*0.08333)))
          if(hgr(j) < -20)CHHUM3(j)=0
+c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-         CHBIO3(j)=BIO3(j)*rmW3(j)*(exp(-raC(j)*rmpH(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
+         CHBIO3(j)=BIO3(j)*(exp(-raC(j)*rmW(j)*rmpH(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
          if(hgr(j) < -20)CHBIO3(j)=0
 
-         CHHUM3(j)=HUM3(j)*rmW3(j)*(exp(-raC(j)*rmpH(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
+         CHHUM3(j)=HUM3(j)*(exp(-raC(j)*rmW(j)*rmpH(j)*rmpH(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
          if(hgr(j) < -20)CHHUM3(j)=0
 
 c================================================================
@@ -883,12 +853,15 @@ c================================================================
 
          PrDPM0(j)=0.59*inf(1)
          PrRPM0(j)=0.41*inf(1)
-c       PrDPM(j)=PrDPM0(j)*((1-exp(-rmt1(j)*rmW3(j)*rmpH1(j)*0.6*10.0
+c       PrDPM(j)=PrDPM0(j)*((1-exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*10.0
 c     6*0.00278)))*0.05
-c       PrRPM(j)=PrRPM0(j)*((1-exp(-rmt1(j)*rmW3(j)*rmpH1(j)*0.6*0.3
+c       PrRPM(j)=PrRPM0(j)*((1-exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.3
 c     6*0.00278)))*0.05
 
-
+c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
          PrDPM(j)=PrDPM0(j)*((1-exp(-rmt1(j)*rmW(j)*rmpH(j)*0.6*10.0*0.00278)))*0.3
          PrRPM(j)=PrRPM0(j)*((1-exp(-rmt1(j)*rmW(j)*rmpH(j)*0.6*0.3*0.00278)))*0.05
@@ -911,21 +884,21 @@ c          PrDHUM(j)=PrDPM(j)*(0.85/(1+(1/ratX(j))))*0.54
 
 c      PCHBIO(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
 c     5+(1/ratX(j)))))
-c     6 *(PrDBIO(j)*rmW3(j)*(exp(-rmt1(j)
+c     6 *(PrDBIO(j)*(exp(-rmt1(j)*rmW1(j)
 c     6 *rmpH1(j)*0.6*0.66*0.08333)))
          if(hgr(j) < -20)PCHBIO(j)=0
 
 c      PCHHUM(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
 c     5+(1/ratX(j)))))
-c     6 *(PrDHUM(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)
+c     6 *(PrDHUM(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)
 c     6 *0.6*0.02*0.08333)))
          if(hgr(j) < -20)PCHHUM(j)=0
 
-         PCHBIO(j)=PrDBIO(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
+         PCHBIO(j)=PrDBIO(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
 
          if(hgr(j) < -20)PCHBIO(j)=0
 
-         PCHHUM(j)=PrDHUM(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
+         PCHHUM(j)=PrDHUM(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
 
          if(hgr(j) < -20)PCHHUM(j)=0
 
@@ -943,20 +916,20 @@ c       PrHUM1(j)=PrRPM(j)*(0.85/(1+(1/ratX(j))))*0.54
 
 c       PCHB1(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
 c     5+(1/ratX(j)))))
-c     6 *(PrBIO1(j)*rmW3(j)*(exp(-rmt1(j)
+c     6 *(PrBIO1(j)*(exp(-rmt1(j)*rmW1(j)
 c     6 *rmpH1(j)*0.6*0.66*0.08333)))
          if(hgr(j) < -20)PCHB1(j)=0
 
 c       PCHH1(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
 c     5+(1/ratX(j)))))
-c     6 *(PrHUM1(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)
+c     6 *(PrHUM1(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)
 c     6 *0.6*0.02*0.08333)))
          if(hgr(j) < -20)PCHH1(j)=0
 
-         PCHB1(j)=PrBIO1(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
+         PCHB1(j)=PrBIO1(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
          if(hgr(j) < -20) PCHB1(j)=0
 
-         PCHH1(j)= PrHUM1(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
+         PCHH1(j)=PrHUM1(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
 
          if(hgr(j) < -20) PCHH1(j)=0
 
@@ -966,10 +939,11 @@ c===============================================================
 c      Prrdh1(j)- kolichestvo  BIO
 c       Prrdh1(j)=(PrDPM(j)*(exp(-raC(j)*rbC(j)*0.6*0.66*0.08333))
 c     6 +PrDBIO(j))*(1-exp(-raC(j)*rbC(j)*0.6*0.66*0.08333))
-
+c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
          Prrdh1(j)=PrDBIO(j)*(1-exp(-rmt1(j)*rmW(j)*rmpH(j)*0.6*0.66*0.00278))
-
-
 
          PrBIO2(j)=Prrdh1(j)*(1/(1+ratX(j)))*0.46
 
@@ -988,31 +962,26 @@ ccccccc       PrR2CO(j)=(rdh1(j)*0.46+Prrdh2(j)*0.54)-(PrBIO2(j)+PrHUM2(j))
 
 c       PCHB2(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
 c     5+(1/ratX(j)))))
-c     6 *(PrBIO2(j)*rmW3(j)*(exp(-rmt1(j)
+c     6 *(PrBIO2(j)*(exp(-rmt1(j)*rmW1(j)
 c     6 *rmpH1(j)*0.6*0.66*0.08333)))
          if(hgr(j) < -20)PCHB2(j)=0
 
 c       PCHH2(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
 c     5+(1/ratX(j)))))
-c     6 *(PrHUM2(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)
+c     6 *(PrHUM2(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)
 c     6 *0.6*0.02*0.08333)))
          if(hgr(j) < -20)PCHH2(j)=0
 
-         PCHB2(j)=PrBIO2(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
+         PCHB2(j)=PrBIO2(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
          if(hgr(j) < -20)PCHB2(j)=0
 
-         PCHH2(j)=PrHUM2(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
-
+         PCHH2(j)=PrHUM2(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
          if(hgr(j) < -20)PCHH2(j)=0
-
-
-
 
 c===================================================================
 c      Razlogenie  PrHUM1 na PrBIO3,  PrHUM3, PrR3CO2
 c=================================================================
 	      Prrdh3(j)=PrHUM1(j)*(1-exp(-rmt1(j)*rmW(j)*rmpH(j)*0.6*0.66*0.00278))
-
 
 c        PrBIO3(j)=Prrdh3(j)*(0.85)*(0.85/(1+(1/ratX(j))))*0.46
          PrBIO3(j)=Prrdh3(j)*(1/(1+ratX(j)))*0.46
@@ -1037,10 +1006,10 @@ c     6 *(PrHUM3(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)
 c     6 *0.6*0.02*0.08333)))
          if(hgr(j) < -20)PCHH3(j)=0
 
-         PCHB3(j)=PrBIO3(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
+         PCHB3(j)=PrBIO3(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
          if(hgr(j) < -20)PCHB3(j)=0
 
-         PCHH3(j)=PrHUM3(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
+         PCHH3(j)=PrHUM3(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
 
          if(hgr(j) < -20)PCHH3(j)=0
 c====================================================================
@@ -1168,21 +1137,21 @@ c     6 *rmpH(j)*0.6*0.02*0.08333)))
 
 c      HSBIO0(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
 c     5+(1/ratX(j)))))
-c     6 *(SBIO0(j)*rmW3(j)*(exp(-rmt1(j)
+c     6 *(SBIO0(j)*(exp(-rmt1(j)*rmW1(j)
 c     6 *rmpH1(j)*0.6*0.66*0.08333)))
          if(hgr(j) < -20) HSBIO0(j)=0
 
 c      HHUM00(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
 c     5+(1/ratX(j)))))
-c     6 *(SHUM0(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)
+c     6 *(SHUM0(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)
 c     6 *0.6*0.02*0.08333)))
          if(hgr(j) < -20) HHUM00(j)=0
 
 
-         HSBIO0(j)=SBIO0(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
+         HSBIO0(j)=SBIO0(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
          if(hgr(j) < -20) HSBIO0(j)=0
 
-         HHUM00(j)=SHUM0(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
+         HHUM00(j)=SHUM0(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
 
          if(hgr(j) < -20) HHUM00(j)=0
 
@@ -1195,7 +1164,7 @@ c=============================================================
 c	SDBIO(j)=SDPM0(j)*(0.85)*(0.85/(1+(1/ratX(j))))*0.46
 c        SDHUM(j)=SDPM0(j)*(0.85/(1+(1/ratX(j))))*0.54
 
-	      SDBIO(j)=DPM0(j)*(1/(1+ratX(j)))*0.46
+	 SDBIO(j)=SDPM0(j)*(1/(1+ratX(j)))*0.46
          SDHUM(j)=SDPM0(j)*(1/(1+ratX(j)))*0.54
 
 
@@ -1209,20 +1178,20 @@ c     6  *rmpH(j)*0.6*0.02*0.08333)))
 
 c      HSBIO(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
 c     5+(1/ratX(j)))))
-c     6 *(SDBIO(j)*rmW3(j)*(exp(-rmt1(j)
+c     6 *(SDBIO(j)*(exp(-rmt1(j)*rmW1(j)
 c     6 *rmpH1(j)*0.6*0.66*0.08333)))
          if(hgr(j) < -20) HSBIO(j)=0
 
 c       HHUM0(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
 c     5+(1/ratX(j)))))
-c     6 *(SDHUM(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)
+c     6 *(SDHUM(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)
 c     6 *0.6*0.02*0.08333)))
          if(hgr(j) < -20) HHUM0(j)=0
 
-         HSBIO(j)=SDBIO(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
+         HSBIO(j)=SDBIO(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
          if(hgr(j) < -20) HSBIO(j)=0
 
-         HHUM0(j)=SDHUM(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
+         HHUM0(j)=SDHUM(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
 
          if(hgr(j) < -20) HHUM0(j)=0
 
@@ -1249,20 +1218,20 @@ c     6 *rmpH(j)*0.6*0.02*0.08333)))
 
 c      HSBIO1(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
 c     5+(1/ratX(j)))))
-c     6 *(SBIO1(j)*rmW3(j)*(exp(-rmt1(j)
+c     6 *(SBIO1(j)*(exp(-rmt1(j)*rmW1(j)
 c     6 *rmpH1(j)*0.6*0.66*0.08333)))
          if(hgr(j) < -20)HSBIO1(j)=0
 
 c       HHUM1(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
 c     5+(1/ratX(j)))))
-c     6 *(SHUM1(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)
+c     6 *(SHUM1(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)
 c     6 *0.6*0.02*0.08333)))
          if(hgr(j) < -20)HHUM1(j)=0
 
-         HSBIO1(j)=SBIO1(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
+         HSBIO1(j)=SBIO1(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
          if(hgr(j) < -20)HSBIO1(j)=0
 
-         HHUM1(j)=SHUM1(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
+         HHUM1(j)=SHUM1(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
 
          if(hgr(j) < -20)HHUM1(j)=0
 
@@ -1294,20 +1263,20 @@ c     6  *rmpH(j)*0.6*0.02*0.08333)))
 
 c      HSBIO2(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
 c     5+(1/ratX(j)))))
-c     6 *(SBIO2(j)*rmW3(j)*(exp(-rmt1(j)
+c     6 *(SBIO2(j)*(exp(-rmt1(j)*rmW1(j)
 c     6 *rmpH1(j)*0.6*0.66*0.08333)))
          if(hgr(j) < -20)HSBIO2(j)=0
 
 c       HHUM2(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
 c     5+(1/ratX(j)))))
-c     6 *(SHUM2(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)
+c     6 *(SHUM2(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)
 c     6 *0.6*0.02*0.08333)))
          if(hgr(j) < -20)HHUM2(j)=0
 
-         HSBIO2(j)=SBIO2(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
+         HSBIO2(j)=SBIO2(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
          if(hgr(j) < -20)HSBIO2(j)=0
 
-         HHUM2(j)=SHUM2(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
+         HHUM2(j)=SHUM2(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
 
          if(hgr(j) < -20)HHUM2(j)=0
 
@@ -1334,20 +1303,20 @@ c     6 *rmpH(j)*0.6*0.02*0.08333)))
 
 c      HSBIO3(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
 c     5+(1/ratX(j)))))
-c     6 *(SBIO3(j)*rmW3(j)*(exp(-rmt1(j)
+c     6 *(SBIO3(j)*(exp(-rmt1(j)*rmW1(j)
 c     6 *rmpH1(j)*0.6*0.66*0.08333)))
          if(hgr(j) < -20)HSBIO3(j)=0
 
 c       HHUM3(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
 c     5+(1/ratX(j)))))
-c     6 *(SHUM3(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)
+c     6 *(SHUM3(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)
 c     6 *0.6*0.02*0.08333)))
          if(hgr(j) < -20)HHUM3(j)=0
 
-         HSBIO3(j)=SBIO3(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
+         HSBIO3(j)=SBIO3(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
          if(hgr(j) < -20)HSBIO3(j)=0
 
-         HHUM3(j)=SHUM3(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
+         HHUM3(j)=SHUM3(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
 
          if(hgr(j) < -20)HHUM3(j)=0
 
@@ -1440,10 +1409,10 @@ c============================================================
 
          FDCO(j)=FDPM(j)-(FDBIO(j)+FDHUM(j))
 
-         CHFBI0(j)=FDBIO(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
+         CHFBI0(j)=FDBIO(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
          if(hgr(j) < -20)CHFBI0(j)=0
 
-         CHFHU0(j)=FDHUM(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
+         CHFHU0(j)=FDHUM(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
 
          if(hgr(j) < -20)CHFHU0(j)=0
 
@@ -1455,10 +1424,10 @@ c============================================================
 
          FR1CO(j)=FRPM(j)-(FBIO1(j)+FHUM1(j))
 
-         CHFBI1(j)=FBIO1(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
+         CHFBI1(j)=FBIO1(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
          if(hgr(j) < -20)CHFBI1(j)=0
 
-         CHFHU1(j)=FHUM1(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
+         CHFHU1(j)=FHUM1(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
 
          if(hgr(j) < -20)CHFHU1(j)=0
 c============================================================
@@ -1470,10 +1439,10 @@ c============================================================
          FR3CO(j)=FHUM(j)-(FBIO3(j)+FHUM3(j))
 
 
-         CHFBI3(j)=FBIO3(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
+         CHFBI3(j)=FBIO3(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
          if(hgr(j) < -20)CHFBI3(j)=0
 
-         CHFHU3(j)=FHUM3(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
+         CHFHU3(j)=FHUM3(j)*(exp(-rmt1(j)*rmW1(j)*rmpH1(j)*0.6*0.02*0.00278))*(1-0.85*(0.85/(1+rE(j))))
 
          if(hgr(j) < -20)CHFHU3(j)=0
 
