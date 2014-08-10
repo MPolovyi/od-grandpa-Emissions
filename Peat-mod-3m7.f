@@ -59,7 +59,7 @@ c==========================================================================
       real :: fi
       integer, dimension(:), allocatable :: dv
       real, dimension(:), allocatable :: ts, os, dww, usl2, usl3, usl4, inf, rnitr, hgr
-      real, dimension(12) :: tmpArray, dekadesReal, gimReal
+      real, dimension(12) :: tmpArray2, tmpArray, dekadesReal, gimReal
       
 
 c      open (unit=InputFileUnit, file="Peat-mod-3.dat",status="old",form="formatted")
@@ -68,34 +68,6 @@ c      open (unit=InputFileUnit, file="Peat-mod-3.dat",status="old",form="format
       Open (UNIT=8,FILE="Peat-mod-omm7.res")
 
 
-
-c      read(InputFileUnit, "(4a4)") a55
-c      read(InputFileUnit, "(4a4)") a1,a2,a3,a4
-c      read(InputFileUnit, "(4a20)")
-c      read(InputFileUnit, "(4a20)")
-c      read(InputFileUnit, "(4i3,f6.2)")n,t0,n1,n2,fi
-c      read(InputFileUnit, "(4a20)")
-c      read(InputFileUnit, "(14f5.1)")  (ts(j),j=1,n)
-c      read(InputFileUnit, "(4a20)")
-c      read(InputFileUnit, "(14f5.1)")  (os(j),j=1,n)
-c      read(InputFileUnit, "(4a20)")
-c      read(InputFileUnit, "(14f5.1)")  (dww(j),j=1,n)
-c      read(InputFileUnit, "(4a20)")
-c      read(InputFileUnit, "(14f5.1)")  (usl2(j),j=1,n)
-c      read(InputFileUnit, "(4a20)")
-c      read(InputFileUnit, "(4a20)")
-c      read(InputFileUnit, "(14f5.1)")  (usl3(j),j=1,n)
-c      read(InputFileUnit, "(4a20)")
-c
-c      read(InputFileUnit, "(14f5.1)")  (usl4(j),j=1,n)
-c      read(InputFileUnit, "(4a20)")
-c      read(InputFileUnit, "(24i3)")    (dv(j),j=1,n)
-c      read(InputFileUnit, "(4a20)")
-c      read(InputFileUnit, "(9f8.3)")   (inf(j),j=1,21)
-c      read(InputFileUnit, "(4a20)")
-c      read(InputFileUnit, "(9f8.3)")   (rnitr(j),j=1,15)
-c      read(InputFileUnit, "(4a20)")
-c      read(InputFileUnit, "(12f7.1)")  (hgr(j),j=1,n)
 
       call ReadDataFromFile("Peat-mod-3.dat", Int1=n, Int2=t0, Int3=n1, Int4=n2, 
      >      Real1=fi, IntArrOne1=dv, 
@@ -423,28 +395,30 @@ c dww - otnositelnaj vlagnost vozduxa
 
 c   TSMD - accomulated Topsoil Moisture Deficit
          TSMD(j)=Os(j)-0.75*TIsp(j)
-        if(os(j).gt.TIsp(j)) TSMD(j)=0
-        if(TSMD(j).lt.rd51(j))TSMD(j)=rd51(j)
+         if(os(j).gt.TIsp(j)) TSMD(j)=0
+         if(TSMD(j).lt.rd51(j))TSMD(j)=rd51(j)
          rd41=rd41+tsmd(j)
 c  rd41 - AccTSMD
-       if(os(j).gt.TIsp(j)) rd41=0
-        if(rd41.lt.rd51(j))rd41=rd51(j)+0.01
+         if(os(j).gt.TIsp(j)) rd41=0
+         if(rd41.lt.rd51(j))rd41=rd51(j)+0.01
 c=============================================================
 c===============================================+++++++++++
          Whgr(j) = -1.5643*(-1*hgr(j))+452.32
      
-        if((Whgr(j)-inf(15)).lt.(inf(16)-inf(15))/2) rmW(j)= 0.2+
-     6 (0.8*2/(inf(16)-Inf(15)))*(Whgr(j)-inf(15))
+         if((Whgr(j)-inf(15)).lt.(inf(16)-inf(15))/2) then
+            rmW(j)= 0.2+(0.8*2/(inf(16)-Inf(15)))*(Whgr(j)-inf(15))
+         end if
 
 
-       if((Whgr(j)-inf(15)).gt.(inf(16)-inf(15))/2.and.(Whgr(j)-
-     6  inf(15)).lt.(inf(16)-inf(15)))rmW(j)=1.0
+         if((Whgr(j)-inf(15)).gt.(inf(16)-inf(15))/2.and.(Whgr(j)-inf(15)).lt.(inf(16)-inf(15)))   then
+            rmW(j)=1.0
+         end if
      
 
 
-        if((Whgr(j)-inf(15)).gt.(inf(16)-inf(15))) rmW(j)= 1-
-     6 (0.8/((inf(17)-inf(15))-(inf(16)-inf(15))))*((Whgr(j)-
-     6  inf(15))-(inf(16)-inf(15)))
+         if((Whgr(j)-inf(15)).gt.(inf(16)-inf(15))) then
+            rmW(j)= 1-(0.8/((inf(17)-inf(15))-(inf(16)-inf(15))))*((Whgr(j)-inf(15))-(inf(16)-inf(15)))
+         end if
      
 c        if(Whgr(j).gt.inf(16)) rmW(j)= 0.8-(0.8/(inf(17)-inf(16)))*
 c     6   (Whgr(j)-(inf(16)))
@@ -454,27 +428,28 @@ ccccccccccccccc	rchW1(j)=(Whgr(j)-inf(15))/(inf(16)-inf(15))
          rchW1(j)=Whgr(j)/inf(16)
 
 
-        if(Whgr(j).lt.(inf(16))) rmW1(j)=0
-        if((Whgr(j).gt.(inf(16))) .and. (Whgr(j).gt.(inf(17)))) rmW1(j)=381.2*rchW1(j)**4-
-     6 1643.3*rchW1(j)**3+2658.9*rchW1(j)**2-1913*rchW1(j)+
-     6 516.21
-        if(Whgr(j).gt.(1.2*inf(17))) rmW1(j)=1
+         if(Whgr(j).lt.(inf(16))) then
+            rmW1(j)=0
+         end if
+         if((Whgr(j).gt.(inf(16))) .and. (Whgr(j).lt.(inf(17)))) then
+            rmW1(j)=381.2*rchW1(j)**4-1643.3*rchW1(j)**3+2658.9*rchW1(j)**2-1913*rchW1(j)+516.21
+         end if
+         
+         if(Whgr(j).gt.(inf(17))) then
+            rmW1(j)=1.1
+         end if
 ccc       if(rmW1(j).gt.1) rmW1(j)=1
 cc     6   -inf(15))))/(inf(17)-(inf(16)-inf(15)))
 
-      if (rmW1(j) > 1) then
-         rmW1(j) = 1
-      end if
 
-        rmpH(j)=0.2+(1-0.2)*((inf(18)-2)/(5-2))
-        if(Whgr(j).gt.inf(16))rmpH(j)=((1.0**(1/(-50))+exp((-1)
-     6 *inf(18))))**(-50) 
+         rmpH(j)=0.2+(1-0.2)*((inf(18)-2)/(5-2))
+         if(Whgr(j).gt.inf(16)) rmpH(j)=((1.0**(1/(-50))+exp((-1)*inf(18))))**(-50) 
 c==================================================
 ccccccccc       rmT1(j)=47.9/(1+exp(106/(Tpoch(j)+18.3)))
 c       rmW1(j)=0.5
-        rmpH1(j)=((1.0**(1/(-50))+exp((-1)*inf(18))))**(-50)
+         rmpH1(j)=((1.0**(1/(-50))+exp((-1)*inf(18))))**(-50)
 
-      rmW3(j) = -0.0012*hgr(j)**2 + 0.002*hgr(j) + 1.006
+         rmW3(j) = -0.0012*hgr(j)**2 + 0.002*hgr(j) + 1.006
 
 
 c============================================================
@@ -495,15 +470,15 @@ c - Tpoch - temperatura pochvi na glubine 20 cm
          if(usl2(j).eq.12) Tpoch(j)=ts(j)+3.1
 
 
-
 c=================================================================
 c       RASCHET  KOEFFIZIENTOV  BAZOVOGO I  VSPOMAGATELNIX URAVNENIY
 c  dlj rascheta razlogenij organicheskogo materiala pochvi
 c==================================================================
 c         raC(j)=47.9/(1+exp(106/(Tpoch(j)+18.3)))
          raC(j)=47.9/(1+exp(125/(Tpoch(j)+18.3)))
-         rmt1(j)=47.9/(1+exp(125/(Tpoch(j)+18.3)))
          if(Tpoch(j).lt.0) raC(j)=0
+
+         rmt1(j)=47.9/(1+exp(125/(Tpoch(j)+18.3)))
          if(Tpoch(j).lt.0) rmt1(j)=0  
 c  raC - koeffizient "a" v osnovnom uravnenii
 
@@ -552,12 +527,12 @@ c=================================================================
 c  RASCHET VSPOMOGATELNIX  KOEFFIZIENTOV  DLJ  RASCHETA PROZESSA
 c              DENITROFIKAZII
 c================================================================
-	     denNO3(j)=NNO3/((3.3*5)+NNO3)
-        denW(j)= (((Whgr(j)/inf(17))-0.62)/0.38)**1.74
-	     denCO2(j)=0.005*RtCO
-        denpW(j)=0.5*(Whgr(j)/inf(17))
+	      denNO3(j)=NNO3/((3.3*5)+NNO3)
+         denW(j)= (((Whgr(j)/inf(17))-0.62)/0.38)**1.74
+	      denCO2(j)=0.005*RtCO
+         denpW(j)=0.5*(Whgr(j)/inf(17))
 ccccccccccc        dnpNO3(j)=1-(NNO3/(VNdeni(j)*10))
-	     dnpNO3(j)=0.4
+	      dnpNO3(j)=0.4
 c   !!! opredelit  znachenie  v znamenatele, poka stoit "10" ili d0 v formule
 c po idee drob dolgna bit menee 1, sledovatelno d0 dolgno bit bolschim, t.k.
 c  NNO3 budet mensche , chem to, chto vozniklo pri denitrifikazii
@@ -581,13 +556,6 @@ c  inf(5) - chislo mesjzev vegetazii
 c=================================================================
 c     RASCHET  RASTITELNIX  OSTATKOV prirodnoy rastitelnosti
 c=================================================================
-c      if(inf(10).eq.1)SumRst=inf(12)*inf(11)+(1-inf(13))*inf(11)*inf(14) 
-c      if(inf(10).eq.2)SumRst=inf(12)*inf(11)+(1-inf(13))*inf(11)*inf(14)
-c      if(inf(10).eq.3)SumRst=inf(12)*inf(11)+(1-inf(13))*inf(11)*inf(14)
-c      if(inf(10).eq.4)SumRst=inf(12)*inf(11)+(1-inf(13))*inf(11)*inf(14)
-c      if(inf(10).eq.5)SumRst=inf(12)*inf(11)+(1-inf(13))*inf(11)*inf(14)
-c      if(inf(10).eq.6)SumRst=inf(12)*inf(11)+(1-inf(13))*inf(11)*inf(14)
-
 
          if(inf(10) .eq. 1)  SumRst=inf(12)*inf(11)+(inf(11)/inf(13))*inf(14)
          if(inf(10) .eq. 2)  SumRst=inf(12)*inf(11)+(inf(11)/inf(13))*inf(14)
@@ -612,16 +580,6 @@ c      if(inf(10).eq.6)SumRst=inf(12)*inf(11)+(1-inf(13))*inf(11)*inf(14)
             SumRst=((0.106*(inf(11)/1000*inf(21))-91.386)+(0.132*(inf(11)/1000*inf(21))+1885.6)*inf(14))*inf(21)  
          end if
   
-
-
-
-
-
-
-
-
-
-
 
 c 6. Розрахунок рослинних залишків для природної рослинності:
 c 1) вологі луки з домінуванням Deschampsia caespitosa ,
@@ -673,38 +631,15 @@ c       RPM0(j)=0.41*CUrost(j)/30
 
          DPM(j)=DPM0(j)*(1-exp(-rmt1(j)*rmW(j)*rmpH(j)*0.6*10.0*0.00278))
          RPM(j)=RPM0(j)*(1-exp(-rmt1(j)*rmW(j)*rmpH(j)*0.6*0.3*0.00278))
-
-cccc   *0.03333
 c================================================================
 c      Razlogenie DPM na DBIO, DHUM,  DCO2
 c================================================================
          DBIO(j)=DPM(j)*(1/(1+ratX(j)))*0.46
          DHUM(j)=DPM(j)*(1/(1+ratX(j)))*0.54
-
-c        DBIO(j)=DPM(j)*(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))
-c     5 -(0.85/(1
-c     5+(1/ratX(j)))))*0.46
-c          DHUM(j)=DPM(j)*(0.85/(1+(1/ratX(j))))*0.54
-
-cc         *(1-(1/(1+ratX(j)))*0.46-(1/(1+ratX(j)))*0.54)
-
          DCO2(j)=DPM(j)-(DBIO(j)+DHUM(j))
-
-c        DCO2(j)=DPM(j)*(1-((1/ratX(j))))
-
-
-c       CHBIO(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
-c     5+(1/ratX(j)))))
-c     6 *(DBIO(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278))
-c     6 )
         
          if(hgr(j) < -20)CHBIO(j)=0
 
-
-c       CHHUM(j)=(1-((1/ratX(j))-(0.85/(1+(1/ratX(j)))))-(0.85/(1
-c     5+(1/ratX(j)))))
-c     6 *(DHUM(j)*rmW3(j)*(exp(-rmt1(j)*rmpH1(j)
-c     6 *0.6*0.02*0.00278)))
          if(hgr(j) < -20)CHHUM(j)=0
 
          CHBIO(j)=DBIO(j)*rmW1(j)*(exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278))*(1-(0.85/(1+rE(j))))
@@ -2142,8 +2077,13 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
          gimReal(iter) = gim(iter)
       end do
 
-      call WriteTable(6, "Summarnie wibrosy metana w rasnie mejaza", 
-     > "dek", dekadesReal,"cyt",gimReal,"hgr", hgr, "Metan" , summMetanMonths, "rmW1", rmW1)
+      do iter = 1, n
+         tmpArray(iter) = exp(-rmt1(iter)*rmpH1(iter)*0.6*0.66*0.00278)
+         tmpArray2(iter) = exp(-rmt1(iter)*rmpH1(iter)*0.6*0.02*0.00278)
+      end do
+
+      call WriteTable(6, "Exponent values", 
+     > "dek", dekadesReal,"cyt", gimReal, "hgr", hgr, "rmw1", rmW1, "rmT1", rmT1, "rmpH1", rmpH1, "0.66" , tmpArray, "0.02", tmpArray2)
 
       print *, "Summarnie za god wibrosy", SummarnoeWidilenieMetana * 1000
 

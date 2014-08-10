@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"summ",
+				"SummarnoeWidilenieMetana"
+			],
+			[
+				"rdp",
+				"rdplCH"
+			],
+			[
 				"deka",
 				"dekadesReal"
 			],
@@ -63,7 +71,7 @@
 			"file": "Peat-mod-3m7.f",
 			"settings":
 			{
-				"buffer_size": 104687,
+				"buffer_size": 103746,
 				"line_ending": "Windows"
 			}
 		},
@@ -71,23 +79,15 @@
 			"file": "Peat-mod-3.dat",
 			"settings":
 			{
-				"buffer_size": 1592,
+				"buffer_size": 1577,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/F/works/models_granddad/N2O_emission/Mod T9.f08",
+			"file": "Peat-mod-main-3m7.res",
 			"settings":
 			{
-				"buffer_size": 52323,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Results_08_08/compile_settings",
-			"settings":
-			{
-				"buffer_size": 46,
+				"buffer_size": 81646,
 				"line_ending": "Windows"
 			}
 		}
@@ -265,9 +265,14 @@
 	},
 	"file_history":
 	[
+		"/F/works/models_granddad/Search_07_08/WriteFormattedData.f08",
+		"/F/works/models_granddad/Search_07_08/Try1/Peat-mod-3.dat",
+		"/F/works/models_granddad/N2O_emission/Mod T9.f08",
+		"/F/works/models_granddad/Search_07_08/Peat-mod-mG.dat",
+		"/F/works/models_granddad/Search_07_08/Results_08_08/compile_settings",
+		"/F/works/models_granddad/Search_07_08/Try1/compile_settings",
 		"/F/works/models_granddad/Search_07_08/Results_08_08/Peat-mod-3m6.f",
 		"/F/works/models_granddad/Search_07_08/Проба1/Peat-mod-3m6.f",
-		"/F/works/models_granddad/Search_07_08/WriteFormattedData.f08",
 		"/F/works/models_granddad/Search_07_08/Peat-mod-main-3m7.res",
 		"/F/works/models_granddad/Search_07_08/Peat-mod-3m7.res",
 		"/F/Users/Maxim/Desktop/tmp",
@@ -277,7 +282,6 @@
 		"/F/works/models_granddad/N2O_emission/read_from_file.f",
 		"/F/works/models_granddad/Search_07_08/read_from_file.f",
 		"/C/Users/Max/AppData/Roaming/Sublime Text 3/Packages/Table Editor/README.md",
-		"/F/works/models_granddad/N2O_emission/Mod T9.f08",
 		"/C/Users/Max/AppData/Roaming/Sublime Text 3/Packages/User/Fortran.sublime-build",
 		"/C/Users/Max/AppData/Roaming/Sublime Text 3/Packages/MinimalFortran/MinimalFortran.JSON-tmLanguage",
 		"/Z/Users/Maxim/AppData/Roaming/Sublime Text 2/Packages/Fortran/Syntaxes/Fortran - Punchcard.tmLanguage",
@@ -388,11 +392,7 @@
 		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Something/SplitsVelocities_15.06_13.15.17.txt",
 		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_14.06_11.07.42.txt",
 		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_13.06_23.24.17.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_14.06_23.34.17.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_15.06_04.00.21.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_15.06_12.51.02.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_15.06_13.15.17.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_15.06_13.24.30.txt"
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_14.06_23.34.17.txt"
 	],
 	"find":
 	{
@@ -410,6 +410,23 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"rmw1",
+			"(exp(-rmt1(j)*rmW1(j)*",
+			"rmw1",
+			"rmw",
+			"summMetanMonths",
+			"rdplCH",
+			"SMCHPL",
+			"metan",
+			"rdplCH",
+			"print",
+			"SMCHPL",
+			"CHrst(j)+CHsoil(j)+CHfum(j)   ",
+			"SMCHPL",
+			"rdplCH",
+			"ts2m",
+			"(36)",
+			"(21)",
 			"SMNsum",
 			"PrR2CO",
 			"PrR2CO2",
@@ -520,31 +537,19 @@
 			"y.*= ",
 			"y.*n",
 			".",
-			"y = ",
-			" n",
-			"y.*n",
-			".",
-			"y = ",
-			" n",
-			"y.*N",
-			".",
-			"y = ",
-			" n",
-			"y.*n",
-			" n",
-			" .*n",
-			".",
-			" n",
-			"c:.",
-			"c:.*n",
-			"."
+			"y = "
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": false,
+		"regex": true,
 		"replace_history":
 		[
+			"rmw3",
+			"rmW1(j)*(exp(-rmt1(j)*",
+			"summMetanMonths",
+			"SummarnoeWidilenieMetana",
+			"",
 			"\"",
 			"write(OutputFileUnit,",
 			"write(OutputFileUnit, *) ",
@@ -615,7 +620,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -624,15 +629,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 104687,
+						"buffer_size": 103746,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								55555,
-								55555
+								18134,
+								18134
 							]
 						],
 						"settings":
@@ -642,10 +647,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 28476.0,
+						"translation.y": 8922.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -654,15 +659,27 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1592,
+						"buffer_size": 1577,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								361,
-								361
+								1529,
+								1529
+							],
+							[
+								1534,
+								1534
+							],
+							[
+								1539,
+								1539
+							],
+							[
+								1544,
+								1544
 							]
 						],
 						"settings":
@@ -670,7 +687,7 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 240.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -678,59 +695,32 @@
 				},
 				{
 					"buffer": 2,
-					"file": "/F/works/models_granddad/N2O_emission/Mod T9.f08",
+					"file": "Peat-mod-main-3m7.res",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 52323,
+						"buffer_size": 81646,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11166,
-								11169
+								73938,
+								73938
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/MinimalFortran/MinimalFortran.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 20375.0,
+						"translation.y": 23600.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "Results_08_08/compile_settings",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 46,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								46,
-								46
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -769,7 +759,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 259.0
+		"height": 248.0
 	},
 	"output.find_results":
 	{
