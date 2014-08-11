@@ -356,8 +356,8 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       do j=1,n
          urostCoeff = urostCoeff + (2.3026*(2./3)*10.**(2.-(2./3)*((j-inf(7)+1)/3)))/(1.+10.**(2.-(2./3)*((j-inf(7)+1)/3)))**2
       end do
-      print *, urostCoeff
-      
+
+
       do j=1,n
          s1=0
          s2=0
@@ -623,7 +623,7 @@ c      RASCHET RASPREDELENIJ RASTITELNIX OSTATKOV PO MESJZAM VEGETAZII
 c===================================================================
 c          "inf(7) - nomer pervogo mesjza vegetazii kulturi"
 
-         CUrost(j)=(((2.3026*(2./3)*10.**(2.-(2./3)*((j-inf(7)+1)/3)))/(1.+10.**(2.-(2./3)*((j-inf(7)+1)/3)))**2)*SumRst)/urostCoeff
+         CUrost(j)=(((2.3026*(2./3)*10.**(2.-(2./3)*((j-inf(7)+1)/3)))/(1.+10.**(2.-(2./3)*((j-inf(7)+1)/3)))**2)/urostCoeff)*SumRst
          if(j.lt.inf(7)) CUrost(j)=0
          if(j.gt.(inf(7)+inf(5))) CUrost(j)=0
 
@@ -2026,6 +2026,12 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
          tmpArray(iter) = exp(-rmt1(iter)*rmpH1(iter)*0.6*0.66*0.00278)
          tmpArray2(iter) = exp(-rmt1(iter)*rmpH1(iter)*0.6*0.02*0.00278)
       end do
+
+      do iter = 1, n
+         tmpVal = tmpVal + CUrost(j)
+      end do
+
+      print *, tmpVal - SumRst
 
       call WriteTable(6, "Exponent values", 
      > "dek", dekadesReal,"cyt", gimReal, "hgr", hgr,"Whgr",Whgr,  "rmw1", rmW1, "rchW1", rchW1)
