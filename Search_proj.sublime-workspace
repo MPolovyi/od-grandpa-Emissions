@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"tm",
+				"tmpArray2"
+			],
+			[
+				"summ",
+				"SummarnoeWidilenieMetana"
+			],
+			[
+				"rdp",
+				"rdplCH"
+			],
+			[
+				"deka",
+				"dekadesReal"
+			],
+			[
+				"rnitr",
+				"rnitr"
+			],
+			[
+				"Rea",
+				"RealArrOne5"
+			],
+			[
 				"if",
 				"if	if"
 			],
@@ -48,37 +72,44 @@
 	"buffers":
 	[
 		{
-			"file": "/F/works/models_granddad/N2O_emission/Mod T9.f08",
-			"settings":
-			{
-				"buffer_size": 52323,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "Peat-mod-3m7.f",
 			"settings":
 			{
-				"buffer_size": 118631,
+				"buffer_size": 102086,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/Users/Max/AppData/Roaming/Sublime Text 3/Packages/User/Fortran.sublime-build",
+			"file": "Peat-mod-3.dat",
 			"settings":
 			{
-				"buffer_size": 271,
-				"line_ending": "Windows",
-				"name": "untitled.sublime-build"
+				"buffer_size": 1575,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Peat-mod-main-3m7.res",
+			"settings":
+			{
+				"buffer_size": 81901,
+				"line_ending": "Windows"
 			}
 		}
 	],
 	"build_system": "Packages/User/Fortran.sublime-build",
 	"command_palette":
 	{
-		"height": 337.0,
+		"height": 400.0,
 		"selected_items":
 		[
+			[
+				"table",
+				"Table Editor: Enable for current view"
+			],
+			[
+				"pac",
+				"PackageResourceViewer: Open Resource"
+			],
 			[
 				"ssfor",
 				"Set Syntax: MinimalFortran"
@@ -106,10 +137,6 @@
 			[
 				"ssjs",
 				"Set Syntax: JavaScript"
-			],
-			[
-				"table",
-				"Table Editor: Show demo film in new scratch view"
 			],
 			[
 				"tab",
@@ -242,8 +269,32 @@
 	},
 	"file_history":
 	[
-		"/F/works/models_granddad/Search_07_08/compile_settings",
+		"/F/Users/Maxim/Desktop/errors_moodle.txt",
+		"/C/Users/Max/AppData/Roaming/Sublime Text 3/Packages/Table Editor/README.md",
+		"/F/works/models_granddad/Search_07_08/WriteFormattedData.f08",
+		"/F/works/models_granddad/Search_07_08/Try1/Peat-mod-3.dat",
+		"/F/works/models_granddad/N2O_emission/Mod T9.f08",
+		"/F/works/models_granddad/Search_07_08/Peat-mod-mG.dat",
+		"/F/works/models_granddad/Search_07_08/Results_08_08/compile_settings",
+		"/F/works/models_granddad/Search_07_08/Try1/compile_settings",
+		"/F/works/models_granddad/Search_07_08/Results_08_08/Peat-mod-3m6.f",
+		"/F/works/models_granddad/Search_07_08/Проба1/Peat-mod-3m6.f",
 		"/F/works/models_granddad/Search_07_08/Peat-mod-main-3m7.res",
+		"/F/works/models_granddad/Search_07_08/Peat-mod-3m7.res",
+		"/F/Users/Maxim/Desktop/tmp",
+		"/F/works/models_granddad/Search_07_08/string_recognition.f08",
+		"/F/works/models_granddad/N2O_emission/Mod T9.dat",
+		"/F/works/models_granddad/Search_07_08/filereading.mod",
+		"/F/works/models_granddad/N2O_emission/read_from_file.f",
+		"/F/works/models_granddad/Search_07_08/read_from_file.f",
+		"/C/Users/Max/AppData/Roaming/Sublime Text 3/Packages/User/Fortran.sublime-build",
+		"/C/Users/Max/AppData/Roaming/Sublime Text 3/Packages/MinimalFortran/MinimalFortran.JSON-tmLanguage",
+		"/Z/Users/Maxim/AppData/Roaming/Sublime Text 2/Packages/Fortran/Syntaxes/Fortran - Punchcard.tmLanguage",
+		"/C/Users/Max/AppData/Roaming/Sublime Text 3/Packages/MinimalFortran/MinimalFortran.tmLanguage",
+		"/Z/Users/Maxim/AppData/Roaming/Sublime Text 2/Packages/Fortran/Syntaxes/Fortran - Modern.tmLanguage",
+		"/Z/Users/Maxim/AppData/Roaming/Sublime Text 2/Packages/Fortran/Syntaxes/Fortran - Punchcard.tmLanguage.cache",
+		"/Z/Users/Maxim/AppData/Roaming/Sublime Text 2/Packages/Fortran/Syntaxes/Fortran - Modern.tmLanguage.cache",
+		"/F/works/models_granddad/Search_07_08/compile_settings",
 		"/Z/Users/Maxim/AppData/Roaming/Sublime Text 2/Packages/User/Build sistems/Fortran.sublime-build",
 		"/F/works/models_granddad/Search_07_08/Peat-mod-main-3m6.res",
 		"/F/works/models_granddad/Поиск_7_08/Peat-mod-3m5.f",
@@ -345,35 +396,11 @@
 		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Something/SplitsVelocities_15.06_12.51.02.txt",
 		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Something/SplitsVelocities_15.06_13.15.17.txt",
 		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_14.06_11.07.42.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_13.06_23.24.17.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_14.06_23.34.17.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_15.06_04.00.21.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_15.06_12.51.02.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_15.06_13.15.17.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_15.06_13.24.30.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_15.06_13.39.22.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_15.06_13.54.19.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_16.06_01.41.21.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/3k/SplitsVelocities_05.06_21.28.02.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/3k/SplitsVelocities_05.06_16.33.22.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/3k/SplitsVelocities_04.06_14.30.53.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/1k/SplitsVelocities_04.06_14.14.55.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/1k/SplitsVelocities_06.06_00.45.13.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/1k/SplitsVelocities_13.06_22.51.23.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/1k/SplitsVelocities_15.06_03.49.58.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/1k/SplitsVelocities_16.06_23.01.23.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/1k/SplitsVelocities_16.06_23.17.18.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/1k/SplitsDensities_16.06_23.17.18.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/DataViewerPy/AveragedVelocity.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Thesis/DataFiles.sublime-project",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/SplitsVelocities_16.06_23.17.18.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/SplitsVelocities_16.06_23.01.23.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/SplitsVelocities_16.06_01.41.21.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/SplitsVelocities_15.06_13.54.19.txt"
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_13.06_23.24.17.txt"
 	],
 	"find":
 	{
-		"height": 39.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
@@ -387,6 +414,96 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"rmw1",
+			"Tpoch",
+			"rmt1",
+			"exp(-rmt1(j)*rmpH1(j)",
+			"exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278",
+			"rmw1",
+			"(exp(-rmt1(j)*rmW1(j)*",
+			"rmw1",
+			"rmw",
+			"summMetanMonths",
+			"rdplCH",
+			"SMCHPL",
+			"metan",
+			"rdplCH",
+			"print",
+			"SMCHPL",
+			"CHrst(j)+CHsoil(j)+CHfum(j)   ",
+			"SMCHPL",
+			"rdplCH",
+			"ts2m",
+			"(36)",
+			"(21)",
+			"SMNsum",
+			"PrR2CO",
+			"PrR2CO2",
+			"rgh1",
+			"gim",
+			"'",
+			"inf(8)=",
+			"inf(8)= ",
+			"print",
+			"CUrost\\(j\\)=",
+			"CUrost\\(j\\)",
+			"CUrost(j)",
+			"DPM0(j)=",
+			"DPM0(j)",
+			"SDBIO(j)=",
+			"SDBIO",
+			"read",
+			"335",
+			"494",
+			"ts2m",
+			"ts2",
+			"tss",
+			"write(6,",
+			"write(OutputFileUnit,,",
+			"write(6",
+			"print *,",
+			"j\\b",
+			"j",
+			"BalanC",
+			"30   ",
+			"30",
+			"rmW\\b",
+			"CHFHU.*=",
+			"CHFBI.*=",
+			"HHUM.*=",
+			"HSBIO.*=",
+			"PCHH.*=",
+			"CHHUM.\\(j\\)=",
+			"CHHUM\\(j\\)=",
+			"PCHB.\\(j\\)=",
+			"CHBIO.\\(j\\)=",
+			"CHBIO",
+			"CHBIfm",
+			"CHHUso",
+			"CHBIso",
+			"CHBIrs",
+			"CHfum",
+			"CHsoil",
+			"CHrst",
+			"SMCHPL",
+			"rdplCH",
+			"Metan",
+			"\\bWhgr\\(j\\)",
+			"\\bhgr\\(j\\)",
+			"rmpH1(j)=",
+			"rmt1(j)",
+			"rmt1(j)=",
+			"rmt1",
+			"hgr(j)",
+			"rmW3",
+			"CHsoil",
+			"metan",
+			"rmW3",
+			"rmW",
+			"write(6",
+			"rw2",
+			"rw3",
+			"2002",
 			".",
 			",",
 			"Noise",
@@ -424,96 +541,6 @@
 			" n",
 			"y.*= ",
 			"y.*n",
-			".",
-			" n",
-			"y.*= ",
-			"y.*n",
-			".",
-			"y = ",
-			" n",
-			"y.*n",
-			".",
-			"y = ",
-			" n",
-			"y.*N",
-			".",
-			"y = ",
-			" n",
-			"y.*n",
-			" n",
-			" .*n",
-			".",
-			" n",
-			"c:.",
-			"c:.*n",
-			".",
-			" n",
-			"c:.",
-			"c:.*n",
-			".",
-			" n",
-			"c:.",
-			"c:.*n",
-			"Particle",
-			".",
-			" n",
-			"c: ",
-			"c:.",
-			"c:.*n",
-			".",
-			" n",
-			"c: ",
-			"c:.",
-			"c:.*n",
-			" n",
-			"c: ",
-			".",
-			"c:.*n",
-			".",
-			" n",
-			"c: ",
-			"c:.*n",
-			".",
-			" n",
-			"c: ",
-			"c.*n",
-			".",
-			" n",
-			"c: ",
-			"c:.*n",
-			".",
-			"......... ",
-			"matri",
-			"g_Camera.",
-			"Camera",
-			" noize.*",
-			"Veloc: ",
-			" n",
-			"c:.",
-			"c:.*n",
-			".n",
-			"c:.",
-			"c:.*n",
-			" n",
-			".*n",
-			".",
-			"e: ",
-			"e:.*",
-			" n",
-			": ",
-			":.*n",
-			".",
-			"/",
-			"179.5",
-			"179ю5",
-			".",
-			"e: ",
-			"e:.",
-			"e:.*",
-			".",
-			"c: ",
-			".n",
-			"c:.*n",
 			"."
 		],
 		"highlight": true,
@@ -522,6 +549,15 @@
 		"regex": false,
 		"replace_history":
 		[
+			"rmw3",
+			"rmW1(j)*(exp(-rmt1(j)*",
+			"summMetanMonths",
+			"SummarnoeWidilenieMetana",
+			"",
+			"\"",
+			"write(OutputFileUnit,",
+			"write(OutputFileUnit, *) ",
+			"write(106",
 			",",
 			",\n",
 			"",
@@ -588,94 +624,107 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/F/works/models_granddad/N2O_emission/Mod T9.f08",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 52323,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								10936,
-								10936
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/MinimalFortran/MinimalFortran.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 6166.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "Peat-mod-3m7.f",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 118631,
+						"buffer_size": 102086,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5604,
-								5604
+								17422,
+								17422
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/MinimalFortran/MinimalFortran.tmLanguage",
-							"tab_size": 2,
+							"tab_size": 3,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1980.0,
+						"translation.y": 8400.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "/C/Users/Max/AppData/Roaming/Sublime Text 3/Packages/User/Fortran.sublime-build",
+					"buffer": 1,
+					"file": "Peat-mod-3.dat",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 271,
+						"buffer_size": 1575,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								213,
-								213
+								1529,
+								1529
+							],
+							[
+								1534,
+								1534
+							],
+							[
+								1539,
+								1539
+							],
+							[
+								1544,
+								1544
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 240.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Peat-mod-main-3m7.res",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 81901,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2371,
+								2371
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 840.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -683,7 +732,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 27.0
+		"height": 28.0
 	},
 	"input":
 	{
@@ -714,7 +763,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 261.0
+		"height": 368.0
 	},
 	"output.find_results":
 	{
@@ -727,7 +776,7 @@
 	"project": "Search_proj.sublime-project",
 	"replace":
 	{
-		"height": 74.0
+		"height": 52.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -735,6 +784,14 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"int",
+				"string_recognition.f08"
+			],
+			[
+				"str",
+				"string_recognition.f08"
+			],
 			[
 				"sess",
 				"Pages\\Helpers\\SessionHelper.cs"
