@@ -442,7 +442,7 @@ ccccccccccccccc	rchW1(j)=(Whgr(j)-inf(15))/(inf(16)-inf(15))
          if (Whgr(j) .gt. inf(17)) then
             tmpVal  = (-1.5643*(-1*hgr(j))+452.32)/inf(16)
             tmpVal3 = (381.2*rchW1(j)**4-1643.3*rchW1(j)**3+2658.9*rchW1(j)**2-1913*rchW1(j)+516.21)
-            rmW1(j) = (20*(tmpVal - tmpVal4))**10 + (tmpVal3 - tmpVal2) + tmpVal1
+            rmW1(j) = (20*(tmpVal - tmpVal4))**5 + (tmpVal3 - tmpVal2) + tmpVal1
             print *, 20*(tmpVal - tmpVal4)
          end if
 
