@@ -9,9 +9,9 @@ c                              Z   Z I X    G R U N T I V   (Peat-GHG-Model)
 
              
 c==========================================================================
-      integer, dimension(12) :: gim
+      integer, dimension(36) :: gim
       real, dimension(9) :: a9
-      real, dimension(12) :: j1m,ts11,epot,filt, ossrnz,srdww,osnz,rstek,dw41,
+      real, dimension(36) :: j1m,ts11,epot,filt, ossrnz,srdww,osnz,rstek,dw41,
      > dw51,CperW1,CperW2,
      > RPM,DPM,BIO1,HUM1,IOM,CUrOst, raC,TSMD,MTSMD,rbC,rcC,Tpoch,TIsp, rd51,rd42,HUM2,BIO2,DBIO,DHUM,DCO2,
      >  R1CO2,R2CO2,ratX,rE,rMCsoi, rMNsoi, BIO3,HUM3,R3CO,DPM0,RPM0,SDPM,SRPM, SBIO,SHUM,SDPM0,SRPM0,SBIO0,SHUM0,
@@ -59,7 +59,7 @@ c==========================================================================
       real :: fi, tmpVal, tmpVal1, tmpVal2, tmpVal3, tmpVal4, tmpVal5
       integer, dimension(:), allocatable :: dv
       real, dimension(:), allocatable :: ts, os, dww, usl2, usl3, usl4, inf, rnitr, hgr
-      real, dimension(12) :: tmpArray2, tmpArray, dekadesReal, gimReal
+      real, dimension(36) :: tmpArray2, tmpArray, dekadesReal, gimReal
       
 
 c      open (unit=InputFileUnit, file="Peat-mod-3.dat",status="old",form="formatted")
@@ -74,7 +74,8 @@ c      open (unit=InputFileUnit, file="Peat-mod-3.dat",status="old",form="format
      >      RealArrOne1=ts, RealArrOne2=os, RealArrOne3=dww, RealArrOne4=usl2, RealArrOne5=usl3,
      >      RealArrOne6=usl4, RealArrOne7=inf, RealArrOne8=rnitr, RealArrOne9=hgr)
 
-      
+      call WriteTable(6, "Test input table", "ts", ts, "os",os,"dww",dww,
+     >   "usl2",usl2,"usl3",usl3,"usl4",usl4,"inf",inf,"rnitr",rnitr,"hgr",hgr)
       BalanC=0
 
       i = 1
@@ -465,20 +466,21 @@ c============================================================
 c  RASCHET TEMPERATURI POCHVI NA GLUBINE 20 cm
 c=============================================================
 c - Tpoch - temperatura pochvi na glubine 20 cm
-         if(usl2(j).eq.1)  Tpoch(j)=ts(j)+2.7
-         if(usl2(j).eq.2)  Tpoch(j)=ts(j)+0.74
-         if(usl2(j).eq.3)  Tpoch(j)=ts(j)-0.6
-         if(usl2(j).eq.4)  Tpoch(j)=ts(j)+1.9
-         if(usl2(j).eq.5)  Tpoch(j)=ts(j)+4.4
-         if(usl2(j).eq.6)  Tpoch(j)=ts(j)+4.2
-         if(usl2(j).eq.7)  Tpoch(j)=ts(j)+3.1
-         if(usl2(j).eq.8)  Tpoch(j)=ts(j)+2.8
-         if(usl2(j).eq.9)  Tpoch(j)=ts(j)+2.1
-         if(usl2(j).eq.10) Tpoch(j)=ts(j)+2.2
-         if(usl2(j).eq.11) Tpoch(j)=ts(j)+4.5
-         if(usl2(j).eq.12) Tpoch(j)=ts(j)+3.1
-
-
+c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+c         if(usl2(j).eq.1)  Tpoch(j)=ts(j)+2.7
+c         if(usl2(j).eq.2)  Tpoch(j)=ts(j)+0.74
+c         if(usl2(j).eq.3)  Tpoch(j)=ts(j)-0.6
+c         if(usl2(j).eq.4)  Tpoch(j)=ts(j)+1.9
+c         if(usl2(j).eq.5)  Tpoch(j)=ts(j)+4.4
+c         if(usl2(j).eq.6)  Tpoch(j)=ts(j)+4.2
+c         if(usl2(j).eq.7)  Tpoch(j)=ts(j)+3.1
+c         if(usl2(j).eq.8)  Tpoch(j)=ts(j)+2.8
+c         if(usl2(j).eq.9)  Tpoch(j)=ts(j)+2.1
+c         if(usl2(j).eq.10) Tpoch(j)=ts(j)+2.2
+c         if(usl2(j).eq.11) Tpoch(j)=ts(j)+4.5
+c         if(usl2(j).eq.12) Tpoch(j)=ts(j)+3.1
+         
+         Tpoch(j) = ts(j)
 c=================================================================
 c       RASCHET  KOEFFIZIENTOV  BAZOVOGO I  VSPOMAGATELNIX URAVNENIY
 c  dlj rascheta razlogenij organicheskogo materiala pochvi
@@ -967,7 +969,7 @@ c====================================================================
 
 	      HUMrst(j)=(DHUM(j)+PrDHUM(j)+HUM1(j)+PrHUM1(j)+HUM2(j)+PrHUM2(j)+HUM3(j)+PrHUM3(j))
 	
-      	SMCrst(j)=(BIOrst(j)+HUMrst(j))*30
+      	SMCrst(j)=(BIOrst(j)+HUMrst(j))*10
 
 cccc        SMNrst(j)=SMCrst(j)/rnitr(3)*1000*30
          SMNrst(j)=SMCrst(j)*1000/rnitr(3)
@@ -979,22 +981,13 @@ c     6   +PrR2CO(j)+R3CO(j)+PrR3CO(j))*30
 ccccccccccccc	CO2rst(j)=(DCO2(j)+R1CO2(j)+R2CO2(j)
 cccccccccccccccccc     6   +R3CO(j))*30
 
-	      if(usl3(j) == 0) CO2rst(j)=(DCO2(j)+R1CO2(j)+R2CO2(j)+R3CO(j))*30
+	      CO2rst(j)=(DCO2(j)+R1CO2(j)+R2CO2(j)+R3CO(j))*10
 
-	      If(usl3(j) == 1) CO2rst(j)=((DCO2(j)+R1CO2(j)+R2CO2(j)+R3CO(j))*30)*0.5*0.8
-
-	      If(usl3(j) == 2) CO2rst(j)=((DCO2(j)+R1CO2(j)+R2CO2(j)+R3CO(j))*30)*0.5*0.6
-
-	      If(usl3(j) == 3) CO2rst(j)=((DCO2(j)+R1CO2(j)+R2CO2(j)+R3CO(j))*30)*0.5*0.4
 
 	      SMCOrs=SMCOrs+CO2rst(j)	
 
-
-	      If(usl3(j) == 0) prCOrs(j)=(PrDCO2(j)+PrR1CO(j)+R2CO2(j)+PrR2CO(j)+PrR3CO(j))*30
-	      If(usl3(j) == 1) prCOrs(j)=((PrDCO2(j)+PrR1CO(j)+R2CO2(j)+PrR2CO(j)+PrR3CO(j))*30)*0.5*0.8
-	      If(usl3(j) == 2) prCOrs(j)=((PrDCO2(j)+PrR1CO(j)+R2CO2(j)+PrR2CO(j)+PrR3CO(j))*30)*0.5*0.6
-	      If(usl3(j) == 3) prCOrs(j)=((PrDCO2(j)+PrR1CO(j)+R2CO2(j)+PrR2CO(j)+PrR3CO(j))*30)*0.5*0.4
-
+	      prCOrs(j)=(PrDCO2(j)+PrR1CO(j)+R2CO2(j)+PrR2CO(j)+PrR3CO(j))*10
+	      
          prSMCO=prSMCO+prCOrs(j)
 
 c       CHBIrs(j)=CHBIO(j)*usl3(j)*30+CHBIO1(j)*usl3(j)*30+CHBIO2(j)
@@ -1008,22 +1001,12 @@ c     6 +CHHUM3(j)*usl3(j)*30+PCHHUM(j)*usl3(j)*30+
 c     6 PCHH1(j)*usl3(j)*30+PCHH2(j)*usl3(j)*30+PCHH3(j)*usl3(j)*30
 cc
 c
-	      If(usl3(j) == 0) CHBIrs(j)=0 
-         If(usl3(j) == 1) CHBIrs(j)=(CHBIO(j)+CHBIO1(j)+CHBIO2(j)+CHBIO3(j)+PCHBIO(j)+PCHB1(j)+PCHB2(j)+PCHB3(j))*30*0.33
-
-         If(usl3(j) == 2) CHBIrs(j)=(CHBIO(j)+CHBIO1(j)+CHBIO2(j)+CHBIO3(j)+PCHBIO(j)+PCHB1(j)+PCHB2(j)+PCHB3(j))*30*0.66
-
-         If(usl3(j) == 3) CHBIrs(j)=(CHBIO(j)+CHBIO1(j)+CHBIO2(j)+CHBIO3(j)+PCHBIO(j)+PCHB1(j)+PCHB2(j)+PCHB3(j))*30*1.00
+	      CHBIrs(j)=(CHBIO(j)+CHBIO1(j)+CHBIO2(j)+CHBIO3(j)+PCHBIO(j)+PCHB1(j)+PCHB2(j)+PCHB3(j))*10 
+         
      
 
-	      If(usl3(j) == 0) CHHUrs(j)=0
-	      If(usl3(j) == 1) CHHUrs(j)=(CHHUM(j)+CHHUM1(j)+CHHUM2(j)+CHHUM3(j)+PCHHUM(j)+PCHH1(j)+PCHH2(j)+PCHH3(j))*30*0.33
-
-	      If(usl3(j) == 2) CHHUrs(j)=(CHHUM(j)+CHHUM1(j)+CHHUM2(j)+CHHUM3(j)+PCHHUM(j)+PCHH1(j)+PCHH2(j)+PCHH3(j))*30*0.66
-
-	      If(usl3(j) == 3) CHHUrs(j)=(CHHUM(j)+CHHUM1(j)+CHHUM2(j)+CHHUM3(j)+PCHHUM(j)+PCHH1(j)+PCHH2(j)+PCHH3(j))*30*1.00
-
-
+	      CHHUrs(j)=(CHHUM(j)+CHHUM1(j)+CHHUM2(j)+CHHUM3(j)+PCHHUM(j)+PCHH1(j)+PCHH2(j)+PCHH3(j))*10
+	      
 
      
          CHrst(j)=CHBIrs(j)+CHHUrs(j)
@@ -1275,20 +1258,16 @@ c===============================================================
 
          HUMsoi(j)=(SDHUM(j)+SHUM1(j)+SHUM2(j)+SHUM3(j))
 
-	      SMCsoi(j)=(BIOsoi(j)+HUMsoi(j))*30
+	      SMCsoi(j)=(BIOsoi(j)+HUMsoi(j))*10
 
          SMNsoi(j)=SMCsoi(j)*1000/(rnitr(4))
 c perevod v kg N/ga umnogjenie na 1000
 ccccccccc        if(j.gt.1) SMNsoi(j)=SMCsoi(j)/CNsoil(j)  
 
 
-         If(usl3(j).eq.0)  CO2soi(j)=(SDCO(j)+sR1CO(j)+sR2CO(j)+sR3CO(j))*30
+          CO2soi(j)=(SDCO(j)+sR1CO(j)+sR2CO(j)+sR3CO(j))*10
 
-         If(usl3(j).eq.1)  CO2soi(j)=((SDCO(j)+sR1CO(j)+sR2CO(j)+sR3CO(j))*30)*0.5*0.8
-
-         If(usl3(j).eq.2) CO2soi(j)=((SDCO(j)+sR1CO(j)+sR2CO(j)+sR3CO(j))*30)*0.5*0.6
-
-         If(usl3(j).eq.3) CO2soi(j)=((SDCO(j)+sR1CO(j)+sR2CO(j)+sR3CO(j))*30)*0.5*0.4
+         
 
          SMCOso=SMCOso+CO2soi(j) 
 
@@ -1301,23 +1280,9 @@ c
 c        CHHUso(j)=HHUM00(j)*usl3(j)*30+HHUM0(j)*usl3(j)*30+HHUM1(j)*
 c     4 usl3(j)*30+HHUM2(j)*usl3(j)*30+HHUM3(j)*usl3(j)*30
 
-         If(usl3(j).eq.0) CHBIso(j)=0
-         If(usl3(j).eq.1) CHBIso(j)=(HSBIO0(j)+HSBIO(j)+HSBIO1(j)+HSBIO2(j)+HSBIO3(j))*30*0.33
+         CHBIso(j)=(HSBIO0(j)+HSBIO(j)+HSBIO1(j)+HSBIO2(j)+HSBIO3(j))*10
 
-         If(usl3(j).eq.2) CHBIso(j)=(HSBIO0(j)+HSBIO(j)+HSBIO1(j)+HSBIO2(j)+HSBIO3(j))*30*0.66
-
-         If(usl3(j).eq.3) CHBIso(j)=(HSBIO0(j)+HSBIO(j)+HSBIO1(j)+HSBIO2(j)+HSBIO3(j))*30*1.00
-
-
-         If(usl3(j).eq.0) CHHUso(j)=0 
-
-         If(usl3(j).eq.1) CHHUso(j)=(HHUM00(j)+HHUM0(j)+HHUM1(j)+HHUM2(j)+HHUM3(j))*30*0.33
-
-         If(usl3(j).eq.2) CHHUso(j)=(HHUM00(j)+HHUM0(j)+HHUM1(j)+HHUM2(j)+HHUM3(j))*30*0.66
-
-         If(usl3(j).eq.3) CHHUso(j)=(HHUM00(j)+HHUM0(j)+HHUM1(j)+HHUM2(j)+HHUM3(j))*30*1.00
-
-
+         CHHUso(j)=(HHUM00(j)+HHUM0(j)+HHUM1(j)+HHUM2(j)+HHUM3(j))*10
 
 	      CHsoil(j)=CHBIso(j)+CHHUso(j)
 c        If(usl3(j).eq.0)CHsoil(j)=0     
@@ -1399,19 +1364,16 @@ c============================================================
          BIOfum(j)=FDBIO(j)+FBIO1(j)+FBIO3(j)
          HUMfum(j)=FDHUM(j)+FHUM1(j)+FHUM3(j)
 
-	      SMCfum(j)=(BIOfum(j)+HUMfum(j))*30
+	      SMCfum(j)=(BIOfum(j)+HUMfum(j))*10
 
          SMNfum(j)=SMCfum(j)*1000/rnitr(5)
 
 c        if(j.gt.1) SMNfum(j)=SMCfum(j)/CNfum(j)  
 
-         If(usl3(j).eq.0) CO2fum(j)=((FDCO(j)+FR1CO(j)+FR3CO(j))*30)
+         CO2fum(j)=((FDCO(j)+FR1CO(j)+FR3CO(j))*10)
 
-         If(usl3(j).eq.1) CO2fum(j)=((FDCO(j)+FR1CO(j)+FR3CO(j))*30)*0.5*0.8
+         
 
-         If(usl3(j).eq.2) CO2fum(j)=((FDCO(j)+FR1CO(j)+FR3CO(j))*30)*0.5*0.6
-
-         If(usl3(j).eq.3)  CO2fum(j)=((FDCO(j)+FR1CO(j)+FR3CO(j))*30)*0.5*0.4
 
 	      SMCOfm=SMCOfm+CO2fum(j)
         
@@ -1421,26 +1383,12 @@ c        CHHUfm(j)=CHFHU0(j)*usl3(j)*30+CHFHU1(j)*usl3(j)*30+CHFHU3(j)
 c     4 *usl3(j)*30
 
 
-         If(usl3(j).eq.0)CHBIfm(j)=0
+         CHBIfm(j)=(CHFBI0(j)+CHFBI1(j)+CHFBI3(j))*10
  
-         If(usl3(j).eq.1) CHBIfm(j)=(CHFBI0(j)+CHFBI1(j)+CHFBI3(j))*30*0.33
-
-         If(usl3(j).eq.2) CHBIfm(j)=(CHFBI0(j)+CHFBI1(j)+CHFBI3(j))*30*0.66
-
-         If(usl3(j).eq.3) CHBIfm(j)=(CHFBI0(j)+CHFBI1(j)+CHFBI3(j))*30*1.00
-
+         
         
-         If(usl3(j).eq.0) CHHUfm(j)=0
-
-         If(usl3(j).eq.1) CHHUfm(j)=(CHFHU0(j)+CHFHU1(j)+CHFHU3(j))*30*0.33
-
-         If(usl3(j).eq.2) CHHUfm(j)=(CHFHU0(j)+CHFHU1(j)+CHFHU3(j))*30*0.66
- 
-         If(usl3(j).eq.3) CHHUfm(j)=(CHFHU0(j)+CHFHU1(j)+CHFHU3(j))*30*1.00
-
-
-
-
+         CHHUfm(j)=(CHFHU0(j)+CHFHU1(j)+CHFHU3(j))*10
+         
 
          CHfum(j)=CHBIfm(j)+CHHUfm(j)
 c        If(usl3(j).eq.0) CHfum(j)=0
@@ -1456,7 +1404,7 @@ c========================================================
 c============================================================
 c  Nnakoplenie ugleroda na pole i vibrosi CO2: PolcC(j) i  PolCO2(j)
 c=================================================================
-	      PoleC(j)=(BIOrst(j)+HUMrst(j)+BIOsoi(j)+HUMsoi(j)+BIOfum(j)+HUMfum(j))*30
+	      PoleC(j)=(BIOrst(j)+HUMrst(j)+BIOsoi(j)+HUMsoi(j)+BIOfum(j)+HUMfum(j))*10
         
 ccccc        PolCO2(j)=CO2rst(j)+CO2soi(j)+CO2fum(j)
 cccc       PolCO2(j)
@@ -1467,15 +1415,15 @@ c==============================================================
 c     RASCHET ZA GOD RAZLOGJENIJ  otdelnix komponentov RASTITELNIX OSTATKOV
 c             i  otnoschenij  C/N
 c==============================================================
-         SmDBIO=SmDBIO+DBIO(j)*30+PrDBIO(j)*30
-         SmBIO1=SmBIO1+BIO1(j)*30+PrBIO1(j)*30
-         SmBIO2=SmBIO2+BIO2(j)*30+PrBIO2(j)*30
-         SmBIO3=SmBIO3+BIO3(j)*30+PrBIO3(j)*30
+         SmDBIO=SmDBIO+DBIO(j)*10+PrDBIO(j)*10
+         SmBIO1=SmBIO1+BIO1(j)*10+PrBIO1(j)*10
+         SmBIO2=SmBIO2+BIO2(j)*10+PrBIO2(j)*10
+         SmBIO3=SmBIO3+BIO3(j)*10+PrBIO3(j)*10
 
-         SmDHUM=SmDHum+DHUM(j)*30+PrDHUM(j)*30
-         SmHUM1=SmHum1+HUM1(j)*30+PrHUM1(j)*30
-         SmHUM2=SmHum2+HUM2(j)*30+PrHUM2(j)*30
-         SmHUM3=SmHum3+HUM3(j)*30+PrHUM3(j)*30
+         SmDHUM=SmDHum+DHUM(j)*10+PrDHUM(j)*10
+         SmHUM1=SmHum1+HUM1(j)*10+PrHUM1(j)*10
+         SmHUM2=SmHum2+HUM2(j)*10+PrHUM2(j)*10
+         SmHUM3=SmHum3+HUM3(j)*10+PrHUM3(j)*10
 
          TSMCrs=TSMCrs+SMCrst(j)
          TSMNrs=TSMNrs+SMNrst(j)
@@ -1487,16 +1435,16 @@ ccccccccccccc	  OCNrst=SMCrst(j)/CNrst(j)
 
 ccccccccc         CNrst(j)=TSMCrs/TSMNrs
 
-         SmDCO=SmDCO+(DCO2(j)+PrDCO2(j))*30
-         SmR1CO=SmR1CO+(R1CO2(j)+PrR1CO(j))*30
-         SmR2CO=SmR2CO+(R2CO2(j)+PrR2CO(j))*30
-         SmR3CO=SmR3CO+(R3CO(j)+PrR3CO(j))*30
+         SmDCO=SmDCO+(DCO2(j)+PrDCO2(j))*10
+         SmR1CO=SmR1CO+(R1CO2(j)+PrR1CO(j))*10
+         SmR2CO=SmR2CO+(R2CO2(j)+PrR2CO(j))*10
+         SmR3CO=SmR3CO+(R3CO(j)+PrR3CO(j))*10
 
 
 c	 if(j.gt.1)go to 2001
-cccccccccccccc	SMNrst(j)=SMCrst(j)*1000/rnitr(3)*30
+cccccccccccccc	SMNrst(j)=SMCrst(j)*1000/rnitr(3)*10
 
-	      SMNrst(j)=(SMCrst(j)*1000/rnitr(3))*30
+	      SMNrst(j)=(SMCrst(j)*1000/rnitr(3))*10
 
 
 c	 go to 2002
@@ -1567,24 +1515,24 @@ c==============================================================
 c  RASCHET ZA GOD RAZLOGJENIJ otdelnix komponentov ORGANICHESKOGO VESCHESTVA POCHVI
 c                i  otnoschenij  C/N
 c===============================================================
- 2002    SsDBIO=SsDBIO+SDBIO(j)*30
-         SsBIO1=SsBIO1+SBIO1(j)*30
-         SsBIO2=SsBIO2+SBIO2(j)*30
-         SsBIO3=SsBIO3+SBIO3(j)*30
+ 2002    SsDBIO=SsDBIO+SDBIO(j)*10
+         SsBIO1=SsBIO1+SBIO1(j)*10
+         SsBIO2=SsBIO2+SBIO2(j)*10
+         SsBIO3=SsBIO3+SBIO3(j)*10
    
-         SsDHUM=SsDHUM+SDHUM(j)*30
-         SsHUM1=SsHUM1+SHUM1(j)*30
-         SsHUM2=SsHUM2+SHUM2(j)*30
-         SsHUM3=SsHUM3+SHUM3(j)*30
+         SsDHUM=SsDHUM+SDHUM(j)*10
+         SsHUM1=SsHUM1+SHUM1(j)*10
+         SsHUM2=SsHUM2+SHUM2(j)*10
+         SsHUM3=SsHUM3+SHUM3(j)*10
    
          TSMCso=TSMCso+SMCsoi(j)
          TSMNso=TSMNso+SMNsoi(j)
 cccc       CNsoil(j)=TSMCso/TSMNso
          CNsoil(j)=rNitr(4)
-         SsDCO=SsDCO+SDCO(j)*30
-         SsR1CO=SsR1CO+sR1CO(j)*30
-         SsR2CO=SsR2CO+sR2CO(j)*30
-         SsR3CO=SsR3CO+sR3CO(j)*30
+         SsDCO=SsDCO+SDCO(j)*10
+         SsR1CO=SsR1CO+sR1CO(j)*10
+         SsR2CO=SsR2CO+sR2CO(j)*10
+         SsR3CO=SsR3CO+sR3CO(j)*10
 
 c==============================================================
 c  RASCHET ZA GOD RAZLOGJENIJ otdelnix  komponentov  VESCHESTVA 
@@ -1605,10 +1553,10 @@ c===============================================================
 cccc       CNfum(j)=TSMCfm/TSMNfm
          CNfum(j)=rNitr(5)
        
-         SFDCO=SFDCO+FDCO(j)*30
-         SFR1CO=SFR1CO+FR1CO(j)*30
+         SFDCO=SFDCO+FDCO(j)*10
+         SFR1CO=SFR1CO+FR1CO(j)*10
 
-         SFR3CO=SFR3CO+FR3CO(j)*30
+         SFR3CO=SFR3CO+FR3CO(j)*10
 
 c==============================================================
 c  RASCHET ZA GOD  otnoschenij  C/N  summarnogo
@@ -1670,17 +1618,11 @@ c   	VNnitr(j)=NNH4
 
 ccccccccc        VNN2O(j)=rmt2(j)*rmW2(j)*rmpH2(j)*(0.004+0.030*rMNsoi(j))
 
-         If(usl3(j).eq.0) VNN2O(j)=(rmt2(j)*rmW2(j)*rmpH2(j)*(0.004+0.030*VNnitr(j)))*30
+         VNN2O(j)=(rmt2(j)*rmW2(j)*rmpH2(j)*(0.004+0.030*VNnitr(j)))*10
 
         
-         If(usl3(j).eq.1) VNN2O(j)=(rmt2(j)*rmW2(j)*rmpH2(j)*(0.004+0.030*VNnitr(j)))*30*0.66
+         
    
-
-
-         If(usl3(j).eq.2) VNN2O(j)=(rmt2(j)*rmW2(j)*rmpH2(j)*(0.004+0.030*VNnitr(j)))*30*0.33
-
-         If(usl3(j).eq.3) VNN2O(j)=(rmt2(j)*rmW2(j)*rmpH2(j)*(0.004+0.030*VNnitr(j)))*30*0.01
-
          SnN2O=SnN2O+VNN2O(j)
 
 cccc  vrem        VNN2O(j)=((0.2*Whgr(j)/inf(17))+(0.02*(1-0.1)))*rMNsoi(j)
@@ -1712,13 +1654,9 @@ cccccccccccc     4 /3.14))/1000000000
          if(FdWFPS(j).gt.1.0)FdWFPS(j)=1.0   
 cccccccccccccccccccc        vNdN2(j)=(FdNO3(j)*FdWFPS(j)*30)/1000
 
-         If(usl3(j).eq.0)vNdN2(j)=(FdNO3(j)*FdWFPS(j)*30)/1000
+         If(usl3(j).eq.0)vNdN2(j)=(FdNO3(j)*FdWFPS(j)*10)/1000
 
-         If(usl3(j).eq.1)vNdN2(j)=((FdNO3(j)*FdWFPS(j)*30)/1000)*0.66
-
-         If(usl3(j).eq.2)vNdN2(j)=((FdNO3(j)*FdWFPS(j)*30)/1000)*0.33
-
-         If(usl3(j).eq.3)vNdN2(j)=((FdNO3(j)*FdWFPS(j)*30)/1000)*0.01
+         
 
 
 c   perevod iz grammov  v vkilogrammi
@@ -1836,7 +1774,7 @@ cccccccccccccccccccccccccccccccccc c 4     -rnitr(10)*RNupt(j)-VNN2O(j)-vNNO(j)-
 
 c	NNH4=NNH4+SMNrst(j)+SMNsoi(j)+SMNfum(j)+rnitr(7)*rnitr(8)
 c     4   -rnitr(10)*RNupt(j)-VNN2O(j)-vNNO(j)-VNvfum(j)-Vnvfrt(j)
-         RNNH4=RNNH4+VNN2O(j)*30
+         RNNH4=RNNH4+VNN2O(j)*10
 c	BNNH4(j)=NNH4+SMNrst(j)+SMNsoi(j)+SMNfum(j)+rnitr(7)
 c     4 *rnitr(8)
 c     4   -rnitr(10)*RNupt(j)-VNN2O(j)-vNNO(j)-VNvfum(j)-Vnvfrt(j)
@@ -1847,7 +1785,7 @@ c     4   -rnitr(10)*RNupt(j)-VNN2O(j)-vNNO(j)-VNvfum(j)-Vnvfrt(j)
 c	NNH4=NNH4+10
 c        NNO3=NNO3+VNnitr(j)-VNdeni(j)-rnitr(11)*RNupt(j)-VNdN2(j)-
 c     4   VNdN2O(j)-RNinfl(j)
-	      RNNO3=RNNO3+(vNdN2(j)*30/1000)
+	      RNNO3=RNNO3+(vNdN2(j)*10/1000)
         
 c===================================================================
 c  BALANS  SUMARNOY  EMISSII ZAKISI  AZOTA
