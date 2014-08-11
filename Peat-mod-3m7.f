@@ -56,7 +56,7 @@ c==========================================================================
       integer, parameter :: OutputFileUnit = 106
 
       integer :: n, t0, n1, n2
-      real :: fi, tmpVal, tmpVal1, tmpVal2, tmpVal3, tmpVal4, tmpVal5
+      real :: fi, urostCoeff, tmpVal, tmpVal1, tmpVal2, tmpVal3, tmpVal4, tmpVal5
       integer, dimension(:), allocatable :: dv
       real, dimension(:), allocatable :: ts, os, dww, usl2, usl3, usl4, inf, rnitr, hgr
       real, dimension(36) :: tmpArray2, tmpArray, dekadesReal, gimReal
@@ -73,10 +73,6 @@ c      open (unit=InputFileUnit, file="Peat-mod-3.dat",status="old",form="format
      >      Real1=fi, IntArrOne1=dv, 
      >      RealArrOne1=ts, RealArrOne2=os, RealArrOne3=dww, RealArrOne4=usl2, RealArrOne5=usl3,
      >      RealArrOne6=usl4, RealArrOne7=inf, RealArrOne8=rnitr, RealArrOne9=hgr)
-
-      call WriteTable(6, "Test input table", "ts", ts, "os",os,"dww",dww,
-     >   "usl2",usl2,"usl3",usl3,"usl4",usl4,"inf",inf,"rnitr",rnitr,"hgr",hgr)
-      BalanC=0
 
       i = 1
       if(i.ne.1) inf(8)=BalanC
@@ -357,6 +353,10 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      do j=1,n
+         urostCoeff = urostCoeff + (2.3026*(2./3)*10.**(2.-(2./3)*((j-inf(7)+1)/3)))/(1.+10.**(2.-(2./3)*((j-inf(7)+1)/3)))**2
+      end do
+      print *, urostCoeff
       
       do j=1,n
          s1=0
@@ -467,20 +467,19 @@ c  RASCHET TEMPERATURI POCHVI NA GLUBINE 20 cm
 c=============================================================
 c - Tpoch - temperatura pochvi na glubine 20 cm
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-c         if(usl2(j).eq.1)  Tpoch(j)=ts(j)+2.7
-c         if(usl2(j).eq.2)  Tpoch(j)=ts(j)+0.74
-c         if(usl2(j).eq.3)  Tpoch(j)=ts(j)-0.6
-c         if(usl2(j).eq.4)  Tpoch(j)=ts(j)+1.9
-c         if(usl2(j).eq.5)  Tpoch(j)=ts(j)+4.4
-c         if(usl2(j).eq.6)  Tpoch(j)=ts(j)+4.2
-c         if(usl2(j).eq.7)  Tpoch(j)=ts(j)+3.1
-c         if(usl2(j).eq.8)  Tpoch(j)=ts(j)+2.8
-c         if(usl2(j).eq.9)  Tpoch(j)=ts(j)+2.1
-c         if(usl2(j).eq.10) Tpoch(j)=ts(j)+2.2
-c         if(usl2(j).eq.11) Tpoch(j)=ts(j)+4.5
-c         if(usl2(j).eq.12) Tpoch(j)=ts(j)+3.1
-         
-         Tpoch(j) = ts(j)
+         if((usl2(j)>=1) .and. (usl2(j) <=3))  Tpoch(j)=ts(j)+2.7
+         if((usl2(j)>=4) .and. (usl2(j) <=6)) Tpoch(j)=ts(j)+0.74
+         if((usl2(j)>=7) .and. (usl2(j) <=9)) Tpoch(j)=ts(j)-0.6
+         if((usl2(j)>=10) .and. (usl2(j) <=12)) Tpoch(j)=ts(j)+1.9
+         if((usl2(j)>=13) .and. (usl2(j) <=15)) Tpoch(j)=ts(j)+4.4
+         if((usl2(j)>=16) .and. (usl2(j) <=18)) Tpoch(j)=ts(j)+4.2
+         if((usl2(j)>=19) .and. (usl2(j) <=21)) Tpoch(j)=ts(j)+3.1
+         if((usl2(j)>=22) .and. (usl2(j) <=24)) Tpoch(j)=ts(j)+2.8
+         if((usl2(j)>=25) .and. (usl2(j) <=27)) Tpoch(j)=ts(j)+2.1
+         if((usl2(j)>=28) .and. (usl2(j) <=30)) Tpoch(j)=ts(j)+2.2
+         if((usl2(j)>=31) .and. (usl2(j) <=33)) Tpoch(j)=ts(j)+4.5
+         if((usl2(j)>=34) .and. (usl2(j) <=36)) Tpoch(j)=ts(j)+3.1
+
 c=================================================================
 c       RASCHET  KOEFFIZIENTOV  BAZOVOGO I  VSPOMAGATELNIX URAVNENIY
 c  dlj rascheta razlogenij organicheskogo materiala pochvi
@@ -624,8 +623,7 @@ c      RASCHET RASPREDELENIJ RASTITELNIX OSTATKOV PO MESJZAM VEGETAZII
 c===================================================================
 c          "inf(7) - nomer pervogo mesjza vegetazii kulturi"
 
-         CUrost(j)=((2.3026*(2./3)*10.**(2.-(2./3)*(j-inf(7)+1)))/(1.+10.**(2.-(2./3)*(j-inf(7)+1)))**2)*SumRst
-
+         CUrost(j)=(((2.3026*(2./3)*10.**(2.-(2./3)*((j-inf(7)+1)/3)))/(1.+10.**(2.-(2./3)*((j-inf(7)+1)/3)))**2)*SumRst)/urostCoeff
          if(j.lt.inf(7)) CUrost(j)=0
          if(j.gt.(inf(7)+inf(5))) CUrost(j)=0
 
@@ -1728,7 +1726,7 @@ cc================================================================
 
 
 
-         OtnUrs(j)=((2.3026*(2./3)*10.**(2.-(2./3)*(j-inf(7)+1)))/(1.+10.**(2.-(2./3)*(j-inf(7)+1)))**2)
+         OtnUrs(j)=((2.3026*(2./3)*10.**(2.-(2./3)*((j-inf(7)+1)/3)))/(1.+10.**(2.-(2./3)*((j-inf(7)+1)/3)))**2)
          
          if(j.lt.inf(7))OtnUrs(j)=0
          if(j.gt.(inf(7)+inf(5)))OtnUrs(j)=0
