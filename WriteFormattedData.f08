@@ -149,7 +149,6 @@ contains
 
 		TmpString1 = '| '
 		do i=1, NumOfItems
-			print *, TmpString1
 			write(TmpString2, ItemFmt(i)), DataSet(i)
 			TmpString1 = trim(TmpString1) // " " //trim(ItemNames(i)) // " =" // trim(TmpString2) //" |'| "
 		end do
@@ -361,7 +360,7 @@ contains
 			end if
 		end do
 
-		write(FileUnit, "(15x100a)"),adjustl(trim(TmpString1))
+		write(FileUnit, "(15x100a)"), adjustl(trim(TmpString1))
 		write(FileUnit, "(15x100a)"), adjustl(trim(TmpString2))
 
 		call WriteHorisontalLine("_", TableWidth, FileUnit)
