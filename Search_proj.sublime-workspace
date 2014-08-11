@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"tm",
+				"tmpArray2"
+			],
+			[
 				"summ",
 				"SummarnoeWidilenieMetana"
 			],
@@ -71,7 +75,7 @@
 			"file": "Peat-mod-3m7.f",
 			"settings":
 			{
-				"buffer_size": 103746,
+				"buffer_size": 102086,
 				"line_ending": "Windows"
 			}
 		},
@@ -79,7 +83,7 @@
 			"file": "Peat-mod-3.dat",
 			"settings":
 			{
-				"buffer_size": 1577,
+				"buffer_size": 1575,
 				"line_ending": "Windows"
 			}
 		},
@@ -87,7 +91,7 @@
 			"file": "Peat-mod-main-3m7.res",
 			"settings":
 			{
-				"buffer_size": 81646,
+				"buffer_size": 81901,
 				"line_ending": "Windows"
 			}
 		}
@@ -265,6 +269,8 @@
 	},
 	"file_history":
 	[
+		"/F/Users/Maxim/Desktop/errors_moodle.txt",
+		"/C/Users/Max/AppData/Roaming/Sublime Text 3/Packages/Table Editor/README.md",
 		"/F/works/models_granddad/Search_07_08/WriteFormattedData.f08",
 		"/F/works/models_granddad/Search_07_08/Try1/Peat-mod-3.dat",
 		"/F/works/models_granddad/N2O_emission/Mod T9.f08",
@@ -281,7 +287,6 @@
 		"/F/works/models_granddad/Search_07_08/filereading.mod",
 		"/F/works/models_granddad/N2O_emission/read_from_file.f",
 		"/F/works/models_granddad/Search_07_08/read_from_file.f",
-		"/C/Users/Max/AppData/Roaming/Sublime Text 3/Packages/Table Editor/README.md",
 		"/C/Users/Max/AppData/Roaming/Sublime Text 3/Packages/User/Fortran.sublime-build",
 		"/C/Users/Max/AppData/Roaming/Sublime Text 3/Packages/MinimalFortran/MinimalFortran.JSON-tmLanguage",
 		"/Z/Users/Maxim/AppData/Roaming/Sublime Text 2/Packages/Fortran/Syntaxes/Fortran - Punchcard.tmLanguage",
@@ -391,8 +396,7 @@
 		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Something/SplitsVelocities_15.06_12.51.02.txt",
 		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Something/SplitsVelocities_15.06_13.15.17.txt",
 		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_14.06_11.07.42.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_13.06_23.24.17.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_14.06_23.34.17.txt"
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_13.06_23.24.17.txt"
 	],
 	"find":
 	{
@@ -410,6 +414,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"rmw1",
+			"Tpoch",
+			"rmt1",
+			"exp(-rmt1(j)*rmpH1(j)",
+			"exp(-rmt1(j)*rmpH1(j)*0.6*0.66*0.00278",
 			"rmw1",
 			"(exp(-rmt1(j)*rmW1(j)*",
 			"rmw1",
@@ -532,17 +541,12 @@
 			" n",
 			"y.*= ",
 			"y.*n",
-			".",
-			" n",
-			"y.*= ",
-			"y.*n",
-			".",
-			"y = "
+			"."
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
 			"rmw3",
@@ -629,15 +633,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 103746,
+						"buffer_size": 102086,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								18134,
-								18134
+								17422,
+								17422
 							]
 						],
 						"settings":
@@ -647,7 +651,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 8922.0,
+						"translation.y": 8400.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -659,7 +663,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1577,
+						"buffer_size": 1575,
 						"regions":
 						{
 						},
@@ -699,15 +703,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 81646,
+						"buffer_size": 81901,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								73938,
-								73938
+								2371,
+								2371
 							]
 						],
 						"settings":
@@ -717,7 +721,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 23600.0,
+						"translation.y": 840.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -759,7 +763,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 248.0
+		"height": 368.0
 	},
 	"output.find_results":
 	{
@@ -772,7 +776,7 @@
 	"project": "Search_proj.sublime-project",
 	"replace":
 	{
-		"height": 76.0
+		"height": 52.0
 	},
 	"save_all_on_build": true,
 	"select_file":

@@ -56,7 +56,7 @@ c==========================================================================
       integer, parameter :: OutputFileUnit = 106
 
       integer :: n, t0, n1, n2
-      real :: fi
+      real :: fi, tmpVal, tmpVal1, tmpVal2, tmpVal3, tmpVal4, tmpVal5
       integer, dimension(:), allocatable :: dv
       real, dimension(:), allocatable :: ts, os, dww, usl2, usl3, usl4, inf, rnitr, hgr
       real, dimension(12) :: tmpArray2, tmpArray, dekadesReal, gimReal
@@ -427,17 +427,26 @@ ccccccccccccccc	rchW1(j)=(Whgr(j)-inf(15))/(inf(16)-inf(15))
 
          rchW1(j)=Whgr(j)/inf(16)
 
+         tmpVal  = inf(17)/inf(16)
+         tmpVal1 = 381.2*(tmpVal**4)-1643.3*(tmpVal**3)+2658.9*(tmpVal**2)-1913*tmpVal+516.21
+
+         tmpVal2 = (381.2*tmpVal**4-1643.3*tmpVal**3+2658.9*tmpVal**2-1913*tmpVal+516.21)
+         tmpVal4 = tmpVal
 
          if(Whgr(j).lt.(inf(16))) then
             rmW1(j)=0
          end if
-         if((Whgr(j).gt.(inf(16))) .and. (Whgr(j).lt.(inf(17)))) then
+         if (Whgr(j).gt.(inf(16))) then
             rmW1(j)=381.2*rchW1(j)**4-1643.3*rchW1(j)**3+2658.9*rchW1(j)**2-1913*rchW1(j)+516.21
          end if
-         
-         if(Whgr(j).gt.(inf(17))) then
-            rmW1(j)=1.1
+         if (Whgr(j) .gt. inf(17)) then
+            tmpVal  = (-1.5643*(-1*hgr(j))+452.32)/inf(16)
+            tmpVal3 = (381.2*rchW1(j)**4-1643.3*rchW1(j)**3+2658.9*rchW1(j)**2-1913*rchW1(j)+516.21)
+            rmW1(j) = (20*(tmpVal - tmpVal4))**10 + (tmpVal3 - tmpVal2) + tmpVal1
+            print *, 20*(tmpVal - tmpVal4)
          end if
+
+
 ccc       if(rmW1(j).gt.1) rmW1(j)=1
 cc     6   -inf(15))))/(inf(17)-(inf(16)-inf(15)))
 
@@ -2083,7 +2092,7 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       end do
 
       call WriteTable(6, "Exponent values", 
-     > "dek", dekadesReal,"cyt", gimReal, "hgr", hgr, "rmw1", rmW1, "rmT1", rmT1, "rmpH1", rmpH1, "0.66" , tmpArray, "0.02", tmpArray2)
+     > "dek", dekadesReal,"cyt", gimReal, "hgr", hgr,"Whgr",Whgr,  "rmw1", rmW1, "rchW1", rchW1)
 
       print *, "Summarnie za god wibrosy", SummarnoeWidilenieMetana * 1000
 
