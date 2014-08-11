@@ -1,6 +1,6 @@
           SUMMARNOE PRIRASCHENIE  UGLEROGA za god, t/ga;
- SUMMARNOE PRIRASCHENIE UGLEROGA na pole,t/ga =  -0.06699
+ SUMMARNOE PRIRASCHENIE UGLEROGA na pole,t/ga =  -0.02820
     ----------------------------------------------------------------------------
           BALANS  UGLERODA NA POLE  PROEKTA, t/ga;
- BALANS UGLERODA , t/ga =   0.02901
+ BALANS UGLERODA , t/ga =   0.06780
     ----------------------------------------------------------------------------

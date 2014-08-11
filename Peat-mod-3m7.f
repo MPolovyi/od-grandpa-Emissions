@@ -627,6 +627,7 @@ c          "inf(7) - nomer pervogo mesjza vegetazii kulturi"
          if(j.lt.inf(7)) CUrost(j)=0
          if(j.gt.(inf(7)+inf(5))) CUrost(j)=0
 
+         tmpVal5 = tmpVal5 + CUrost(j)
 c================================================================
 c      RASCHET  PERVICHNOGO RAZLOGENIJ RASTITELNIX OSTATKOV
 c================================================================
@@ -2031,7 +2032,7 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
          tmpVal = tmpVal + CUrost(j)
       end do
 
-      print *, tmpVal - SumRst
+      print *, tmpVal5 - SumRst
 
       call WriteTable(6, "Exponent values", 
      > "dek", dekadesReal,"cyt", gimReal, "hgr", hgr,"Whgr",Whgr,  "rmw1", rmW1, "rchW1", rchW1)
