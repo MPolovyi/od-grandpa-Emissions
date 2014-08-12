@@ -2,16 +2,16 @@
           RASCHET ZA GOD RAZLOGJENIJ RASTITELNIX OSTATKOV,;
              VSEX KOMPONENTOV, t/ga ;
     ----------------------------------------------------------------------------
- RastBIO =.002372 RastHUM =.002784 RastCO2 =0.06034812
+ RastBIO =.003334 RastHUM =.003913 RastCO2 =0.08482884
     ----------------------------------------------------------------------------
           RASCHET ZA GOD NERAZLOGIVSHIXS RASTIT OSTATKOV,t/ga;
     ----------------------------------------------------------------------------
- SumDPM =1.2682837248 prSMCO =
+ SumDPM =1.2656308413 prSMCO =
     ----------------------------------------------------------------------------
           RASCHET ZA GOD RAZLOGJENIJ ORGANIKI POCHVI,;
              VSEX KOMPONENTOV, t/ga ;
     ----------------------------------------------------------------------------
- SoilBIO =0.00283 SoilHUM =0.00333 SoilCO2 =0.07199945
+ SoilBIO =0.00399 SoilHUM =0.00468 SoilCO2 =0.10123580
     ----------------------------------------------------------------------------
           RASCHET ZA GOD RAZLOGJENIJ ORGANIKI UDOBRENIY,;
              VSEX KOMPONENTOV, t/ga ;
@@ -22,20 +22,20 @@
           organiki pochvi i organicheskogo veschestva ;
           organicheskix udobreniy na pole proekta, t/ga ;
     ----------------------------------------------------------------------------
- SumBIO pole =0.00516 SumHUM pole =0.00616 SSSHum =0.00000
+ SumBIO pole =0.00725 SumHUM pole =0.00866 SSSHum =0.00000
     ----------------------------------------------------------------------------
           VIDILENIE CO2 iz  POLE  PROEKTA za god, t/ga;
- VIDILENIE CO2  , t C /ga =   0.13235
+ VIDILENIE CO2  , t C /ga =   0.18606
     ----------------------------------------------------------------------------
           PRIBAVKA UGLERODA za schet Razlogenij za god, t/ga;
- PRIBAVKA UGLEROD za schet Razlogenij, t/ga =   0.01132
+ PRIBAVKA UGLEROD za schet Razlogenij, t/ga =   0.01591
     ----------------------------------------------------------------------------
           VINOS  UGLEROGA S  MASSOY  UROGJAJ za god, t/ga;
   VINOS  UGLEROGA S  MASSOY  UROGJAJ , t/ga =   0.00050
     ----------------------------------------------------------------------------
           SUMMARNOE PRIRASCHENIE  UGLEROGA za god, t/ga;
- SUMMARNOE PRIRASCHENIE UGLEROGA na pole,t/ga =  -0.12153
+ SUMMARNOE PRIRASCHENIE UGLEROGA na pole,t/ga =  -0.17065
     ----------------------------------------------------------------------------
           BALANS  UGLERODA NA POLE  PROEKTA, t/ga;
- BALANS UGLERODA , t/ga =   0.03482
+ BALANS UGLERODA , t/ga =   0.01018
     ----------------------------------------------------------------------------
