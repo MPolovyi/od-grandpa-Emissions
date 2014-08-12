@@ -2009,9 +2009,11 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      
+      print *, "CO2", gn7(36)*3.67
+      print *, "CH4", SummarnoeWidilenieMetana * 1000
       print *, "N2O", gn3(36)
-      
-      
+
       j1=j-1
 
       do iter = 1,n
@@ -2027,7 +2029,7 @@ cc     rMNsoi(j)+(SMNrst(j)+SMNsoi(j)+SMNfum(j)-RNupt(j)
 c      call WriteTable(6, "N2O", 
 c     > "dek", dekadesReal,"rmw2", rmw2, "rmt2", rmt2, "rMNsoi", rMNsoi, "SMNrst",SMNrst,"SMNsoi",SMNsoi,"SMNfum",SMNfum,"RNupt",RNupt, "Val", tmpArray)
 
-      print *, "Summarnie za god wibrosy", SummarnoeWidilenieMetana * 1000
+      
 
       call WriteTable(OutputFileUnit,"RASCHET  DEFIZITA  WLAGI",
      >   "dek", dekadesReal,"cyt",gimReal,"Tisp",Tisp,"ratX",ratX,"pBIO",pBIO,"pHUM",pHUM," pCO2",pCO2,"rE",rE)
