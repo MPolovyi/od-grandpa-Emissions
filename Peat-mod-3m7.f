@@ -520,7 +520,7 @@ ccc     6  (inf(17)-inf(16))
 
          rchW2(j)=Whgr(j)/inf(17)
 
-         rmW2(j)=(((rchW2(j)-1.27)/(0.60-1.27))**(2.84*((1.27-0.60)/(0.60-0.0012))))*((rchW2(j)-0.0012)/(0.60-0.0012))**2.84
+        rmW2(j)=(((rchW2(j)-1.27)/(0.60-1.27))**(2.84*((1.27-0.60)/(0.60-0.0012))))*((rchW2(j)-0.0012)/(0.60-0.0012))**2.84
 
 cccc	   rmpH2(j)=0.56+3.14/(tan(3.14*0.45*(inf(18)-5)))
 
@@ -1592,12 +1592,10 @@ cccccccccc      VNnitr(j)=(rMNsoi(j)+(SMNrst(j)+SMNsoi(j)+SMNfum(j))*0.7)*exp(-0
 cccccccccccc     4   *rmt2(j)*rmW2(j)*rmpH2(j))+rnitr(7)*rnitr(8)
 ccccccccccccc        if(Tpoch(j).lt.0.or.Tpoch(j).eq.0) VNnitr(j)=0
 
-         RNupt(j)=0.75*(CUrost(j)/rnitr(3))*1000*rnitr(11)
+         RNupt(j)=0.15*(CUrost(j)/rnitr(3))*1000*rnitr(11)
 
 
-       VNnitr(j)=(rMNsoi(j)+(SMNrst(j)+SMNsoi(j)+SMNfum(j)-
-     4 RNupt(j))*0.8)*exp(-0.6
-     4   *rmt2(j)*rmW2(j)*rmpH2(j))+rnitr(7)*rnitr(8)
+        VNnitr(j)=(rMNsoi(j)+(SMNrst(j)+SMNsoi(j)+SMNfum(j)-RNupt(j))*0.8)*exp(-0.6*rmt2(j)*rmW2(j)*rmpH2(j))+rnitr(7)*rnitr(8)
         if(Tpoch(j).lt.0.or.Tpoch(j).eq.0) VNnitr(j)=0
 
 
@@ -1651,7 +1649,7 @@ cccccccccccc     4 /3.14))/1000000000
          if(FdWFPS(j).gt.1.0)FdWFPS(j)=1.0   
 cccccccccccccccccccc        vNdN2(j)=(FdNO3(j)*FdWFPS(j)*30)/1000
 
-         If(usl3(j).eq.0)vNdN2(j)=(FdNO3(j)*FdWFPS(j)*10)/1000
+         VNdN2(j)=(FdNO3(j)*FdWFPS(j)*10)/1000
 
          
 
@@ -2011,7 +2009,7 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+      print *, "N2O", gn3(36)
       
       
       j1=j-1
@@ -2021,13 +2019,13 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
          gimReal(iter) = gim(iter)
       end do
 
-      do iter = 1, n
-         tmpArray(iter) = exp(-rmt1(iter)*rmpH1(iter)*0.6*0.66*0.00278)
-         tmpArray2(iter) = exp(-rmt1(iter)*rmpH1(iter)*0.6*0.02*0.00278)
-      end do
-
-c     call WriteTable(6, "Exponent values", 
-c    > "dek", dekadesReal,"cyt", gimReal, "hgr", hgr,"Whgr",Whgr,  "rmw1", rmW1, "rchW1", rchW1)
+c      do iter = 1, 36
+c         tmpArray(iter) = rMNsoi(j)+(SMNrst(j)+SMNsoi(j)+SMNfum(j)-RNupt(j))
+c         tmpArray2(iter) = exp(-rmt1(iter)*rmpH1(iter)*0.6*0.02*0.00278)
+c      end do
+cc     rMNsoi(j)+(SMNrst(j)+SMNsoi(j)+SMNfum(j)-RNupt(j)
+c      call WriteTable(6, "N2O", 
+c     > "dek", dekadesReal,"rmw2", rmw2, "rmt2", rmt2, "rMNsoi", rMNsoi, "SMNrst",SMNrst,"SMNsoi",SMNsoi,"SMNfum",SMNfum,"RNupt",RNupt, "Val", tmpArray)
 
       print *, "Summarnie za god wibrosy", SummarnoeWidilenieMetana * 1000
 
