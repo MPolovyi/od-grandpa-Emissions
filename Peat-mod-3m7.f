@@ -136,7 +136,6 @@ c 4119 format(4x,76("*"))
       write(OutputFileUnit,"(12f7.1)") (hgr(j),j=1,n)
 
 
-
 c==========================================================================
 c       O P I S A N I E   V X O D N O Y   I N F O R M A Z I I 
 c--------------------------------------------------------------------------
@@ -444,7 +443,6 @@ ccccccccccccccc	rchW1(j)=(Whgr(j)-inf(15))/(inf(16)-inf(15))
             tmpVal  = (-1.5643*(-1*hgr(j))+452.32)/inf(16)
             tmpVal3 = (381.2*rchW1(j)**4-1643.3*rchW1(j)**3+2658.9*rchW1(j)**2-1913*rchW1(j)+516.21)
             rmW1(j) = (20*(tmpVal - tmpVal4))**5 + (tmpVal3 - tmpVal2) + tmpVal1
-            print *, 20*(tmpVal - tmpVal4)
          end if
 
 
@@ -538,9 +536,9 @@ c  RASCHET VSPOMOGATELNIX  KOEFFIZIENTOV  DLJ  RASCHETA PROZESSA
 c              DENITROFIKAZII
 c================================================================
 	      denNO3(j)=NNO3/((3.3*5)+NNO3)
-         denW(j)= (((Whgr(j)/inf(17))-0.62)/0.38)**1.74
+        denW(j)= (((Whgr(j)/inf(17))-0.62)/0.38)**1.74
 	      denCO2(j)=0.005*RtCO
-         denpW(j)=0.5*(Whgr(j)/inf(17))
+        denpW(j)=0.5*(Whgr(j)/inf(17))
 ccccccccccc        dnpNO3(j)=1-(NNO3/(VNdeni(j)*10))
 	      dnpNO3(j)=0.4
 c   !!! opredelit  znachenie  v znamenatele, poka stoit "10" ili d0 v formule
@@ -1093,7 +1091,7 @@ c=============================================================
 c	SDBIO(j)=SDPM0(j)*(0.85)*(0.85/(1+(1/ratX(j))))*0.46
 c        SDHUM(j)=SDPM0(j)*(0.85/(1+(1/ratX(j))))*0.54
 
-	 SDBIO(j)=SDPM0(j)*(1/(1+ratX(j)))*0.46
+	       SDBIO(j)=SDPM0(j)*(1/(1+ratX(j)))*0.46
          SDHUM(j)=SDPM0(j)*(1/(1+ratX(j)))*0.54
 
 
@@ -1987,7 +1985,7 @@ c==================================
          rdsoCH(j)=soilCH
          rdfmCH(j)=fumCH
          summMetanMonths(j)=CHrst(j)+CHsoil(j)+CHfum(j)
-      	rOCNrs(j)=OCNrst
+      	 rOCNrs(j)=OCNrst
        
          rdNH4(j)=RNNH4
          rdNO3(j)=RNNO3
@@ -1995,7 +1993,7 @@ c==================================
          gn1(j)=SnN2O
          gn2(j)=SdN2O   
          gn3(j)=SN2O
-	      gn4(j)=SMCOrs
+	       gn4(j)=SMCOrs
          gn5(j)=SMCOso
          gn6(j)=SMCOfm
          gn7(j)=SPolCO 	
@@ -2028,14 +2026,8 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
          tmpArray2(iter) = exp(-rmt1(iter)*rmpH1(iter)*0.6*0.02*0.00278)
       end do
 
-      do iter = 1, n
-         tmpVal = tmpVal + CUrost(j)
-      end do
-
-      print *, tmpVal5 - SumRst
-
-      call WriteTable(6, "Exponent values", 
-     > "dek", dekadesReal,"cyt", gimReal, "hgr", hgr,"Whgr",Whgr,  "rmw1", rmW1, "rchW1", rchW1)
+c     call WriteTable(6, "Exponent values", 
+c    > "dek", dekadesReal,"cyt", gimReal, "hgr", hgr,"Whgr",Whgr,  "rmw1", rmW1, "rchW1", rchW1)
 
       print *, "Summarnie za god wibrosy", SummarnoeWidilenieMetana * 1000
 
