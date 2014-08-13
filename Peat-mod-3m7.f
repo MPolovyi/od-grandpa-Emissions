@@ -635,7 +635,6 @@ c       RPM0(j)=0.41*CUrost(j)/30
          DPM0(j)=0.59*CUrost(j)
          RPM0(j)=0.41*CUrost(j)
 
-         print *, "CUrost(",j,")", CUrost(j)
 
          DPM(j)=DPM0(j)*(1-exp(-rmt1(j)*rmW(j)*rmpH(j)*0.6*10.0*0.00278))
          RPM(j)=RPM0(j)*(1-exp(-rmt1(j)*rmW(j)*rmpH(j)*0.6*0.3*0.00278))
@@ -1998,8 +1997,8 @@ c        SnN2O=SnN2O+VNN2O(j)
 
 c        VNNO(j)=0.02*0.1*VNnitr(j)
 
-       call WriteTable(6, "N2O", 
-     > "dek", dekadesReal,"VNnitr", VNnitr, "Proisvedenie", tmpArray,"SMNrst",SMNrst, "SMNsoi", SMNsoi, "rMNsoi",rMNsoi)
+c       call WriteTable(6, "N2O", 
+c     > "dek", dekadesReal,"VNnitr", VNnitr, "Proisvedenie", tmpArray,"SMNrst",SMNrst, "SMNsoi", SMNsoi, "rMNsoi",rMNsoi)
 
       print *, "CO2", gn7(36)*3.67
       print *, "CH4", SummarnoeWidilenieMetana * 1000
