@@ -75,7 +75,7 @@
 			"file": "Peat-mod-3m7.f",
 			"settings":
 			{
-				"buffer_size": 102086,
+				"buffer_size": 99882,
 				"line_ending": "Windows"
 			}
 		},
@@ -83,7 +83,7 @@
 			"file": "Peat-mod-3.dat",
 			"settings":
 			{
-				"buffer_size": 1575,
+				"buffer_size": 3104,
 				"line_ending": "Windows"
 			}
 		},
@@ -91,7 +91,7 @@
 			"file": "Peat-mod-main-3m7.res",
 			"settings":
 			{
-				"buffer_size": 81901,
+				"buffer_size": 167875,
 				"line_ending": "Windows"
 			}
 		}
@@ -102,6 +102,10 @@
 		"height": 400.0,
 		"selected_items":
 		[
+			[
+				"pacrev",
+				"PackageResourceViewer: Open Resource"
+			],
 			[
 				"table",
 				"Table Editor: Enable for current view"
@@ -269,6 +273,9 @@
 	},
 	"file_history":
 	[
+		"/F/Users/Maxim/Desktop/err_grammar.txt",
+		"/F/Users/Maxim/Desktop/questions.xml",
+		"/F/Users/Maxim/Desktop/err_MW.txt",
 		"/F/Users/Maxim/Desktop/errors_moodle.txt",
 		"/C/Users/Max/AppData/Roaming/Sublime Text 3/Packages/Table Editor/README.md",
 		"/F/works/models_granddad/Search_07_08/WriteFormattedData.f08",
@@ -393,10 +400,7 @@
 		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/SplitsVelocities_05.06_21.07.48.txt",
 		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Something/SplitsVelocities_15.06_13.54.19.txt",
 		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Something/SplitsVelocities_15.06_04.00.21.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Something/SplitsVelocities_15.06_12.51.02.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Something/SplitsVelocities_15.06_13.15.17.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_14.06_11.07.42.txt",
-		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/SplitsVelocities_13.06_23.24.17.txt"
+		"/F/Users/Maxim/UserData/University/4 course/Vicsek/Results/4k/Something/SplitsVelocities_15.06_12.51.02.txt"
 	],
 	"find":
 	{
@@ -414,6 +418,50 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"questiontext",
+			">",
+			"<![endif]-->",
+			"<!--[if gte mso 9]>",
+			"&amp#010",
+			";",
+			";&amp;#010;",
+			"&amp",
+			"&lt;",
+			"&gt",
+			"|       61 |             | Add questions   |",
+			"CUrost(j)",
+			"CUrost(j)=",
+			"Curost",
+			"CHHUrs",
+			"j-",
+			"+j",
+			"OtnUrs",
+			"if(j.lt.inf(7)",
+			"if(j.lt.inf(7))",
+			"j.lt.inf(7)",
+			"tpoch",
+			"rmt1",
+			"gi",
+			"gim",
+			"usl3",
+			"If\\(usl3\\(j\\)\\.eq\\.1\\).*",
+			"If\\(usl3\\(j\\) == 1\\).*",
+			"If(usl3(j).eq.0) ",
+			"If(usl3(j) == 0) ",
+			"usl3",
+			"CHBIfm",
+			"*30",
+			"If(usl3(j).eq.2) ",
+			"usl3",
+			"If(usl3(j) == 2) ",
+			"*30",
+			"usl2",
+			"usl3",
+			"usl4",
+			"usl1",
+			"usl2",
+			"usl3",
+			"usl2",
 			"rmw1",
 			"Tpoch",
 			"rmt1",
@@ -497,51 +545,7 @@
 			"hgr(j)",
 			"rmW3",
 			"CHsoil",
-			"metan",
-			"rmW3",
-			"rmW",
-			"write(6",
-			"rw2",
-			"rw3",
-			"2002",
-			".",
-			",",
-			"Noise",
-			"N",
-			"y = ",
-			"y = \\d\\.*\\d* ",
-			" - ",
-			"article",
-			"url",
-			"annote",
-			"journaltitle",
-			"journal",
-			"journaltitle",
-			"{\n",
-			"writeField",
-			"month",
-			"annote",
-			"month = ",
-			"month =",
-			"root",
-			"tex",
-			"e",
-			"Bookmark",
-			" n",
-			"y.*= ",
-			"y.*n",
-			".",
-			" n",
-			"y.*= ",
-			"y.*n",
-			" n",
-			"y.= ",
-			"y.*n",
-			".",
-			" n",
-			"y.*= ",
-			"y.*n",
-			"."
+			"metan"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -549,6 +553,13 @@
 		"regex": false,
 		"replace_history":
 		[
+			">\n",
+			"",
+			"&",
+			"<",
+			">",
+			"",
+			"*10",
 			"rmw3",
 			"rmW1(j)*(exp(-rmt1(j)*",
 			"summMetanMonths",
@@ -633,25 +644,25 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 102086,
+						"buffer_size": 99882,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								17422,
-								17422
+								59944,
+								59944
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/MinimalFortran/MinimalFortran.tmLanguage",
-							"tab_size": 3,
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 8400.0,
+						"translation.x": 48.0,
+						"translation.y": 34190.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -663,27 +674,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1575,
+						"buffer_size": 3104,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1529,
-								1529
-							],
-							[
-								1534,
-								1534
-							],
-							[
-								1539,
-								1539
-							],
-							[
-								1544,
-								1544
+								2121,
+								2121
 							]
 						],
 						"settings":
@@ -691,7 +690,7 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 240.0,
+						"translation.y": 132.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -703,15 +702,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 81901,
+						"buffer_size": 167875,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2371,
-								2371
+								81595,
+								81595
 							]
 						],
 						"settings":
@@ -721,7 +720,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 840.0,
+						"translation.y": 2256.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -763,7 +762,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 368.0
+		"height": 332.0
 	},
 	"output.find_results":
 	{
@@ -806,7 +805,7 @@
 		[
 			[
 				"",
-				"F:\\Users\\Maxim\\UserData\\University\\4 course\\Vicsek\\Thesis\\Thesis.sublime-project"
+				"F:\\Users\\Maxim\\UserData\\Programming\\LaTeXstyles\\styleFile.sublime-project"
 			]
 		],
 		"width": 380.0
