@@ -520,13 +520,13 @@ ccc     6  (inf(17)-inf(16))
 
          rchW2(j)=Whgr(j)/inf(17)
 
-        rmW2(j)=(((rchW2(j)-1.27)/(0.60-1.27))**(2.84*((1.27-0.60)/(0.60-0.0012))))*((rchW2(j)-0.0012)/(0.60-0.0012))**2.84
+         rmW2(j)=(((rchW2(j)-1.27)/(0.60-1.27))**(2.84*((1.27-0.60)/(0.60-0.0012))))*((rchW2(j)-0.0012)/(0.60-0.0012))**2.84
 
 cccc	   rmpH2(j)=0.56+3.14/(tan(3.14*0.45*(inf(18)-5)))
 
 cccccccccccccccccccccccccccccc	 rmpH2(j)=0.56+(1/(tan(3.14*0.45*(inf(18)-5))))/3.14
 
-	      rmpH2(j)=0.56+(atan(3.14*0.45*(inf(18)-5)))/3.14
+	       rmpH2(j)=0.56+(atan(3.14*0.45*(inf(18)-5)))/3.14
 
 
              
@@ -635,7 +635,7 @@ c       RPM0(j)=0.41*CUrost(j)/30
          DPM0(j)=0.59*CUrost(j)
          RPM0(j)=0.41*CUrost(j)
 
-
+         print *, "CUrost(",j,")", CUrost(j)
 
          DPM(j)=DPM0(j)*(1-exp(-rmt1(j)*rmW(j)*rmpH(j)*0.6*10.0*0.00278))
          RPM(j)=RPM0(j)*(1-exp(-rmt1(j)*rmW(j)*rmpH(j)*0.6*0.3*0.00278))
@@ -1573,57 +1573,18 @@ ccccccccccccccc        rMNsoi(j)=(inf(19)*inf(8)*10)*rnitr(1)
 
 c  osn ccccccccccccccccccccccccc        rMNsoi(j)=((inf(19)*inf(8)*1000)*rnitr(1))/10000
 
-         rMNsoi(j)=(((inf(19)*inf(8)*1000000)*rnitr(1))/100)/1000000
-c          * na 1000000 perevod v grammi
-c         /100 umnogjili na mg/100 g
-c           /1000000   perevod mg v kg
+         rMNsoi(j)=(inf(19)*inf(8)*rnitr(1))
 
+         RNupt(j)=(CUrost(j)/rnitr(3))*1000*rnitr(11)*10
 
-cccccccccccc        rMNsoi(j)=(inf(19)*inf(8)*1000)/rnitr(1)*10000
+         VNnitr(j)=(rMNsoi(j)+(SMNrst(j)+SMNsoi(j)+SMNfum(j)-RNupt(j))*0.8)*exp(-0.6*rmt2(j)*rmW2(j)*rmpH2(j))+rnitr(7)*rnitr(8)
+         if(Tpoch(j).lt.0.or.Tpoch(j).eq.0) VNnitr(j)=0
 
-c                 kg N / ga
-
-cccccccccccccc	VNnitr(j)=rMNsoi(j)*exp(-0.6*rmt2(j)*rmW2(j)*rmpH2(j))+
-ccccccccccccc     4 SMNrst(j)+SMNsoi(j)+SMNfum(j)+rnitr(7)*rnitr(8)
-cccccccccccc        if(Tpoch(j).lt.0.or.Tpoch(j).eq.0) VNnitr(j)=0
-
-
-cccccccccc      VNnitr(j)=(rMNsoi(j)+(SMNrst(j)+SMNsoi(j)+SMNfum(j))*0.7)*exp(-0.6
-cccccccccccc     4   *rmt2(j)*rmW2(j)*rmpH2(j))+rnitr(7)*rnitr(8)
-ccccccccccccc        if(Tpoch(j).lt.0.or.Tpoch(j).eq.0) VNnitr(j)=0
-
-         RNupt(j)=0.15*(CUrost(j)/rnitr(3))*1000*rnitr(11)
-
-
-        VNnitr(j)=(rMNsoi(j)+(SMNrst(j)+SMNsoi(j)+SMNfum(j)-RNupt(j))*0.8)*exp(-0.6*rmt2(j)*rmW2(j)*rmpH2(j))+rnitr(7)*rnitr(8)
-        if(Tpoch(j).lt.0.or.Tpoch(j).eq.0) VNnitr(j)=0
-
-
-
-
-c      Primechanie  20% visvobogjdaemogo azota vkljuchaetsj v stabilhuju funkziju organicheskogo veschestva
-c           str/258 Gollandzi
-
-
-c	VNnitr(j)=(rnitr(1)*exp(-0.6*rmt2(j)*rmW2(j)*rmpH2(j))+
-c     4 SMNrst(j)+SMNsoi(j)+SMNfum(j)+rnitr(7)*rnitr(8))*30
-c        if(Tpoch(j).lt.0.or.Tpoch(j).eq.0) VNnitr(j)=0
-
-c   	VNnitr(j)=NNH4
-
-ccccccccc        VNN2O(j)=rmt2(j)*rmW2(j)*rmpH2(j)*(0.004+0.030*rMNsoi(j))
-
-         VNN2O(j)=(rmt2(j)*rmW2(j)*rmpH2(j)*(0.004+0.030*VNnitr(j)))*10
-
-        
-         
+         VNN2O(j)=(rmt2(j)*rmW2(j)*rmpH2(j)*(0.004+0.030*VNnitr(j)))
    
          SnN2O=SnN2O+VNN2O(j)
 
-cccc  vrem        VNN2O(j)=((0.2*Whgr(j)/inf(17))+(0.02*(1-0.1)))*rMNsoi(j)
-cccccc        VNNO(j)=0.02*0.1*rnitr(1)
-
-         VNNO(j)=0.02*0.1*VNnitr(j)   
+         VNNO(j)=0.02*0.1*VNnitr(j)
 
 c==============================================================
 c RASCHET  DENITRIFIKAZII  I EMISSII AZOTA V PROZESSE  DENITRIFIKAZII
@@ -2010,9 +1971,7 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       
-      print *, "CO2", gn7(36)*3.67
-      print *, "CH4", SummarnoeWidilenieMetana * 1000
-      print *, "N2O", gn3(36)
+
 
       j1=j-1
 
@@ -2021,15 +1980,30 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
          gimReal(iter) = gim(iter)
       end do
 
-c      do iter = 1, 36
-c         tmpArray(iter) = rMNsoi(j)+(SMNrst(j)+SMNsoi(j)+SMNfum(j)-RNupt(j))
-c         tmpArray2(iter) = exp(-rmt1(iter)*rmpH1(iter)*0.6*0.02*0.00278)
-c      end do
-cc     rMNsoi(j)+(SMNrst(j)+SMNsoi(j)+SMNfum(j)-RNupt(j)
-c      call WriteTable(6, "N2O", 
-c     > "dek", dekadesReal,"rmw2", rmw2, "rmt2", rmt2, "rMNsoi", rMNsoi, "SMNrst",SMNrst,"SMNsoi",SMNsoi,"SMNfum",SMNfum,"RNupt",RNupt, "Val", tmpArray)
+       do iter = 1, 36
+          tmpArray(iter) = (SMNrst(iter)+SMNsoi(iter)+SMNfum(iter)-RNupt(iter))
+          tmpArray2(iter) = exp(-rmt1(iter)*rmpH1(iter)*0.6*0.02*0.00278)
+       end do
 
-      
+c        rMNsoi(j)=(inf(19)*inf(8)*rnitr(1))*10
+
+c        RNupt(j)=(CUrost(j)/rnitr(3))*1000*rnitr(11)*10
+
+c        VNnitr(j)=(rMNsoi(j)+(SMNrst(j)+SMNsoi(j)+SMNfum(j)-RNupt(j))*0.8)*exp(-0.6*rmt2(j)*rmW2(j)*rmpH2(j))+rnitr(7)*rnitr(8)
+c        if(Tpoch(j).lt.0.or.Tpoch(j).eq.0) VNnitr(j)=0
+
+c        VNN2O(j)=(rmt2(j)*rmW2(j)*rmpH2(j)*(0.004+0.030*VNnitr(j)))*10
+c  
+c        SnN2O=SnN2O+VNN2O(j)
+
+c        VNNO(j)=0.02*0.1*VNnitr(j)
+
+       call WriteTable(6, "N2O", 
+     > "dek", dekadesReal,"VNnitr", VNnitr, "Proisvedenie", tmpArray,"SMNrst",SMNrst, "SMNsoi", SMNsoi, "rMNsoi",rMNsoi)
+
+      print *, "CO2", gn7(36)*3.67
+      print *, "CH4", SummarnoeWidilenieMetana * 1000
+      print *, "N2O", gn3(36)
 
       call WriteTable(OutputFileUnit,"RASCHET  DEFIZITA  WLAGI",
      >   "dek", dekadesReal,"cyt",gimReal,"Tisp",Tisp,"ratX",ratX,"pBIO",pBIO,"pHUM",pHUM," pCO2",pCO2,"rE",rE)
