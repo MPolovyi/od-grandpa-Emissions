@@ -956,14 +956,14 @@ c     6   +PrR2CO(j)+R3CO(j)+PrR3CO(j))*30
 ccccccccccccc	CO2rst(j)=(DCO2(j)+R1CO2(j)+R2CO2(j)
 cccccccccccccccccc     6   +R3CO(j))*30
 
-	If(usl3(j).eq.0) CO2rst(j)=(DCO2(j)+R1CO2(j)+R2CO2(j)
-     6   +R3CO(j))*30*0.3
-	If(usl3(j).eq.1)  CO2rst(j)=((DCO2(j)+R1CO2(j)+R2CO2(j)
-     6   +R3CO(j))*30)*0.5*0.8
-	If(usl3(j).eq.2) CO2rst(j)=((DCO2(j)+R1CO2(j)+R2CO2(j)
-     6   +R3CO(j))*30)*0.5*0.6
-	If(usl3(j).eq.3) CO2rst(j)=((DCO2(j)+R1CO2(j)+R2CO2(j)
-     6   +R3CO(j))*30)*0.5*0.4
+  	   If(usl3(j).eq.0) CO2rst(j)=(DCO2(j)+R1CO2(j)+R2CO2(j)
+     >   +R3CO(j))*30*0.3
+  	   If(usl3(j).eq.1)  CO2rst(j)=((DCO2(j)+R1CO2(j)+R2CO2(j)
+     >  +R3CO(j))*30)*0.5*0.8
+  	   If(usl3(j).eq.2) CO2rst(j)=((DCO2(j)+R1CO2(j)+R2CO2(j)
+     >  +R3CO(j))*30)*0.5*0.6
+  	   If(usl3(j).eq.3) CO2rst(j)=((DCO2(j)+R1CO2(j)+R2CO2(j)
+     >   +R3CO(j))*30)*0.5*0.4
 
 
 	SMCOrs=SMCOrs+CO2rst(j)	
@@ -1653,7 +1653,7 @@ c   	VNnitr(j)=NNH4
 ccccccccc        VNN2O(j)=rmt2(j)*rmW2(j)*rmpH2(j)*(0.004+0.030*rMNsoi(j))
 
         If(usl3(j).eq.0) VNN2O(j)=(rmt2(j)*rmW2(j)*rmpH2(j)*(0.004
-     4  +0.030*VNnitr(j)))*30
+     4  +0.030*VNnitr(j)))*30*0.5
 
         
         If(usl3(j).eq.1) VNN2O(j)=(rmt2(j)*rmW2(j)*rmpH2(j)*(0.004
