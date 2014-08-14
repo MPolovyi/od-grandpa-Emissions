@@ -944,7 +944,7 @@ c====================================================================
 
 	      HUMrst(j)=(DHUM(j)+PrDHUM(j)+HUM1(j)+PrHUM1(j)+HUM2(j)+PrHUM2(j)+HUM3(j)+PrHUM3(j))
 	
-	SMCrst(j)=(BIOrst(j)+HUMrst(j))*30
+	      SMCrst(j)=(BIOrst(j)+HUMrst(j))*30
 
 cccc        SMNrst(j)=SMCrst(j)/rnitr(3)*1000*30
         SMNrst(j)=SMCrst(j)*1000/rnitr(3)
