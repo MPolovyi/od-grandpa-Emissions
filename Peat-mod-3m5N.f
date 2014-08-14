@@ -9,9 +9,9 @@ c                              Z   Z I X    G R U N T I V   (Peat-GHG-Model)
 
              
 c==========================================================================
-      integer, dimension(36) :: gim
+      integer, dimension(12) :: gim
       real, dimension(9) :: a9
-      real, dimension(36) :: j1m,ts11,epot,filt, ossrnz,srdww,osnz,rstek,dw41,
+      real, dimension(12) :: j1m,ts11,epot,filt, ossrnz,srdww,osnz,rstek,dw41,
      > dw51,CperW1,CperW2,
      > RPM,DPM,BIO1,HUM1,IOM,CUrOst, raC,TSMD,MTSMD,rbC,rcC,Tpoch,TIsp, rd51,rd42,HUM2,BIO2,DBIO,DHUM,DCO2,
      >  R1CO2,R2CO2,ratX,rE,rMCsoi, rMNsoi, BIO3,HUM3,R3CO,DPM0,RPM0,SDPM,SRPM, SBIO,SHUM,SDPM0,SRPM0,SBIO0,SHUM0,
@@ -59,7 +59,7 @@ c==========================================================================
       real :: fi, urostCoeff, tmpVal, tmpVal1, tmpVal2, tmpVal3, tmpVal4, tmpVal5
       integer, dimension(:), allocatable :: dv
       real, dimension(:), allocatable :: ts, os, dww, usl2, usl3, usl4, inf, rnitr, hgr
-      real, dimension(36) :: tmpArray2, tmpArray, dekadesReal, gimReal
+      real, dimension(12) :: tmpArray2, tmpArray, dekadesReal, gimReal
 
 
 c      open (unit=InputFileUnit, file="Peat-mod-3.dat",status="old",form="formatted")
@@ -957,7 +957,7 @@ ccccccccccccc	CO2rst(j)=(DCO2(j)+R1CO2(j)+R2CO2(j)
 cccccccccccccccccc     6   +R3CO(j))*30
 
 	If(usl3(j).eq.0) CO2rst(j)=(DCO2(j)+R1CO2(j)+R2CO2(j)
-     6   +R3CO(j))*30
+     6   +R3CO(j))*30*0.3
 	If(usl3(j).eq.1)  CO2rst(j)=((DCO2(j)+R1CO2(j)+R2CO2(j)
      6   +R3CO(j))*30)*0.5*0.8
 	If(usl3(j).eq.2) CO2rst(j)=((DCO2(j)+R1CO2(j)+R2CO2(j)
@@ -970,7 +970,7 @@ cccccccccccccccccc     6   +R3CO(j))*30
 
 
 	If(usl3(j).eq.0) prCOrs(j)=(PrDCO2(j)+PrR1CO(j)+R2CO2(j)
-     6   +PrR2CO(j)+PrR3CO(j))*30
+     6   +PrR2CO(j)+PrR3CO(j))*30*0.3
 	If(usl3(j).eq.1) prCOrs(j)=((PrDCO2(j)+PrR1CO(j)+R2CO2(j)
      6   +PrR2CO(j)+PrR3CO(j))*30)*0.5*0.8
 	If(usl3(j).eq.2) prCOrs(j)=((PrDCO2(j)+PrR1CO(j)+R2CO2(j)
@@ -1267,7 +1267,7 @@ c perevod v kg N/ga umnogjenie na 1000
 ccccccccc        if(j.gt.1) SMNsoi(j)=SMCsoi(j)/CNsoil(j)  
 
 
-        If(usl3(j).eq.0)  CO2soi(j)=(SDCO(j)+sR1CO(j)+sR2CO(j)+sR3CO(j))*30
+        If(usl3(j).eq.0)  CO2soi(j)=(SDCO(j)+sR1CO(j)+sR2CO(j)+sR3CO(j))*30*0.3
          If(usl3(j).eq.1)  CO2soi(j)=((SDCO(j)+sR1CO(j)+sR2CO(j)+
      6 sR3CO(j))*30)*0.5*0.8
           If(usl3(j).eq.2) CO2soi(j)=((SDCO(j)+sR1CO(j)+sR2CO(j)
@@ -1389,7 +1389,7 @@ c============================================================
 
 c        if(j.gt.1) SMNfum(j)=SMCfum(j)/CNfum(j)  
 
-        If(usl3(j).eq.0) CO2fum(j)=((FDCO(j)+FR1CO(j)+FR3CO(j))*30)
+        If(usl3(j).eq.0) CO2fum(j)=((FDCO(j)+FR1CO(j)+FR3CO(j))*30)*0.3
         If(usl3(j).eq.1) CO2fum(j)=((FDCO(j)+FR1CO(j)+FR3CO(j))
      4   *30)*0.5*0.8
         If(usl3(j).eq.2) CO2fum(j)=((FDCO(j)+FR1CO(j)+FR3CO(j))
