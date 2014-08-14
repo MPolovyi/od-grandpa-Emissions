@@ -75,7 +75,7 @@
 			"file": "Peat-mod-3m7.f",
 			"settings":
 			{
-				"buffer_size": 99882,
+				"buffer_size": 98918,
 				"line_ending": "Windows"
 			}
 		},
@@ -83,7 +83,7 @@
 			"file": "Peat-mod-3.dat",
 			"settings":
 			{
-				"buffer_size": 3104,
+				"buffer_size": 3101,
 				"line_ending": "Windows"
 			}
 		},
@@ -91,7 +91,7 @@
 			"file": "Peat-mod-main-3m7.res",
 			"settings":
 			{
-				"buffer_size": 167875,
+				"buffer_size": 169946,
 				"line_ending": "Windows"
 			}
 		}
@@ -273,6 +273,7 @@
 	},
 	"file_history":
 	[
+		"/F/works/models_granddad/Search_07_08/compile_settings",
 		"/F/Users/Maxim/Desktop/err_grammar.txt",
 		"/F/Users/Maxim/Desktop/questions.xml",
 		"/F/Users/Maxim/Desktop/err_MW.txt",
@@ -301,7 +302,6 @@
 		"/Z/Users/Maxim/AppData/Roaming/Sublime Text 2/Packages/Fortran/Syntaxes/Fortran - Modern.tmLanguage",
 		"/Z/Users/Maxim/AppData/Roaming/Sublime Text 2/Packages/Fortran/Syntaxes/Fortran - Punchcard.tmLanguage.cache",
 		"/Z/Users/Maxim/AppData/Roaming/Sublime Text 2/Packages/Fortran/Syntaxes/Fortran - Modern.tmLanguage.cache",
-		"/F/works/models_granddad/Search_07_08/compile_settings",
 		"/Z/Users/Maxim/AppData/Roaming/Sublime Text 2/Packages/User/Build sistems/Fortran.sublime-build",
 		"/F/works/models_granddad/Search_07_08/Peat-mod-main-3m6.res",
 		"/F/works/models_granddad/Поиск_7_08/Peat-mod-3m5.f",
@@ -404,7 +404,7 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 45.0
 	},
 	"find_in_files":
 	{
@@ -418,6 +418,49 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"SMNrst(j)=",
+			"rMNsoi",
+			"RNU",
+			"SMNrst(iter)+SMNsoi(iter)+SMNfum(iter)",
+			"(SMNrst(iter)+SMNsoi(iter)+SMNfum(iter)-RNupt(iter))",
+			"SMN.*=",
+			"SMCrst(j)",
+			"SMNrst(j)",
+			"SMCrst(j)",
+			"SMNrst(j)",
+			"CUrost(j)",
+			"SMCrst",
+			"SMNrst",
+			"CUro",
+			"inf(11)",
+			"-10.0",
+			"SumRst",
+			"CUR",
+			"SumRst",
+			"-10.0",
+			"SumRst",
+			"inf(11)",
+			"-60",
+			"inf(11)",
+			"-10.0",
+			"prin",
+			"-80.0",
+			"rMCsoi(j)=",
+			"inf(8)",
+			"SPolCO",
+			"gn7",
+			"rMNsoi(j)=(inf(19)*inf(8)*rnitr(1))",
+			"VNnitr(j)=",
+			"SMNrst(j)+SMNsoi(j)",
+			"(CUrost(j)/rnitr(3))*1000*rnitr(11)*10",
+			"RNupt(j)=(CUrost(j)/rnitr(3))*1000*rnitr(11)",
+			"CUrOst",
+			"RNupt(j)=(CUrost(j)/rnitr(3))*1000*rnitr(11)",
+			"RNupt",
+			"RNupt(j)=0.15*(CUrost(j)/rnitr(3))*1000*rnitr(11)",
+			"rnup",
+			"mt2(iter)*rmW2(iter)*rmpH2(iter)",
+			"VNnitr",
 			"questiontext",
 			">",
 			"<![endif]-->",
@@ -502,50 +545,7 @@
 			"SDBIO",
 			"read",
 			"335",
-			"494",
-			"ts2m",
-			"ts2",
-			"tss",
-			"write(6,",
-			"write(OutputFileUnit,,",
-			"write(6",
-			"print *,",
-			"j\\b",
-			"j",
-			"BalanC",
-			"30   ",
-			"30",
-			"rmW\\b",
-			"CHFHU.*=",
-			"CHFBI.*=",
-			"HHUM.*=",
-			"HSBIO.*=",
-			"PCHH.*=",
-			"CHHUM.\\(j\\)=",
-			"CHHUM\\(j\\)=",
-			"PCHB.\\(j\\)=",
-			"CHBIO.\\(j\\)=",
-			"CHBIO",
-			"CHBIfm",
-			"CHHUso",
-			"CHBIso",
-			"CHBIrs",
-			"CHfum",
-			"CHsoil",
-			"CHrst",
-			"SMCHPL",
-			"rdplCH",
-			"Metan",
-			"\\bWhgr\\(j\\)",
-			"\\bhgr\\(j\\)",
-			"rmpH1(j)=",
-			"rmt1(j)",
-			"rmt1(j)=",
-			"rmt1",
-			"hgr(j)",
-			"rmW3",
-			"CHsoil",
-			"metan"
+			"494"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -553,6 +553,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			"-60.0",
+			"-10",
+			"-60.0",
+			"-10.0",
 			">\n",
 			"",
 			"&",
@@ -644,25 +648,26 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 99882,
+						"buffer_size": 98918,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								59944,
-								59944
+								60343,
+								60343
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/MinimalFortran/MinimalFortran.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"tab_size": 3,
+							"translate_tabs_to_spaces": true,
+							"word_wrap": true
 						},
-						"translation.x": 48.0,
-						"translation.y": 34190.0,
+						"translation.x": 0.0,
+						"translation.y": 37211.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -674,15 +679,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3104,
+						"buffer_size": 3101,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2121,
-								2121
+								2141,
+								2141
 							]
 						],
 						"settings":
@@ -690,7 +695,7 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 132.0,
+						"translation.y": 276.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -702,15 +707,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 167875,
+						"buffer_size": 169946,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								81595,
-								81595
+								94649,
+								94649
 							]
 						],
 						"settings":
@@ -720,7 +725,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2256.0,
+						"translation.y": 31920.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -731,7 +736,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 28.0
+		"height": 33.0
 	},
 	"input":
 	{
@@ -762,7 +767,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 332.0
+		"height": 810.0
 	},
 	"output.find_results":
 	{
@@ -775,7 +780,7 @@
 	"project": "Search_proj.sublime-project",
 	"replace":
 	{
-		"height": 52.0
+		"height": 86.0
 	},
 	"save_all_on_build": true,
 	"select_file":

@@ -352,10 +352,22 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+c!!!!!!!!!!!!!! don't touch this! it's needed for some ***** case, in which compiler tries to optimise programm, and becouthe of this, some of 
       do j=1,n
          urostCoeff = urostCoeff + (2.3026*(2./3)*10.**(2.-(2./3)*((j-inf(7)+1)/3)))/(1.+10.**(2.-(2./3)*((j-inf(7)+1)/3)))**2
       end do
 
+      Write(106,*) sumOs,SmDBIO,SmBIO1,SmBIO2,SmBIO3,SmDHUM,SmHUM1,SmHUM2,
+     > SmHUM3,SmDCO,SmR1CO,SmR2CO,SmR3CO,SsDBIO,SsBIO1,SsBIO2,SsBIO3,
+     > SsDHUM,SsHUM1,SsHUM2,SsHUM3,SsDCO,SsR1CO,SsR2CO,SsR3CO,
+     > SFDBIO, SFBIO1,SFBIO3,SFDHUM,SFHUM1,SFHUM3,SFDCO,SFR1CO,
+     > SFR3CO,RtBIO,RtHUM,RtCO,RslBIO,RslHUM,RslCO,RFBIO,RFHUM,
+     > RFCO, SumBIO,SumHUM,SumCO,BalanC,SSSHUM,
+     > PerzW1,PerzW2,NorW1,NorW2,RRSHUM,UR,SumRst,prSMCO,
+     > RKWin,PKpoch,PKcult,RWin,SumDPM,SumRPM,RazDPM,RazRPM,
+     > TSMCrs,TSMCso,TSMCfm,RNNH4,RNNO3,TSMNrs,TSMNso,TSMNfm,TMNN2O,
+     > SMCHrs,SMCHso,SMCHfm,rastCH,soilCH,fumCH,SummarnoeWidilenieMetana,OCNrst,
+     > SnN2O,SdN2O,SN2O,SMCOrs,SMCOso,SMCOfm,SPolCO
 
       do j=1,n
          s1=0
@@ -535,12 +547,12 @@ c=================================================================
 c  RASCHET VSPOMOGATELNIX  KOEFFIZIENTOV  DLJ  RASCHETA PROZESSA
 c              DENITROFIKAZII
 c================================================================
-	      denNO3(j)=NNO3/((3.3*5)+NNO3)
+	     denNO3(j)=NNO3/((3.3*5)+NNO3)
         denW(j)= (((Whgr(j)/inf(17))-0.62)/0.38)**1.74
-	      denCO2(j)=0.005*RtCO
+	     denCO2(j)=0.005*RtCO
         denpW(j)=0.5*(Whgr(j)/inf(17))
 ccccccccccc        dnpNO3(j)=1-(NNO3/(VNdeni(j)*10))
-	      dnpNO3(j)=0.4
+	     dnpNO3(j)=0.4
 c   !!! opredelit  znachenie  v znamenatele, poka stoit "10" ili d0 v formule
 c po idee drob dolgna bit menee 1, sledovatelno d0 dolgno bit bolschim, t.k.
 c  NNO3 budet mensche , chem to, chto vozniklo pri denitrifikazii
@@ -587,41 +599,14 @@ c=================================================================
          if(inf(10) .eq. 10) then
             SumRst=((0.106*(inf(11)/1000*inf(21))-91.386)+(0.132*(inf(11)/1000*inf(21))+1885.6)*inf(14))*inf(21)  
          end if
-  
-
-c 6. Розрахунок рослинних залишків для природної рослинності:
-c 1) вологі луки з домінуванням Deschampsia caespitosa ,
-c якщо    ,   то    ;
-c ; ; ;
-c
-c 2) вологі луки з домінуванням Molinia caerulea ,
-c якщо    ,   то    ;
-c 3) угруповання жорстких безлистих злаковидних рослин з родин
-c        Cyperaceae та Juncaceae,
-c якщо    ,   то    ;
-c 4) угруповання низьких кореневищних та низькокупинних осок,
-c якщо    ,   то    ;
-c 5) угруповання високих купинних осок,
-c якщо    ,   то    ;
-c 6) зарості високотравних кореневищних гелофітів (очерет, рогоз),
-c якщо    ,   то    ;
-c 7) верба віком до 7 років,   якщо    ,   то
-c  ;
-c 8) верба віком 8–10 років,   якщо    ,   то
-c  ;
-c 9) верба віком 10–12 років,  якщо   ,  то
-c  ;
-c 10) верба віком більше 12 років,  якщо   ,  то
-c  .
-
-
+         
 
 c==================================================================
 c      RASCHET RASPREDELENIJ RASTITELNIX OSTATKOV PO MESJZAM VEGETAZII
 c===================================================================
-c          "inf(7) - nomer pervogo mesjza vegetazii kulturi"
-
+c        "inf(7) - nomer pervogo mesjza vegetazii kulturi"
          CUrost(j)=(((2.3026*(2./3)*10.**(2.-(2./3)*((j-inf(7)+1)/3)))/(1.+10.**(2.-(2./3)*((j-inf(7)+1)/3)))**2)/urostCoeff)*SumRst
+
          if(j.lt.inf(7)) CUrost(j)=0
          if(j.gt.(inf(7)+inf(5))) CUrost(j)=0
 
@@ -968,7 +953,7 @@ c====================================================================
       	SMCrst(j)=(BIOrst(j)+HUMrst(j))*10
 
 cccc        SMNrst(j)=SMCrst(j)/rnitr(3)*1000*30
-         SMNrst(j)=SMCrst(j)*1000/rnitr(3)
+c           SMNrst(j)=SMCrst(j)*1000/rnitr(3)
 cccccccccccccccc        if(j.gt.1) SMNrst(j)=SMCrst(j)/CNrst(j)  
 
 c	CO2rst(j)=(DCO2(j)+PrDCO2(j)+R1CO2(j)+PrR1CO(j)+R2CO2(j)
@@ -1576,7 +1561,12 @@ c  osn ccccccccccccccccccccccccc        rMNsoi(j)=((inf(19)*inf(8)*1000)*rnitr(1
 
          RNupt(j)=(CUrost(j)/rnitr(3))*1000*rnitr(11)*10
 
-         VNnitr(j)=(rMNsoi(j)+(SMNrst(j)+SMNsoi(j)+SMNfum(j)-RNupt(j))*0.8)*exp(-0.6*rmt2(j)*rmW2(j)*rmpH2(j))+rnitr(7)*rnitr(8)
+c         VNnitr(j)=(rMNsoi(j)+(SMNrst(j)+SMNsoi(j)+SMNfum(j))-RNupt(j)*0.8)*exp(-0.6*rmt2(j)*rmW2(j)*rmpH2(j))+rnitr(7)*rnitr(8)
+
+c        VNnitr(j)=(rMNsoi(j)+(SMNrst(j)+SMNsoi(j)+SMNfum(j))*0.8)*exp(-0.6*rmt2(j)*rmW2(j)*rmpH2(j))+rnitr(7)*rnitr(8)
+
+         VNnitr(j)=(rMNsoi(j)+(SMNrst(j)**(0.5)+SMNsoi(j)+SMNfum(j)-RNupt(j)))+rnitr(7)*rnitr(8)
+
          if(Tpoch(j).lt.0.or.Tpoch(j).eq.0) VNnitr(j)=0
 
          VNN2O(j)=(rmt2(j)*rmW2(j)*rmpH2(j)*(0.004+0.030*VNnitr(j)))
@@ -1943,7 +1933,7 @@ c==================================
          rdsoCH(j)=soilCH
          rdfmCH(j)=fumCH
          summMetanMonths(j)=CHrst(j)+CHsoil(j)+CHfum(j)
-      	 rOCNrs(j)=OCNrst
+      	rOCNrs(j)=OCNrst
        
          rdNH4(j)=RNNH4
          rdNO3(j)=RNNO3
@@ -1951,7 +1941,7 @@ c==================================
          gn1(j)=SnN2O
          gn2(j)=SdN2O   
          gn3(j)=SN2O
-	       gn4(j)=SMCOrs
+	      gn4(j)=SMCOrs
          gn5(j)=SMCOso
          gn6(j)=SMCOfm
          gn7(j)=SPolCO 	
@@ -1984,26 +1974,14 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
           tmpArray2(iter) = exp(-rmt1(iter)*rmpH1(iter)*0.6*0.02*0.00278)
        end do
 
-c        rMNsoi(j)=(inf(19)*inf(8)*rnitr(1))*10
-
-c        RNupt(j)=(CUrost(j)/rnitr(3))*1000*rnitr(11)*10
-
-c        VNnitr(j)=(rMNsoi(j)+(SMNrst(j)+SMNsoi(j)+SMNfum(j)-RNupt(j))*0.8)*exp(-0.6*rmt2(j)*rmW2(j)*rmpH2(j))+rnitr(7)*rnitr(8)
-c        if(Tpoch(j).lt.0.or.Tpoch(j).eq.0) VNnitr(j)=0
-
-c        VNN2O(j)=(rmt2(j)*rmW2(j)*rmpH2(j)*(0.004+0.030*VNnitr(j)))*10
-c  
-c        SnN2O=SnN2O+VNN2O(j)
-
-c        VNNO(j)=0.02*0.1*VNnitr(j)
-
-c       call WriteTable(6, "N2O", 
-c     > "dek", dekadesReal,"VNnitr", VNnitr, "Proisvedenie", tmpArray,"SMNrst",SMNrst, "SMNsoi", SMNsoi, "rMNsoi",rMNsoi)
+       call WriteTable(6, "N2O", 
+     > "dek", dekadesReal,"CUrost", CUrost,"SMNrst",SMNrst, "SMNsoi",SMNsoi,"SMNfum",SMNfum, "RNupt",RNupt,"rMNsoi",rMNsoi )
 
       print *, "CO2", gn7(36)*3.67
       print *, "CH4", SummarnoeWidilenieMetana * 1000
       print *, "N2O", gn3(36)
-
+c      print *, "Inf(11)", inf(11)
+c     print *, "SumRst", SumRst
       call WriteTable(OutputFileUnit,"RASCHET  DEFIZITA  WLAGI",
      >   "dek", dekadesReal,"cyt",gimReal,"Tisp",Tisp,"ratX",ratX,"pBIO",pBIO,"pHUM",pHUM," pCO2",pCO2,"rE",rE)
 c=================
