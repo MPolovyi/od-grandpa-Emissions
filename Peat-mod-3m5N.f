@@ -31,7 +31,7 @@ c==========================================================================
      > SMCsoi,SMCfum,rCsoil,rCfum,SMNrst,rNrst, SMNsoi,SMNfum,rNsoil,rNfum,CNrst,CNsoil,
      > CNfum,CNsum,VNnitr,VNN2O,VNNO,denNO3, denW,denCO2,denpW,dnpNO3,VNdeni,VNdN2,
      > VNdN2O,VNvfum,VNvfrt,Winfil,RNinfl, Nimmob,rdCHrs,rdCHso,rdCHfm,rdRsCH,
-     > RNupt,OtnUrs,rdSoCH,rdFmCH,summMetanMonths, rOCNrs,rdNH4,rdNO3,rdNN20,BNNH4,BNNO3,
+     > RNupt,OtnUrs,rdSoCH,rdFmCH, rOCNrs,rdNH4,rdNO3,rdNN20,BNNH4,BNNO3,
      > rNmicr,FdWFPS,FdNO3,FdCO2,FdSCO2, gn1,gn2,gn3,gn4,gn5,gn6,gn7,
      > rmW3, ts2m
 
@@ -60,12 +60,10 @@ c==========================================================================
       integer, dimension(:), allocatable :: dv
       real, dimension(:), allocatable :: ts, os, dww, usl2, usl3, usl4, inf, rnitr, hgr
       real, dimension(12) :: tmpArray2, tmpArray, dekadesReal, gimReal
-
+      real, dimension(12) :: CH4Months, CO2Months, N2OMonths
 
 c      open (unit=InputFileUnit, file="Peat-mod-3.dat",status="old",form="formatted")
       Open (UNIT=OutputFileUnit,FILE="Peat-mod-main-3m7.res")
-      Open (UNIT=7,FILE="Peat-mod-3m7.res")
-      Open (UNIT=8,FILE="Peat-mod-omm7.res")
 
 
 
@@ -1013,12 +1011,13 @@ c
 
      
         CHrst(j)=CHBIrs(j)+CHHUrs(j)
+
 c	If(usl3(j).eq.0) CHrst(j)=0
 c	If(usl3(j).eq.1) CHrst(j)=(CHBIrs(j)+CHHUrs(j))*0.33
 c	If(usl3(j).eq.1) CHrst(j)=(CHBIrs(j)+CHHUrs(j))*0.66
 c	If(usl3(j).eq.1) CHrst(j)=(CHBIrs(j)+CHHUrs(j))*1.0
     
-	SMCHrs=SMCHrs+CHrst(j)
+	     SMCHrs=SMCHrs+CHrst(j)
 
 c===================================================================
 c  RASCHET SODERGJANIJ INERTNOGO ORGANICHNOGO MATERIALA
@@ -1875,10 +1874,10 @@ c=============================================================
 c=================================================================
 c  RASCHET  ZA  GOD VIDELENIJ  METANA
 c================================================================
-	rastCH=rastCH+CHrst(j)
+	      rastCH=rastCH+CHrst(j)
         soilCH=soilCH+CHsoil(j)
-	fumCH=fumCH+CHfum(j)
-c        SummarnoeWidilenieMetana=SummarnoeWidilenieMetana+rastCH+soilCH+fumCH
+      	fumCH=fumCH+CHfum(j)
+
          SummarnoeWidilenieMetana=SummarnoeWidilenieMetana+CHrst(j)+CHsoil(j)+CHfum(j)    
 c===============================================================
 c  BALANS UGLERODA  V POCHVE NA POLE  PROEKTA
@@ -2032,20 +2031,24 @@ c==================================
       rdrsCH(j)=rastCH
       rdsoCH(j)=soilCH
       rdfmCH(j)=fumCH
-         summMetanMonths(j)=CHrst(j)+CHsoil(j)+CHfum(j)
-	rOCNrs(j)=OCNrst
+
+	    rOCNrs(j)=OCNrst
        
       rdNH4(j)=RNNH4
       rdNO3(j)=RNNO3
       rdNN20(j)=TMNN20   
       gn1(j)=SnN2O
       gn2(j)=SdN2O   
-       gn3(j)=SN2O
-	gn4(j)=SMCOrs
-        gn5(j)=SMCOso
-        gn6(j)=SMCOfm
-        gn7(j)=SPolCO 	
+      gn3(j)=SN2O
+	    gn4(j)=SMCOrs
+      gn5(j)=SMCOso
+      gn6(j)=SMCOfm
+      gn7(j)=SPolCO 	
 
+      CH4Months(j) = CHrst(j)+CHsoil(j)+CHfum(j)
+      CO2Months(j) = CO2rst(j)+CO2soi(j)+CO2fum(j)
+      N2OMonths(j) = vNdN2(j)+VNN2O(j)
+      print *, "CO2rst", CO2rst(j)
 c+++++++++++++++++++++++++++++++++++++++++++
 ccc       rdg11(j)=(rdg2(j)+rdg5(j)+rdg8(j))
 ccc       RRSHUM=RRSHUM+rdg11(j)
@@ -2060,7 +2063,22 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       
+            call WriteTable(OutputFileUnit,"Mesiachnoe raslogenie CH4",
+     >    "dek", dekadesReal,"cyt", gimReal, "hgr", hgr, 
+     >    "pochva", CHsoil, "rastitelnost", CHrst, "udobreniya", CHfum, "summarno", CH4Months)
 
+            call WriteTable(OutputFileUnit,"Mesiachnoe raslogenie CO2",
+     >    "dek", dekadesReal,"cyt", gimReal, "hgr", hgr, 
+     >    "pochva", CHsoil, "rastitelnost", CO2rst, "udobreniya", CO2fum, "summarno", CO2Months)
+
+            call WriteTable(OutputFileUnit,"Mesiachnoe raslogenie N2O",
+     >    "dek", dekadesReal,"cyt", gimReal, "hgr", hgr, 
+     >    "pochva", CHsoil, "nitrifikaciya", VNN2O, "DEnitrifikaciya", vNdN2, "summarno", N2OMonths)
+
+          call WriteItems(OutputFileUnit, "Godovoe raslogenie CH4", SummarnoeWidilenieMetana * 1000)
+          call WriteItems(OutputFileUnit, "Godovoe raslogenie CO2", SPolCO*3.67)
+          call WriteItems(OutputFileUnit, "Godovoe raslogenie DIOCSID UGLERODA", SPolCO*3.67)
+          call WriteItems(OutputFileUnit, "Godovoe raslogenie N2O", SN2O)
 
       j1=j-1
 
@@ -2077,494 +2095,15 @@ c!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
        call WriteTable(6, "N2O", 
      > "dek", dekadesReal,"CUrost", CUrost,"SMNrst",SMNrst, "SMNsoi",SMNsoi,"SMNfum",SMNfum, "RNupt",RNupt,"rMNsoi",rMNsoi )
 
-      print *, "CO2", gn7(n)*3.67
+      print *, "CO2", SPolCO*3.67
       print *, "CH4", SummarnoeWidilenieMetana * 1000
-      print *, "N2O", gn3(n)
+      print *, "N2O", SN2O
       print *, "Inf(11)", inf(11)
       print *, "SumRst", SumRst
-      call WriteTable(OutputFileUnit,"RASCHET  DEFIZITA  WLAGI",
-     >   "dek", dekadesReal,"cyt",gimReal,"Tisp",Tisp,"ratX",ratX,"pBIO",pBIO,"pHUM",pHUM," pCO2",pCO2,"rE",rE)
+
 c=================
-      call WriteTable(OutputFileUnit,"RASCHET  DEFIZITA  WLAGI",
-     >   "dek", dekadesReal,"cyt",gimReal,"hgr", hgr, "Whgr", Whgr, "rmpH", rmpH,"rmpH1", rmpH1, "rmW", rmW, "rmW1", rmW1, "rmW2", rmW2, "rmW3", rmW3)
-
-
-
-c====================================================== 
-      call WriteTable(OutputFileUnit, "T A B L I Z A  R.2a",
-     >   "dek", dekadesReal,"cyt",gimReal,"hgr", hgr, "rchW2", rchW2,"rmt1",rmt1,"rmt2",rmt2, "rmW2",rmW2,"rmpH2",rmpH2)
-       
-c======================================================        
-      call WriteTable(OutputFileUnit, "RASCHET  PARAMETROV OSNOVNOGO URAVNENIJ I \n RASTITELNIX OSTATKOV  i DPM i  RPM, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal, "raC",raC,"rbC",rbC,"ratX",ratX,"CUrost",CUrost,"DPM0",DPM0,"RPM0",RPM0)
-
-c++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      call WriteTable(OutputFileUnit, "RASCHET  RAZLOGJENIJ   DPM(j) \n RASTITELNIX OSTATKOV, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal, "DBIO",DBIO,"DHUM",DHUM,"DCO2",DCO2,"DPM",DPM)
-
-      call WriteTable(OutputFileUnit, "RASCHET  RAZLOGJENIJ   RPM(j) \n RASTITELNIX OSTATKOV, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal, "BIO1",BIO1,"HUM1",HUM1,"R1CO2",R1CO2,"RPM",RPM)
-
-      do iter = 1, n
-         tmpArray(iter) = rdh1(iter) + rdh2(iter)
-      end do
-
-      call WriteTable(OutputFileUnit, "RASCHET  RAZLOGJENIJ   BIO1(j) \n RASTITELNIX OSTATKOV, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal, "BIO2",BIO2,"HUM2",HUM2,"R2CO2",R2CO2,"rdh1+rdh2", tmpArray)
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA \n IZ   BIO   RASTITELNIX OSTATKOV, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal, "CHBIO",CHBIO,"CHBIO1",CHBIO1,"CHBIO2",CHBIO2,"CHBIO3", CHBIO3)
-
-c===============================================================
-      do iter = 1, n
-         tmpArray(iter) = rdh3(iter) + rdh4(iter)
-      end do
-
-      call WriteTable(OutputFileUnit, "RASCHET  RAZLOGJENIJ   HUM1(j) \n RASTITELNIX OSTATKOV, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal, "BIO3",BIO3,"HUM3",HUM3,"R3CO2",R3CO,"rdh3+rdh4",tmpArray)
-      write(OutputFileUnit,120)
-C!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-C!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-C!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA \n IZ   HUM   RASTITELNIX OSTATKOV, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal, "CHHUM",CHHUM,"CHHUM1",CHHUM,"CHHUM2",CHHUM2,"CHHUM3", CHHUM3)
-C!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-C!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-C!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET  videlenij CO2 \n IZ  RASTITELNIX OSTATKOV, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal, "DCO2",DCO2,"R1CO2 ",R1CO2,"R2CO2",R2CO2,"R3CO", R3CO)
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET  videlenij CO2 \n IZ  RASTITELNIX OSTATKOV, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal, "PrDBIO",PrDBIO,"PrDHUM",PrDHUM,"PrDCO2",PrDCO2,"PrDPM",PrDPM)
-
-      call WriteTable(OutputFileUnit, "RASCHET  RAZLOGENUJ  PrRPM(j) \n IZ  RASTITELNIX OSTATKOV, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal, "PrBIO1",BIO1,"PrHUM1",HUM1,"PrR1CO2",R1CO2,"PrRPM",RPM)
-
-      do iter = 1, n
-         tmpArray(iter) = Prrdh1(iter) + Prrdh2(iter)
-      end do
-      call WriteTable(OutputFileUnit, "RASCHET  RAZLOGJENIJ   PrBIO1(j) \n IZ  RASTITELNIX OSTATKOV, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal, "PrBIO2",PrBIO2,"PrHUM2",PrHUM2,"PrR2CO2",PrR2CO,"Prrdh1+Prrdh2", tmpArray)
-
-      do iter = 1, n
-         tmpArray(iter) = Prrdh3(iter) + Prrdh4(iter)
-      end do      
-      call WriteTable(OutputFileUnit, "RASCHET  RAZLOGJENIJ   PrHUM1(j) \n IZ  RASTITELNIX OSTATKOV, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal, "PrBIO3", PrBIO3, "PrHUM3",PrHUM3,"PrR3CO2",PrR3CO,"Prrdh3+Prrdh4",tmpArray)
-        
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA \n IZ  PrBIO  RASTITELNIX OSTATKOV, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal, "PCHBIO",PCHBIO,"PCHB1",PCHB1,"PCHB2",PCHB2,"PCHB3", PCHB3)
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA \n IZ  PrHUM  RASTITELNIX OSTATKOV, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal, "PCHHUM", PCHHUM,"PCHH1",PCHH1,"PCHH2",PCHH2,"PCHH3", PCHH3)
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA \n IZ  IZ  tekuschego i proschlogo goda, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal, "CHBIrs",CHBIrs,"CHHUrs",CHHUrs,"CHrst",CHrst,"SMCHrs", rdCHrs)
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "SUMMARNOE   RAZLOGJENIE  PO VSEM KOMPONENTAM \n RASTITELNIX OSTATKOV, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal, "BIOrst",BIOrst,"HUMrst",HUMrst,"CO2rst",CO2rst,"CHBIrs",CHBIrs,"CHHUrs",CHHUrs,"CHrst",CHrst)
-
-c=========================================
-      call WriteTable(OutputFileUnit, "VIBROSI CO2  PROSCHLOGO  GODA \n RASTITELNIX OSTATKOV, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal, "prDCO2",prDCO2,"prR1CO",prR1CO,"prR2CO",prR2CO,"prR3CO",prR3CO)
-
       
-
-c=========================================
-      do iter = 1, n
-         tmpArray(iter) = inf(8)
-      end do 
-      call WriteTable(OutputFileUnit, "RASCHET  NACHALNIX ZNACHENIY ORGANIKI \n POCHVI, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal,"SDPM  ",SDPM,"SRPM",SRPM,"SBIO",SBIO,"SHUM",SHUM,"IOM",RIOM,"SOM", tmpArray)
-
-c============================
-      call WriteTable(OutputFileUnit, "RASCHET  ROZLOGJENIJ  ORGANIKI \n POCHVI, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal,"SDPM0",SDPM0,"SRPM0",SRPM0,"SBIO0",SBIO0,"SHUM0",SHUM0)
-      
-c============================
-      call WriteTable(OutputFileUnit, "RASCHET  ROZLOGJENIJ  SDPM0 \n POCHVI, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal,"SDBIO  ",SDBIO,"SDHUM",SDHUM,"SDCO2",SDCO)
-
-c============================
-      call WriteTable(OutputFileUnit, "RASCHET  ROZLOGJENIJ  SRPM0 \n POCHVI, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal,"SBIO1  ",SBIO1,"SHUM1",SHUM1,"SR1CO2",SR1CO)
-
-c============================
-      call WriteTable(OutputFileUnit, "RASCHET  ROZLOGJENIJ  SBIO0(j) \n POCHVI, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal,"SBIO2  ",SBIO2,"SHUM2",SHUM2,"SR2CO2",SR2CO)
-
-c============================
-      call WriteTable(OutputFileUnit, "RASCHET  ROZLOGJENIJ  SHUM0(j) \n POCHVI, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal,"SBIO3  ",SBIO3,"SHUM3",SHUM3,"SR3CO2",SR3CO)
-
-c===================================================
-      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA \n IZ BIO POCHVI, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal,"HSBIO0",HSBIO0,"HSBIO",HSBIO,"HSBIO1",HSBIO1,"HSBIO2",HSBIO2,"HSBIO3" ,HSBIO3)
-      
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA \n IZ HUM POCHVI, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal,"HHUM00",HHUM00,"HHUM0",HHUM0,"HHUM1",HHUM1,"HHUM2" ,HHUM2,"HHUM3" ,HHUM3)
-c===============================================================
-      call WriteTable(OutputFileUnit, "SUMMARNOE   RAZLOGJENIE  PO VSEM KOMPONENTAM \n ORGANIKI  POCHVI, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal, "BIOsoil  ",BIOsoi,"HUMsoil",HUMsoi,"CO2soil",CO2soi)
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA SUMMARNO IZ VSEX BIO i HUM POCHVI , t/ga \n I SUMMARNO   IZ VSEY   POCHVI , t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal,"CHBIso",CHBIso, "CHHUso",CHHUso,"CHsoil",CHsoil,"SMCHso", rdCHso)
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET  PERVICHNOGO   ROZLOGJENIJ \n ORGANICHESKIX  UDOBRENIY, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal,"FDPM",FDPM,"FRPM",FRPM,"FHUM",FHUM)
-
-c======================
-      call WriteTable(OutputFileUnit, "RASCHET     ROZLOGJENIJ       FDPM(j) \n ORGANICHESKIX  UDOBRENIY, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal,"FDBIO  ",FDBIO,"FDHUM",FDHUM,"FDCO",FDCO)
-
-c======================
-      call WriteTable(OutputFileUnit, "RASCHET     ROZLOGJENIJ       FRPM(j) \n ORGANICHESKIX  UDOBRENIY, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal,"FBIO1  ",FBIO1,"FHUM1",FHUM1,"FR1CO",FR1CO)
-
-c======================
-      call WriteTable(OutputFileUnit, "RASCHET     ROZLOGJENIJ       FHUM(j) \n ORGANICHESKIX  UDOBRENIY, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal,"FBIO3  ",FBIO3,"FHUM3",FHUM3,"FR3CO",FR3CO)
-      
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA \n IZ   BIO I  HUM   UDOBRENIY , t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal,"CHFBI0",CHFBI0,"CHFBI1",CHFBI1,"CHFBI3",CHFBI3,"CHFHU0",CHFHU0,"CHFHU1",CHFHU1,"CHFHU3", CHFHU3)
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "SUMMARNOE   RAZLOGJENIE  PO VSEM KOMPONENTAM \n ORGANICHESKIX  UDOBRENIY, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal,"BIOfum  ",BIOfum,"HUMfum",HUMfum,"CO2fum",CO2fum)
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET  videlenij METANA \n SUMMARNOGO  IZ    UDOBRENIY, t/ga",
-     >   "dek", dekadesReal, "cyt", gimReal,"CHBIOfm",CHBIfm, "CHHUMfm",CHHUfm,"CHfum",CHfum,"SMCHfum",rdCHfm)
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET  KOEFFIZIENTOV URAVNENIY \n RASCHETA NITRIFIKAZII  I DENITRIFIKAZII",
-     >   "dek", dekadesReal, "cyt", gimReal,"denNO3",denNO3, "denW",denW,"denCO2",denCO2,"denpW",denpW, "dnpNO3", dnpNO3)
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET  SKOROSII OBRAZOVANIJ UGLERODA",
-     >   "dek", dekadesReal, "cyt", gimReal,"SMCrst",SMCrst, "SdN2O",gn2,"SnN2O",gn1,"denpW",denpW,"dnpNO3", dnpNO3)
-      
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET",
-     >   "dek", dekadesReal, "cyt", gimReal,"rNmicr",rNmicr,"FdNO3",FdNO3,"FdWFPS",FdWFPS,"rchW2",rchW2)
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET  SKOROSTI MINERALIZAZII - OBRAZOVANIJ AMMONIJ",
-     >   "dek", dekadesReal, "cyt", gimReal,"SMNrst",SMNrst, "SMNsoi",SMNsoi,"SMNfum",SMNfum,"SMNsum" ,SMNfum)
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET  NITRIFIKAZII  I EMISSII AZOTA V PROZESSE \n NITRIFIKAZII - VNnitr(j),VNN2O(j),VNNO(j)",
-     >   "dek", dekadesReal, "cyt", gimReal,"VNnitr",VNnitr, "VNN2O",VNN2O,"VNNO" ,VNNO)
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET  NITRIFIKAZII  I EMISSII AZOTA V PROZESSE \n DENITRIFIKAZII - VNdeni(j),VNdN2(j),VNdN2O(j)", 
-     >   "dek", dekadesReal, "cyt", gimReal,"VNdeni",VNdeni,"VNdN2+4N2O",VNdN2,"VNdN2O", VNdN2O)
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASCHET  POGLOSHENIJ AZOTA RASTENIJMI \n INFILTRAZII I VIVETRIVANIJ AZOTA, RNupt(j),RNinfl(j),Unvfum(j),Unvfrt(j)", 
-     >   "dek", dekadesReal, "cyt", gimReal,"RNupt ",RNupt,"RNinfl",RNinfl,"Vnvfum",Vnvfum,"Vnvfrt", Vnvfrt)
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "VIBROSI N2O pri nitrifikazii SumnitrN2O \n VIBROSI N2O pri denitrifikazii SumdenN2O  (kg N / ga za god)", 
-     >   "dek", dekadesReal, "cyt", gimReal,"SumnitrN2O",VNN2O,"sumdenN2o",VNdN2,"rMCsoi", rMCsoi)
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASTENIJMI \n A", 
-     >   "dek", dekadesReal, "cyt", gimReal,"SMCOrs ",gn4,"SMCOso",gn5,"SMCOfm",gn6,"SPolCO",gn7)
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "RASTENIJMI \n A", 
-     >   "dek", dekadesReal, "cyt", gimReal,"CUrost ",CUrost,"RNupt",RNupt,"SMCOfm",gn6,"SPolCO", gn7)
-
-c===============================================================
-      call WriteTable(OutputFileUnit, "VIBROSI CO2 \n VIBROSI CO2", 
-     >   "dek", dekadesReal, "cyt", gimReal," CO2",rdg12, "Tpoch",Tpoch,"rMCsoi", rMCsoi)
-
-c============================================================
-c  Nnakoplenie ugleroda na pole i vibrosi CO2: PolcC(j) i  PolCO2(j)
-      call WriteTable(OutputFileUnit, "SUMMARNOE   NAKOLENIE  UGLERODA NA POLE(PoleC(j) \n I  VIBROSI  CO2 (PolCO2(j), t/ga", 
-     >   "dek", dekadesReal, "cyt", gimReal,"PoleC  ",PoleC,"PoleCO2",gn7)
-
-c++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      
-
-      write(OutputFileUnit, *) "RASCHET ZA GOD RAZLOGJENIJ RASTITELNIX OSTATKOV, t/ga;"
-
-
-      call WriteItems(OutputFileUnit, "SmDBIO",rd1(n),"SmBIO1",rd2(n)," SmBIO2",rd3(n),
-     >   "SmBIO3",rd4(n),"SmDHUM",rd5(n),"SMHUM1",rd6(n),"SMHUM2",rd7(n),"SMHUM3",rd8(n),
-     >   "SmDCO",rd9(n))
-
-      call WriteItems(OutputFileUnit,"SMR1CO",rd10(n),"SMR2CO",rd11(n),"SMR3CO",rd12(n))
-
-      write(OutputFileUnit,120)
-       write(OutputFileUnit, *) "RASCHET ZA GOD RAZLOGJENIJ ORGANIKI POCHVI, t/ga ;"
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,878)rds1(n),rds2(n),rds3(n),rds4(n),rds5(n),rds6(n),
-     4 rds7(n),rds8(n),rds9(n),rds10(n),rds11(n),rds12(n)
-c 827 4 format(1x,"SmDBIO=",f10.5)
-878   format(1x,"SsDBIO=",f7.5,1x,"SsBIO1=",f7.5,1x,"SsBIO2=",f7.5,1x,
-     4 "SsBIO3=",f7.5,1x,"SsDHUM=",f7.5,1x,"SsHUM1=",f7.5,1x,
-     4 "SsHUM2=",f7.5,1x,"SsHUM3=",f7.5,1x,"SsDCO=",f7.5,1x,"SsR1CO="
-     4 ,f7.5,5x,
-     4 "SsR2CO=",f7.5,1x,"SsR3CO=",f7.5)
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-       write(OutputFileUnit, *) "RASCHET ZA GOD RAZLOGJENIJ ORGANIKI UDOBRENIY, t/ga;"
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,879)rdf1(n),rdf2(n),rdf3(n),rdf4(n),rdf5(n),rdf6(n),
-     4 rdf7(n),rdf8(n),rdf9(n)
-c 827 4 format(1x,"SmDBIO=",f10.5)
- 879   format(1x,"SFDBIO=",f7.5,1x,"SFBIO1=",f7.5,1x,
-     4 "SFBIO3=",f7.5,1x,"SFDHUM=",f7.5,1x,"SFHUM1=",f7.5,1x,
-     4 "SFHUM3=",f7.5,1x,"SFDCO=",f7.5,1x,"SFR1CO="
-     4 ,f7.5,5x,"SFR3CO=",f7.5)
-      write(OutputFileUnit,120)
-
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-       write(OutputFileUnit, *) "RASCHET ZA GOD RAZLOGJENIJ RASTITELNIX OSTATKOV,;"
-       write(OutputFileUnit, *) "   VSEX KOMPONENTOV, t/ga ;"
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,900)rdg1(n),rdg2(n),rdg3(n)
-
- 900   format(1x,"RastBIO =",f7.6,1x,"RastHUM =",f7.6,1x,
-     4 "RastCO2 =",f10.8,1x)
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-
-
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-       write(OutputFileUnit, *) "RASCHET ZA GOD NERAZLOGIVSHIXSJ RASTIT OSTATKOV, t/ga;"
-       write(OutputFileUnit, *) "  ;"
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,876)rmgw4(n),drww1(j)
-
- 876   format(1x,"SumDPM =",f12.10,1x,"prSMCO =",f12.10,1x)
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-
-
-       write(OutputFileUnit, *) "RASCHET ZA GOD RAZLOGJENIJ ORGANIKI POCHVI,;"
-       write(OutputFileUnit, *) "   VSEX KOMPONENTOV, t/ga ;"
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,901)rdg4(n),rdg5(n),rdg6(n)
-
- 901   format(1x,"SoilBIO =",f7.5,1x,"SoilHUM =",f7.5,1x,
-     4 "SoilCO2 =",f10.8)
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-       write(OutputFileUnit, *) "RASCHET ZA GOD RAZLOGJENIJ ORGANIKI UDOBRENIY,;"
-       write(OutputFileUnit, *) "   VSEX KOMPONENTOV, t/ga ;"
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,922)rdg7(n),rdg8(n),rdg9(n)
-
-
- 922   format(1x,"FumBIO =",f7.5,1x,"FumHUM =",f7.5,1x,
-     4 "FUMCO2 =",f10.8)
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-       write(OutputFileUnit, *) "RASCHET ZA GOD RAZLOGJENIJ Rastitenix ostatkov,;"
-       write(OutputFileUnit, *) "organiki pochvi i organicheskogo veschestva ;"
-       write(OutputFileUnit, *) "organicheskix udobreniy na pole proekta, t/ga ;"
-      write(OutputFileUnit,120)
-c      write(OutputFileUnit,922)rdg10(n),rdg11(n),rdg12(n)
-      write(OutputFileUnit,902)rdg10(n),rdg11(n),rmg1(n)
-
-
- 902   format(1x,"SumBIO pole =",f7.5,1x,"SumHUM pole =",f7.5,1x,
-     4 "SSSHum =",f7.5)
-      write(OutputFileUnit,120)
-
-      write(OutputFileUnit,120)
-       write(OutputFileUnit, *) "RASCHET ZA GOD VIDELENIJ METANA IZ Rastitenix 
-     4 ostatkov,;"
-       write(OutputFileUnit, *) "organiki pochvi i organicheskogo veschestva ;"
-       write(OutputFileUnit, *) "organicheskix udobreniy na pole proekta, t/ga ;"
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,932)rdrsCH(n),rdsoCH(n),rdfmCH(n)
-
-
- 932   format(1x,"rastCH pole =",f7.5,1x,"soilCH pole =",f7.5,1x,
-     4 "fumCH pole =",f7.5)
-      write(OutputFileUnit,120)
-
-      
-c      write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-       write(OutputFileUnit, *) "VIDILENIE METANA iz  POLE  PROEKTA za god;"
-       write(OutputFileUnit,837) SummarnoeWidilenieMetana*1000
- 837  format(1x,"VIDILENIE  METANA  , kg CH4/ ga =",f10.5)
-      write(OutputFileUnit,120)
-
-c      write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-       write(OutputFileUnit, *) "VIDILENIE CO2 iz  POLE  PROEKTA za god;"
-       write(OutputFileUnit,828)gn7(n)
- 828  format(1x,"VIDILENIE CO2  , t C /ga =",f10.5)
-      write(OutputFileUnit,120)
-c      write(OutputFileUnit,120)
-
-c      write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-       write(OutputFileUnit, *) "VIDILENIE DIOKSIDA UGLERODA - CO2 iz  POLE 
-     4  PROEKTA za god;"
-       write(OutputFileUnit,228)(gn7(n)*3.67)
- 228  format(1x,"VIDILENIE DIOKSIDA UGLERODA - CO2  , t/ga =",f10.5)
-      write(OutputFileUnit,120)
-c      write(OutputFileUnit,120)
-
-c      write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-       write(OutputFileUnit, *) "VIDILENIE N2O iz  POLE  PROEKTA za god;"
-       write(OutputFileUnit,238)gn3(n)
- 238  format(1x,"VIDILENIE N2O  , kg N /ga =",f10.5)
-      write(OutputFileUnit,120)
-c      write(OutputFileUnit,120)
-
-
-
-       write(OutputFileUnit, *) "PRIBAVKA UGLERODA za schet Razlogenij za god;"
-       write(OutputFileUnit,841)(rdg10(n)+rdg11(n)+rmg1(n))
-
- 841  format(1x,"PRIBAVKA UGLEROD za schet Razlogenij, t/ga =",f10.5)
-      write(OutputFileUnit,120)
-
-       write(OutputFileUnit, *) "VINOS  UGLEROGA S  MASSOY  UROGJAJ za god;"
-       write(OutputFileUnit,845)rmgw1(n)
- 845  format(1x," VINOS  UGLEROGA S  MASSOY  UROGJAJ , t/ga =",f10.5)
-      write(OutputFileUnit,120)
-
-       write(OutputFileUnit, *) "SUMMARNOE PRIRASCHENIE  UGLEROGA za god;"
-       write(OutputFileUnit, *) " s uchetom vibrosov CO2 pochvi i vinosa massoy urogaj
-     4  za god;"
-       write(OutputFileUnit,846)(rdg10(n)+rdg11(n)+rmg1(n)-rdg6(n)-rmgw1(n))
-
- 846  format(1x,"SUMMARNOE PRIRASCHENIE UGLEROGA na pole,t/ga =",f10.5)
-      write(OutputFileUnit,120)
-
-       write(OutputFileUnit, *) "BALANS  UGLERODA NA POLE  PROEKTA;"
-       write(OutputFileUnit,827)rdg13(n)
- 827  format(1x,"BALANS UGLERODA , t/ga =",f10.5)
-      write(OutputFileUnit,120)
-      write(OutputFileUnit,120)
-
-c      zapis  v maliy fail
-c      malo
-      write(7,120)
-      write(7,9117)
- 9117 format(10x,"RASCHET ZA GOD RAZLOGJENIJ RASTITELNIX OSTATKOV,;")
-      write(7,9118)
- 9118 format(10x,"   VSEX KOMPONENTOV, t/ga ;")
-      write(7,120)
-      write(7,900)rdg1(n),rdg2(n),rdg3(n)
-c      malo
-c      malo
-      write(7,120)
-      write(7,9119)
- 9119 format(10x,"RASCHET ZA GOD NERAZLOGIVSHIXS RASTIT OSTATKOV,t/ga;")
-      write(7,120)
-      write(7,876)rmgw4(n)
-c      malo
-c      malo
-      write(7,120)
-      write(7,9120)
- 9120 format(10x,"RASCHET ZA GOD RAZLOGJENIJ ORGANIKI POCHVI,;")
-      write(7,9121)
- 9121 format(10x,"   VSEX KOMPONENTOV, t/ga ;")
-      write(7,120)
-      write(7,901)rdg4(n),rdg5(n),rdg6(n)
-      write(7,120)
-c      malo
-c      malo
-      write(7,9122)
- 9122 format(10x,"RASCHET ZA GOD RAZLOGJENIJ ORGANIKI UDOBRENIY,;")
-      write(7,9123)
- 9123 format(10x,"   VSEX KOMPONENTOV, t/ga ;")
-      write(7,120)
-      write(7,922)rdg7(n),rdg8(n),rdg9(n)
-      write(7,120)
-c      malo
-c      malo
-      write(7,9124)
- 9124 format(10x,"RASCHET ZA GOD RAZLOGJENIJ Rastitenix ostatkov,;")
-      write(7,9125)
- 9125 format(10x,"organiki pochvi i organicheskogo veschestva ;")
-      write(7,9126)
- 9126 format(10x,"organicheskix udobreniy na pole proekta, t/ga ;")
-      write(7,120)
-      write(7,902)rdg10(n),rdg11(n),rmg1(n)
-      write(7,120)
-c      malo
-c      malo
-      write(7,9127)
- 9127 format(10x,"VIDILENIE CO2 iz  POLE  PROEKTA za god, t/ga;")
-       write(7,828)rdg12(n)
-      write(7,120)
-c      malo
-c      malo
-      write(7,9128)
- 9128 format(10x,"PRIBAVKA UGLERODA za schet Razlogenij za god, t/ga;")
-       write(7,841)(rdg10(n)+rdg11(n)+rmg1(n))
-      write(7,120)
-c      malo
-c      malo
-      write(7,9129)
- 9129 format(10x,"VINOS  UGLEROGA S  MASSOY  UROGJAJ za god, t/ga;")
-       write(7,845)rmgw1(n)
-      write(7,120)
-c      malo
-c      malo
-      write(7,9130)
- 9130 format(10x,"SUMMARNOE PRIRASCHENIE  UGLEROGA za god, t/ga;")
-cccccccccc       write(7,846)(rdg10(n)+rdg11(n)+rmg1(n)-rdg6(n)-rmgw1(n))
-       write(7,846)(rdg10(n)+rdg11(n)+rmg1(n)-gn7(n)-rmgw1(n))
-
-      write(7,120)
-c      malo
-c      malo
-      write(7,9131)
- 9131 format(10x,"BALANS  UGLERODA NA POLE  PROEKTA, t/ga;")
-       write(7,827)rdg13(n)
-      write(7,120)
-c      malo
-
-c      zapis  v ochen maliy fail
-c      ochen malo
-      write(8,9132)
- 9132 format(10x,"SUMMARNOE PRIRASCHENIE  UGLEROGA za god, t/ga;")
-       write(8,846)(rdg10(n)+rdg11(n)+rmg1(n)-rdg6(n)-rmgw1(n))
-      write(8,120)
-c      ochen malo
-c      ochen malo
-      write(8,9133)
- 9133 format(10x,"BALANS  UGLERODA NA POLE  PROEKTA, t/ga;")
-       write(8,827)rdg13(n)
-      write(8,120)
-
-
-c      write(8,9373)
-c 9373 format(10x,"BALANS  UGLERODA NA POLE  PROEKTA, t/ga;")
-c       write(8,827)SMNrst(1)
-c      write(8,120)
-
-c      ochen malo
-
-
+  
 c++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
       close (unit=OutputFileUnit)
